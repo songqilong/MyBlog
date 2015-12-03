@@ -7,6 +7,6 @@
 <title>出错啦~~~~~~~</title>
 </head>
 <body>
-<h1>这是错误页面</h1>
+<h1>这是错误页面!</h1>
 </body>
 </html>
