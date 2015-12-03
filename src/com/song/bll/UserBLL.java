@@ -23,4 +23,19 @@ public class UserBLL {
 	{
 		return userDAO.AddUser(user);		
 	}
+	
+	/**
+	 * 用户登录
+	 * @param user 封装的登录用户信息
+	 * @return true验证通过可以登录，false验证失败不能登录
+	 */
+	public boolean Login(User user)
+	{
+		User u = userDAO.GetUser(user);
+		if(u != null)
+		{
+			return true;
+		}
+		return false;
+	}
 }
