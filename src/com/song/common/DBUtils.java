@@ -18,7 +18,19 @@ public class DBUtils {
 	private static String PASSWORD = "root";
 	// 数据库连接
 	private static Connection con = null;
-
+	private static Statement stmt = null;
+	private static ResultSet rst = null;
+	
+	// 优先加载驱动
+	static {
+		try {
+			// 加载数据库驱动
+			Class.forName(DRIVER);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * 连接mysql数据库
@@ -27,9 +39,7 @@ public class DBUtils {
 	public static void ConnDB() throws Exception
 	{
 		// 如果连接为空，则创建mysql连接
-		if (con == null) {
-			// 加载数据库驱动
-			Class.forName(DRIVER);
+		if (con == null) {			
 			// 获取数据库连接
 			con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			}
@@ -43,8 +53,9 @@ public class DBUtils {
 	 */
 	public static ResultSet Query(String sql) throws SQLException
 	{
-		Statement stmt = con.createStatement();
-		return stmt.executeQuery(sql);		
+		stmt = con.createStatement();
+		rst = stmt.executeQuery(sql);	
+		return 	rst;
 	}
 	
 	/**
@@ -56,7 +67,7 @@ public class DBUtils {
 	public static int ExecuteUpdateOrDelete(String sql) throws SQLException
 	{
 		int row = 0;
-		Statement stmt = con.createStatement();
+		stmt = con.createStatement();
 		row = stmt.executeUpdate(sql);
 		return row;
 	}
@@ -68,9 +79,21 @@ public class DBUtils {
 	public static void CloseCon()
 	{
 		try {
+			if(stmt != null)
+			{
+				stmt.close();
+				stmt = null;
+			}
+			if(rst != null)
+			{
+				rst.close();
+				rst = null;
+			}
 			if (con != null) {
 				con.close();
+				con = null;
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

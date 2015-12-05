@@ -1,5 +1,10 @@
 package com.song.struts;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.UserBLL;
 import com.song.entity.User;
@@ -28,12 +33,6 @@ public class LoginAction extends ActionSupport {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	@Override
-	public String execute() throws Exception {
-		// TODO Auto-generated method stub
-		return super.execute();
-	}
 	
 	/**
 	 * 登录Action
@@ -41,6 +40,9 @@ public class LoginAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String login()throws Exception{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		// 获取基础路径url
+		String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath();
 		// 实例化用户对象
 		User user = new User();
 		// 对实例化对象设置用户名和密码
@@ -50,6 +52,8 @@ public class LoginAction extends ActionSupport {
 		// 如果用户名和密码验证通过
 		if(userBLL.Login(user))
 		{
+			// 将用户信息保存进Session中
+			ActionContext.getContext().getSession().put("user", user);
 			return "success";
 		}
 		return "false";

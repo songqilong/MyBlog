@@ -22,16 +22,11 @@
         <header>
           <h1 class="text-center">文章标题</h1>
           <dl class="dl-inline">
-            <dt>发布时间：</dt>
-            <dd>2013-11-07 17:14:22</dd>
             <dt>作者：</dt>
             <dd>Catouse</dd>
             <dt></dt>
             <dd class="pull-right"><span class="label label-success">NEW</span> <span class="label label-warning">火爆</span> <span class="label label-info">原创</span> <span class="label label-danger"><i class="icon-eye-open"></i> 235</span></dd>
           </dl>
-          <section class="abstract">
-            <p><strong>摘要：</strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, necessitatibus provident quasi suscipit laborum nemo tenetur ad accusantium explicabo pariatur?</p>
-          </section>
         </header>
         <section class="article-content">
           <h1>Lorem ipsum dolor sit amet.</h1>
@@ -122,12 +117,7 @@
           <p class="pull-right text-muted">
             发布时间：2013年11月7日 16:44:21 &nbsp;点击数：234
           </p>
-          <p class="text-important">本文版权所有归<a href="###">@catouse</a></p>
-          <ul class="pager pager-justify">
-            <li class="previous"><a href="#"><i class="icon-arrow-left"></i> 论烧火煮饭</a></li>
-            <li><a href="#"><i class="icon-list-ul"></i> 目录</a></li>
-            <li class="next disabled"><a href="#">没有下一篇 <i class="icon-arrow-right"></i></a></li>
-          </ul>
+          <p class="text-important">本文版权所有归<a href="###">@catouse</a></p>         
         </footer>
       </article>
     </div>

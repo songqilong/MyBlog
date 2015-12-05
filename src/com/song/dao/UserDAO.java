@@ -14,7 +14,6 @@ public class UserDAO {
 	 * @param user 用户对象
 	 * @return true添加成功，false添加失败
 	 */
-	@SuppressWarnings("finally")
 	public boolean AddUser(User user)
 	{
 		boolean isSuccess = false;
@@ -34,10 +33,10 @@ public class UserDAO {
 			// TODO Auto-generated catch block
 			isSuccess = false;
 			e.printStackTrace();
-		}finally{
+		}
 			DBUtils.CloseCon();
 			return isSuccess;
-		}
+		
 	}
 
 	/**
@@ -45,28 +44,29 @@ public class UserDAO {
 	 * @param user
 	 * @return
 	 */
-	@SuppressWarnings("finally")
 	public User GetUser(User user)
 	{
 		String sql = "select * from t_user where username='"+user.getUsername()+"' and password='"+user.getPassword()+"'";
 		User u = null;
 		try {
 			// 打开数据库
-			DBUtils.CloseCon();
+			DBUtils.ConnDB();;
 			// 执行查询数据库语句
 			ResultSet rst = DBUtils.Query(sql);
 			if(rst.next())
 			{
 				u = new User();
 				u.setPassword(rst.getString("password"));
-				u.setUsername(rst.getString("password"));
+				u.setUsername(rst.getString("username"));
 			}
-		} catch (SQLException e) {
+			rst.close();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			u = null;
 			e.printStackTrace();
-		}finally{
-			return u;
 		}
+			DBUtils.CloseCon();
+			return u;
+		
 	}
 }

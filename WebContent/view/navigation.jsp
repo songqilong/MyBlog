@@ -1,10 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path;
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,16 +20,21 @@
       <a class="navbar-brand" href="#">Brand</a>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">首页 <span class="sr-only">(current)</span></a></li>
-        <li><a href="<%=basePath %>/article/articlelist.jsp">文章列表</a></li>
-        <li><a href="#">相册</a></li>
+      <!-- 获取导航项集合遍历显示 -->
+      <s:iterator value="#session.navigation" id="navItem" status="st">
+      	<li><a href="<s:property value="#navItem.url"/>"><s:property value="#navItem.nav_name"/> </a></li>
+      </s:iterator>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">登录</a></li>
-        <li><a href="#">注册</a></li>
+      	<s:if test="#session.user.username!= null">
+      		<li><a href="#">欢迎 <s:property value="#session.user.username"/>登录</a></li>
+      	</s:if>
+      	<s:else>
+        	<li><a href="register">登录</a></li>
+        	<li><a href="#">注册</a></li>
+        </s:else>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
