@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.min.css">
+<link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.css">
 <script type="text/javascript" src="<%=basePath%>/plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/plugin/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -23,26 +23,22 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li class="active">Data</li>
+        <li><a href="#">首页</a></li>
+        <li class="active">文章列表</li>
       </ul>
       <div class="list">
         <header>
+          <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small>26 篇文章</small></h3>
           <div class="pull-right">
-            <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-default active"><i class="icon-th-list"></i></button>
-              <button type="button" class="btn btn-default"><i class="icon-th"></i></button>
-              <button type="button" class="btn btn-default"><i class="icon-th-large"></i></button>
-            </div>
+            <a class="btn btn-primary" href="article_write">写文章</a>
           </div>
-          <h3><i class="icon-list-ul icon-border-circle"></i> Contents List &nbsp;<small>26 articles</small></h3>
+         <br><br>
         </header>
         <section class="items items-hover">
           <div class="item">
             <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><span class="label label-success">NEW</span>&nbsp; <a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
+              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+              <h4><span class="label label-success">新</span>&nbsp; <a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
             </div>
             <div class="item-content">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!

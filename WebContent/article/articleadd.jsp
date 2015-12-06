@@ -8,9 +8,16 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="<%=basePath%>/plugin/editor/themes/default/default.css">
 <link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.min.css">
+<script type="text/javascript" src="<%=basePath%>/plugin/editor/kindeditor-min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/plugin/bootstrap.min.js"></script>
+<script>
+KindEditor.ready(function(K) {
+    window.editor = K.create('#content');
+});
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>写文章</title>
 </head>
@@ -19,36 +26,16 @@
 <div class="row"><jsp:include page="../view/navigation.jsp"></jsp:include></div>
 <div class="row">
 <div class="example">
-      <form class="form-horizontal form-condensed" role="form" method='post'>
+      <form action="article_add" class="form-horizontal form-condensed" role="form" method='post'>
         <legend>创建文章</legend>
         <div class="form-group">
-          <label class="col-md-2 control-label required">类目</label>
-          <div class="col-md-4">
-            <select name='categories[]' id='categories' multiple='multiple' class='select-3 form-control chosen'>
-              <option value='2'>/蝉知动态</option>
-              <option value='51'>/asd</option>
-            </select>
+          <label class="col-md-2 control-label">标题</label>
+          <div class="col-md-10 has-error">
+             <input type='text' name='title' id='title' value='' class='form-control' placeholder=''/>
+             <div class="help-block alert alert-warning">标题不能为空</div>
           </div>
         </div>
-
-        <div class="form-group">
-          <label class="col-md-2 control-label">作者</label>
-          <div class="col-md-4">
-             <input type='text' name='author' id='author' value='demo' class='form-control' />
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-2 control-label">创建日期</label>
-          <div class="col-md-4">
-            <div class="input-group">
-              <input type='text' name='date' id='date' value='2013-2-13' class='form-control' />
-              <span class="input-group-btn"> <button class="btn btn-default" type="button">田</button> </span>
-            </div>
-          </div>
-        </div>
-
-
+        
         <div class="form-group">
           <label class="col-md-2 control-label">来源</label>
           <div class='col-md-4'>
@@ -62,26 +49,7 @@
             <div class='col-md-3'><input type='text' name='copyURL' id='copyURL' value='' class='form-control' placeholder='来源URL' /></div>
           </div>
         </div>
-
-        <div class="form-group">
-          <label class="col-md-2 control-label">标题</label>
-          <div class="col-md-10 has-error">
-             <input type='text' name='title' id='title' value='' class='form-control' placeholder=''/>
-             <div class="help-block alert alert-warning">标题不能为空</div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-2 control-label">英文别名</label>
-          <div class="col-md-10">
-            <div class="input-group">
-              <span class="input-group-addon">http://demo.chanzhi.org/article/id@</span>
-              <input type='text' name='alias' id='alias' value='' class='form-control' />
-              <span class="input-group-addon">.html</span>
-            </div>
-          </div>
-        </div>
-
+        
         <div class="form-group">
           <label class="col-md-2 control-label">关键字</label>
           <div class="col-md-10">
@@ -90,25 +58,11 @@
         </div>
 
         <div class="form-group">
-          <label class="col-md-2 control-label">摘要</label>
-          <div class="col-md-10">
-            <textarea name='summary' id='summary' rows='2' class='form-control'></textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
           <label class="col-md-2 control-label">内容</label>
           <div class="col-md-10">
-            <textarea name='content' id='content' rows='10' class='form-control'></textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="col-md-2 control-label">保存为</label>
-          <div class="col-md-10">
-            <label class='radio-inline'> <input type="radio" name="optionsRadios" value="option1" checked> 草稿 </label>
-            <label class='radio-inline'> <input type="radio" name="optionsRadios" value="option2"> 私人 </label>
-            <label class='radio-inline'> <input type="radio" name="optionsRadios" value="option2"> 公开 </label>
+            <textarea id="content" name="content" class='form-control'>
+				
+			</textarea>
           </div>
         </div>
 
