@@ -1,9 +1,14 @@
 package com.song.dao;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.song.common.DBUtils;
 import com.song.entity.Article;
 
 public class ArticleDAO {
+
 
 	/**
 	 * 插入文章
@@ -31,5 +36,40 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return isSuccess;
+	}
+	
+	/**
+	 * 获取文章集合
+	 * @return
+	 */
+	public List<Article> ArticleCollection(){
+		// 构建查询文章集合的语句
+		String sql = "select * from t_article";
+		// 实例化一个文章对象的集合
+		List<Article> list = new ArrayList<Article>();
+		try{
+			// 打开数据库
+			DBUtils.ConnDB();
+			// 执行查询
+			ResultSet rst = DBUtils.Query(sql);
+			while(rst.next())
+			{
+				Article article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setType(rst.getString("type"));
+				article.setSourceweb(rst.getString("sourceweb"));
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setContent(rst.getString("content"));
+				article.setCtime(rst.getString("ctime"));
+				list.add(article);
+			}
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
 	}
 }

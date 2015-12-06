@@ -14,11 +14,11 @@
 <div class="row col-md-4 col-md-offset-4">
       <form class="form-signin" action="login">
         <h2 class="form-signin-heading">登录</h2>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="input" name="username" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <label for="UserName" class="sr-only">UserName</label>
+        <input type="text" name="username" class="form-control" placeholder="用户名" required autofocus>
         <br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="Password" class="sr-only">Password</label>
+        <input type="password" name="password" class="form-control" placeholder="密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住密码

@@ -1,8 +1,6 @@
 package com.song.dao;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
 import com.song.common.DBUtils;
 import com.song.entity.User;
 

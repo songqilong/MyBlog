@@ -1,9 +1,23 @@
 package com.song.struts;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.song.bll.ArticleBLL;
+import com.song.common.Common;
+import com.song.entity.Article;
 
 public class ArticleAction extends ActionSupport {
 
+	private Article article;
+	
+	
+	public Article getArticle() {
+		return article;
+	}
+
+
+	public void setArticle(Article article) {
+		this.article = article;
+	}
 	/**
 	 * 
 	 */
@@ -15,6 +29,11 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showList()throws Exception{
+		// 获取全部文章的数量
+		
+		// 获取全部文章的集合
+		
+		// 计算分页数量
 		return "list";
 	} 
 	
@@ -33,7 +52,13 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String add()throws Exception{
-		return "add";
+		this.article.setCtime(Common.GetCurrentTime());
+		ArticleBLL articleBLL = new ArticleBLL();
+		// 如果添加成功跳转到文章列表
+		if(articleBLL.AddArticle(article)){
+			return "list";
+		}
+		return "write";
 	}
 
 }

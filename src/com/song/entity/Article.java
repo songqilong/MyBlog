@@ -5,6 +5,8 @@ public class Article {
 	private int id;
 	// 文章题目
 	private String title;
+	// 文章类型
+	private String type;
 	// 文章源网站名
 	private String sourceweb;
 	// 文章源网站网址
@@ -70,6 +72,14 @@ public class Article {
 
 	public void setCtime(String ctime) {
 		this.ctime = ctime;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 }
