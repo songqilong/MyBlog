@@ -39,12 +39,21 @@ public class ArticleDAO {
 	}
 	
 	/**
-	 * 获取文章集合
+	 * 获取分页文章集合
+	 * @param page 页码
+	 * @param articleCount 每页的文章数量
 	 * @return
 	 */
-	public List<Article> ArticleCollection(){
-		// 构建查询文章集合的语句
-		String sql = "select * from t_article";
+	public List<Article> ArticleCollection(int page,int articleCount){
+		String sql = "";
+		if(page == 1){
+			// 构建查询文章集合的语句
+			sql = "select * from t_article limit 0,"+articleCount+"";
+		}else{
+			if(page>1){
+				sql = "select * from t_article limit "+((page-1)*articleCount+1)+","+articleCount+"";
+			}
+		}		
 		// 实例化一个文章对象的集合
 		List<Article> list = new ArrayList<Article>();
 		try{
@@ -71,5 +80,30 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	/**
+	 * 获取一共有多少条数据
+	 * @return
+	 */
+	public int ArticleCount(){
+		int row = 0;
+		String sql = "select * from t_article";
+		try{
+			// 打开数据库连接
+			DBUtils.ConnDB();
+			// 查询操作
+			ResultSet rst = DBUtils.Query(sql);
+			// 移动到最后一行
+			rst.last();
+			// 获取最后一行的行号
+			row = rst.getRow();
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
 	}
 }

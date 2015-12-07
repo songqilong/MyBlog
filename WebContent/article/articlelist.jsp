@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
     <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -29,90 +29,31 @@
       <div class="list">
         <header>
           <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small>26 篇文章</small></h3>
+          <s:if test="#session.user.username!=null">
           <div class="pull-right">
             <a class="btn btn-primary" href="article_write">写文章</a>
           </div>
          <br><br>
+         </s:if>
         </header>
         <section class="items items-hover">
-          <div class="item">
+        <s:iterator value="articlelist" id="article" status="st">
+        	<div class="item">
             <div class="item-heading">
+            <s:if test="#session.user.username!=null">
               <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
-              <h4><span class="label label-success">新</span>&nbsp; <a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
+            </s:if>  
+              <h4><span class="label label-success">新</span>&nbsp; <a href="###"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
             </div>
             <div class="item-footer">
               <a href="#" class="text-muted"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
+              <span class="text-muted"><s:property value="#article.ctime"/> </span>
             </div>
           </div>
-          <div class="item">
-            <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
-            </div>
-            <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
-            </div>
-            <div class="item-footer">
-              <a href="#"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
-            </div>
-            <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
-            </div>
-            <div class="item-footer">
-              <a href="#"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
-            </div>
-            <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
-            </div>
-            <div class="item-footer">
-              <a href="#"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
-            </div>
-            <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
-            </div>
-            <div class="item-footer">
-              <a href="#"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
-            </div>
-          </div>
-          <div class="item">
-            <div class="item-heading">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> edit</a> &nbsp;<a href="#"><i class="icon-remove"></i> delete</a></div>
-              <h4><a href="###">Lorem ipsum dolor sit amet.中文标题测试</a></h4>
-            </div>
-            <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
-            </div>
-            <div class="item-footer">
-              <a href="#"><i class="icon-comments"></i> 243</a>&nbsp;
-              <span class="text-muted">2013-11-11 16:14:37</span>
-            </div>
-          </div>
+        </s:iterator>
         </section>
         <footer>
           <ul class="pager">

@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class DBUtils {
 	// mysql 驱动字符串
-	private static String DRIVER = "com.mysql.jdbc.Driver";
+	private static String DRIVER = PropertiesUtils.ReadProperties("DRIVER");
 	// mysql 连接URL
 	private static String URL = "jdbc:mysql://127.0.0.1:3306/blog";
 	// mysql数据库用户名
