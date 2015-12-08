@@ -83,9 +83,9 @@ public class ArticleAction extends ActionSupport {
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表
 		if (articleBLL.AddArticle(article)) {
-			return "list";
+			return "add";
 		}
-		return "write";
+		return "addfail";
 	}
 	
 	
