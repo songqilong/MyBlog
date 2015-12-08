@@ -43,8 +43,10 @@
     <!-- 文章 -->
     <package name="article" namespace="/article" extends="struts-default">
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
-            <result name="list">/article/articlelist.jsp</result>
+            <result name="list">/article/articlelist.jsp?page=1</result>
             <result name="write">/article/articleadd.jsp</result>
+            <result name="single">/article/articlesingle.jsp</result>
+            <result name="noarticle">/error.jsp?info=文章不存在</result>
         </action>
     </package>
 

@@ -2,6 +2,9 @@ package com.song.struts;
 
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.ArticleBLL;
 import com.song.common.Common;
@@ -40,11 +43,14 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showList() throws Exception {
-		// 获取全部文章的数量
-
-		// 获取全部文章的集合
 		ArticleBLL articleBLL = new ArticleBLL();
-		this.articlelist = articleBLL.GetAllArticle();
+		// 获取全部文章的数量
+		int totalArticleQty = articleBLL.GetAllArticleCount();
+		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+		// 获取当前页码 
+		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
+		// 获取当前页码全部文章的集合		
+		this.articlelist = articleBLL.GetArticlesForPage(page);
 		if(this.articlelist.size()>0){
 			return "list";
 		}
@@ -69,13 +75,31 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String add() throws Exception {
+		// 设置文章创建的时间
 		this.article.setCtime(Common.GetCurrentTime());
+		// 获取存在Session对象中的作者即用户名
+		String author = String.valueOf(ActionContext.getContext().getSession().get("user"));
+		this.article.setAuthor(author);
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表
 		if (articleBLL.AddArticle(article)) {
 			return "list";
 		}
 		return "write";
+	}
+	
+	
+	public String single()throws Exception{
+		ArticleBLL articleBLL = new ArticleBLL();
+		// 获取文章的ID
+		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
+		//根据ID获取文章
+		this.article = articleBLL.GetArticleById(articleID);
+		// 如果文章不为空
+		if(this.article != null){
+			return "single";
+		}
+		return "noarticle";
 	}
 
 }

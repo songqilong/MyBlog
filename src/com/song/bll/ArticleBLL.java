@@ -2,6 +2,7 @@ package com.song.bll;
 
 import java.util.List;
 
+import com.song.common.PropertiesUtils;
 import com.song.dao.ArticleDAO;
 import com.song.entity.Article;
 
@@ -27,9 +28,10 @@ public class ArticleBLL {
 	 * 获取分页文章
 	 * @return
 	 */
-	public List<Article> GetAllArticle(){
-		//return articleDAO.ArticleCollection();
-		return null;
+	public List<Article> GetArticlesForPage(int page){
+		// 从配置文件中获取每页显示的文章数量
+		int articleCount = Integer.parseInt(PropertiesUtils.ReadProperties("page").toString());
+		return articleDAO.ArticleCollection(page,articleCount);
 	}
 	
 	/**
@@ -38,5 +40,14 @@ public class ArticleBLL {
 	 */
 	public int GetAllArticleCount(){
 		return articleDAO.ArticleCount();
+	}
+
+	/**
+	 * 根据文章ID获取文章
+	 * @param id 文章ID
+	 * @return
+	 */
+	public Article GetArticleById(int id){
+		return articleDAO.GetAticle(id);
 	}
 }

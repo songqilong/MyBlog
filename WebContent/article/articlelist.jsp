@@ -28,7 +28,7 @@
       </ul>
       <div class="list">
         <header>
-          <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small>26 篇文章</small></h3>
+          <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><s:property value="#request.TotalArticleQty"/> 篇文章</small></h3>
           <s:if test="#session.user.username!=null">
           <div class="pull-right">
             <a class="btn btn-primary" href="article_write">写文章</a>
@@ -41,12 +41,13 @@
         	<div class="item">
             <div class="item-heading">
             <s:if test="#session.user.username!=null">
-              <div class="pull-right"><a href="###"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="#"><i class="icon-remove"></i> 删除</a></div>
+              <div class="pull-right"><a href="article_edit?articleID=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?articleID=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
-              <h4><span class="label label-success">新</span>&nbsp; <a href="###"><s:property value="#article.title"/></a></h4>
+              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?articleID=<s:property value="#article.id"/>"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe!
+            <s:property value="#article.content" escape="false"/>
+               <!--  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe! -->
             </div>
             <div class="item-footer">
               <a href="#" class="text-muted"><i class="icon-comments"></i> 243</a>&nbsp;
@@ -74,7 +75,17 @@
   </article>
 </div>
 </div>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	// 遍历class为item-content的元素
+	$(".item-content").each(function(){
+		// 获取每个元素中的文本，然后截取150个字符
+		var articleContent = $(this).text().substr(0,150)+"......";
+		// 将每个元素的样式设为默认样式
+		$(this).text(articleContent).css({"style":"none"});
+	});
+});
+</script>
 
 </body>
 </html>

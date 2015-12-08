@@ -18,8 +18,8 @@ public class ArticleDAO {
 	public boolean AddArticle(Article article) {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
-		String sql = "insert into t_article(title,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
+		String sql = "insert into t_article(title,author,sourceweb,sourceurl,keyword,content,ctime)values('"
+				+ article.getTitle() + "','"+article.getAuthor()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
 				+ article.getKeyword() + "','" + article.getContent() + "','" + article.getCtime() + "')";
 		try{
 			// 打开数据库连接
@@ -66,6 +66,7 @@ public class ArticleDAO {
 				Article article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
 				article.setType(rst.getString("type"));
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
@@ -105,5 +106,39 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return row;
+	}
+
+	/**
+	 * 根据文章ID获取文章
+	 * @param id
+	 * @return
+	 */
+	public Article GetAticle(int id){
+		Article article = null;
+		String sql = "select * from t_article where id="+id+"";
+		try{
+			// 连接数据库
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			if(rst.next()){
+				article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
+				article.setType(rst.getString("type"));
+				article.setKeyword(rst.getString("keyword"));
+				article.setSourceurl(rst.getString("sourceurl"));;
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setContent(rst.getString("content"));
+				article.setCtime(rst.getString("ctime"));
+			}
+			// 是否ResultSet资源
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return article;
 	}
 }

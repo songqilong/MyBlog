@@ -11,11 +11,11 @@ public class DBUtils {
 	// mysql 驱动字符串
 	private static String DRIVER = PropertiesUtils.ReadProperties("DRIVER");
 	// mysql 连接URL
-	private static String URL = "jdbc:mysql://127.0.0.1:3306/blog";
+	private static String URL = PropertiesUtils.ReadProperties("URL");
 	// mysql数据库用户名
-	private static String USERNAME = "root";
+	private static String USERNAME = PropertiesUtils.ReadProperties("USERNAME");
 	// mysql数据库密码
-	private static String PASSWORD = "root";
+	private static String PASSWORD = PropertiesUtils.ReadProperties("PASSWORD");
 	// 数据库连接
 	private static Connection con = null;
 	private static Statement stmt = null;
