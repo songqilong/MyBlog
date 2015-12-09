@@ -15,10 +15,10 @@
       <form class="form-signin" action="login">
         <h2 class="form-signin-heading">登录</h2>
         <label for="UserName" class="sr-only">UserName</label>
-        <input type="text" name="username" class="form-control" placeholder="用户名" required autofocus>
+        <input type="text" name="user.username" class="form-control" placeholder="用户名" required autofocus>
         <br>
         <label for="Password" class="sr-only">Password</label>
-        <input type="password" name="password" class="form-control" placeholder="密码" required>
+        <input type="password" name="user.password" class="form-control" placeholder="密码" required>
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> 记住密码

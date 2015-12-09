@@ -7,6 +7,7 @@
 <title>出错啦~~~~~</title>
 </head>
 <body>
-<h1><s:property value="#info"/> </h1>
+<h1> <%=request.getParameter("info") %> </h1>
+
 </body>
 </html>

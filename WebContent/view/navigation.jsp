@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>导航栏</title>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -24,7 +24,15 @@
       <ul class="nav navbar-nav">
       <!-- 获取导航项集合遍历显示 -->
       <s:iterator value="#session.navigation" id="navItem" status="st">
-      	<li><a href="<s:property value="#navItem.url"/>"><s:property value="#navItem.nav_name"/> </a></li>
+      	<s:if test="%{#navItem.nav_name=='首页'}">
+      		<li><a href="<s:property value="#navItem.url"/>?master=${sessionScope.master}"><s:property value="#navItem.nav_name"/> </a></li>
+      	</s:if> 
+      	<s:elseif test="%{#navItem.nav_name=='文章列表'}">
+      		<li><a href="<s:property value="#navItem.url" escape="false"/>?master=${sessionScope.master}&page=1"><s:property value="#navItem.nav_name"/> </a></li>  
+      	</s:elseif>   
+      	<s:elseif test="%{#navItem.nav_name=='相册'}">
+      		<li><a href="<s:property value="#navItem.url"/>?page=1"><s:property value="#navItem.nav_name"/> </a></li>  
+      	</s:elseif>      		
       </s:iterator>
       </ul>
       <ul class="nav navbar-nav navbar-right">

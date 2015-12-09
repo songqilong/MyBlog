@@ -5,7 +5,7 @@
 
 <struts>
 
-    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    <constant name="struts.enable.DynamicMethodInvocation" value="true" />
     <constant name="struts.devMode" value="true" />
 
     <package name="default" namespace="/" extends="struts-default">
@@ -22,32 +22,30 @@
          -->
 		<!-- 登录 -->
         <action name="login" class="com.song.struts.LoginAction" method="login">
-            <result name="success" type="chain">
-                <param name="actionName">index</param>
-                <param name="namespace">/index</param>
-            </result>
+            <result name="success" type="redirect">index_access?master=${user.username}</result>
             <result name="false">/login.jsp</result>
         </action>
-        
-
-    </package>
-	
-    <!-- 首页 -->
-    <package name="index" namespace="/index" extends="struts-default">
-        <action name="index" class="com.song.struts.IndexAction" method="loadIndexData">
-            <result name="success">/view/main.jsp</result>
-            <result name="false">/error.jsp</result>
+        <!-- 首页 -->
+        <action name="index_*" class="com.song.struts.IndexAction" method="{1}">
+            <result name="access" type="chain">index_loadNav</result>
+            <result name="nav" type="chain">index_loadArticle</result>
+            <result name="navfail" type="redirect">/error.jsp?info=加载导航栏数据失败</result>           
+            <result name="article">/view/main.jsp</result>
+            <result name="articlefail">/error.jsp?info=加载文章失败</result>
         </action>
+
     </package>
     
     <!-- 文章 -->
     <package name="article" namespace="/article" extends="struts-default">
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
+             <result name="showlist" type="chain">article_getList</result>
+             <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
             <result name="list">/article/articlelist.jsp</result>
             <result name="write">/article/articleadd.jsp</result>
             <result name="single">/article/articlesingle.jsp</result>
-            <result name="add" type="redirect">
-                <param name="actionName">/article/article_showList?page=1</param>
+            <result name="add" type="redirectAction">
+                <param name="actionName">article_showList?page=1</param>
             </result>
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>

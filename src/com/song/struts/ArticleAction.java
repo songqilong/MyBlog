@@ -2,13 +2,17 @@ package com.song.struts;
 
 import java.util.List;
 
+import javax.servlet.ServletConfig;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.ArticleBLL;
+import com.song.bll.NavigationBLL;
 import com.song.common.Common;
 import com.song.entity.Article;
+import com.song.entity.Navigation;
 
 public class ArticleAction extends ActionSupport {
 
@@ -43,14 +47,38 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showList() throws Exception {
+		String result = "showlist";
+		Object obj = ActionContext.getContext().getSession().get("navigation");
+		if (obj == null) {
+			NavigationBLL nvaBLL = new NavigationBLL();
+			// 获取导航栏的导航项
+			List<Navigation> list = nvaBLL.GetNavigations();
+			// 如果导航项集合长度不为0
+			if (list.size() < 0) {
+				ActionContext.getContext().getSession().put("navigation", list);
+				result = "showlistfail";
+			}
+		}
+		return result;
+//		return "showlist";
+	}
+	
+	/**
+	 * 获取文章列表
+	 * @return
+	 * @throws Exception
+	 */
+	public String getList()throws Exception{
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 获取全部文章的数量
 		int totalArticleQty = articleBLL.GetAllArticleCount();
 		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+		// 获取master
+		String master = ServletActionContext.getRequest().getParameter("master");
 		// 获取当前页码 
 		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
 		// 获取当前页码全部文章的集合		
-		this.articlelist = articleBLL.GetArticlesForPage(page);
+		this.articlelist = articleBLL.GetArticlesForPage(master,page);
 		if(this.articlelist.size()>0){
 			return "list";
 		}

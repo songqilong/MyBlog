@@ -3,7 +3,6 @@ package com.song.dao;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-
 import com.song.common.DBUtils;
 import com.song.entity.Article;
 
@@ -44,14 +43,14 @@ public class ArticleDAO {
 	 * @param articleCount 每页的文章数量
 	 * @return
 	 */
-	public List<Article> ArticleCollection(int page,int articleCount){
+	public List<Article> ArticleCollection(String author,int page,int articleCount){
 		String sql = "";
 		if(page == 1){
 			// 构建查询文章集合的语句
-			sql = "select * from t_article limit 0,"+articleCount+"";
+			sql = "select * from t_article where author='"+author+"' limit 0,"+articleCount+"";
 		}else{
 			if(page>1){
-				sql = "select * from t_article limit "+((page-1)*articleCount+1)+","+articleCount+"";
+				sql = "select * from t_article where author='"+author+"' limit "+((page-1)*articleCount+1)+","+articleCount+"";
 			}
 		}		
 		// 实例化一个文章对象的集合
@@ -113,7 +112,7 @@ public class ArticleDAO {
 	 * @param id
 	 * @return
 	 */
-	public Article GetAticle(int id){
+	public Article GetArticle(int id){
 		Article article = null;
 		String sql = "select * from t_article where id="+id+"";
 		try{
@@ -133,6 +132,42 @@ public class ArticleDAO {
 				article.setCtime(rst.getString("ctime"));
 			}
 			// 是否ResultSet资源
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return article;
+	}
+
+	/**
+	 * 根据作者查询最新发布的一篇文章
+	 * @param author 作者
+	 * @return
+	 */
+	public Article GetArticle(String author){
+		Article article = null;
+		// 构建SQL查询语句
+		String sql = "select  * from t_article where author='"+author+"' order by ctime desc limit 0,1;";
+		try{
+			// 打开数据库
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			// 如果查询结果存在，则将查询的结果存入文章对象中
+			if(rst.next()){
+				article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
+				article.setType(rst.getString("type"));
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setSourceweb(rst.getString("sourceweb"));
+				article.setKeyword(rst.getString("keyword"));
+				article.setContent(rst.getString("content"));
+				article.setCtime(rst.getString("ctime"));
+			}
+			// 释放资源
 			rst.close();
 			// 关闭数据库连接
 			DBUtils.CloseCon();
