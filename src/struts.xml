@@ -36,13 +36,15 @@
 
     </package>
     
-    <!-- 文章 -->
+    
     <package name="article" namespace="/article" extends="struts-default">
+        <!-- 文章 -->
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
              <result name="showlist" type="chain">article_getList</result>
              <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
             <result name="list">/article/articlelist.jsp</result>
             <result name="write">/article/articleadd.jsp</result>
+            <result name="comment" type="chain">article_comment</result>
             <result name="single">/article/articlesingle.jsp</result>
             <result name="add" type="redirectAction">
                 <param name="actionName">article_showList?page=1</param>
@@ -50,6 +52,11 @@
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>
         </action>
+        
+         <!-- 评论 -->
+         <action name="comment_*" class="com.song.struts.CommentAction" method="{1}">
+             
+         </action>
     </package>
 
     <!-- Add packages here -->

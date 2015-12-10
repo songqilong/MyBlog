@@ -35,11 +35,11 @@ public class ArticleBLL {
 	}
 	
 	/**
-	 * 获取所有文章的数量
+	 * 获取指定作者所有文章的数量
 	 * @return
 	 */
-	public int GetAllArticleCount(){
-		return articleDAO.ArticleCount();
+	public int GetAllArticleCount(String author){
+		return articleDAO.ArticleCount(author);
 	}
 
 	/**

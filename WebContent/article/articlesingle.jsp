@@ -52,14 +52,37 @@
     <div class="row">
      <div class="comments">
         <header>
-          <div class="pull-right"><a href="#commentReplyForm" class="btn btn-info"><i class="icon-comment-alt"></i> 发表评论</a></div>
-          <h3><i class="icon-comments icon-border-circle"></i> 26 条评论</h3>
+          <h3><i class="icon-comments icon-border-circle"></i> <s:property value="#CommentQty"/> 条评论</h3>
           <div class="alert alert-info text-center">
             <a href="alert-link">3 条新的评论</a>
           </div>
         </header>
         <section class="comments-list">
-          <div class="comment">
+ 		<!-- 遍历评论 -->       
+        <s:iterator value="commentlist" id="comment" status="st">
+        	<!-- 如果回复对象为空 -->
+        	<s:if test="#comment.replyto==null">
+        		<div class="comment">
+            		<a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
+            		<div class="content">
+              		<div class="pull-right"><span class="text-muted">2 hours ago</span> &nbsp;<strong>#4</strong></div>
+              		<!-- 文章作者 -->
+              		<a href="#" class="author"><strong><s:property value="#comment.author"/></strong></a>
+              		<div class="text">
+              			<!-- 文章内容 -->
+                		<s:property value="#comment.content"/>
+              		</div>
+              	<div class="actions">
+                <a href="##">回复</a>
+                <a href="##">编辑</a>
+                <a href="##">删除</a>
+              </div>
+            </div>
+          </div>
+        </s:if>
+        <!-- 如果回复对象不为空 -->
+        <s:else>
+        	<div class="comment">
             <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
             <div class="content">
               <div class="pull-right"><span class="text-muted" title="2013-11-08 15:52:32">2 hours ago</span> &nbsp;<strong>#5</strong></div>
@@ -79,86 +102,26 @@
               </div>
             </div>
           </div>
-          <div class="comment">
-            <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="content">
-              <div class="pull-right"><span class="text-muted">2 hours ago</span> &nbsp;<strong>#4</strong></div>
-              <a href="#" class="author"><strong>Catouse</strong></a>
-              <div class="text">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus, illo eaque a iure in quidem officiis numquam ducimus odio non. Architecto, repellendus optio maxime quae sed molestiae ipsa animi tenetur!
-              </div>
-              <div class="actions">
-                <a href="##">reply</a>
-                <a href="##">edit</a>
-                <a href="##">delete</a>
-              </div>
-            </div>
-          </div>
-          <div class="comment">
-            <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="content">
-              <div class="pull-right"><span class="text-muted">4 hours ago</span> &nbsp;<strong>#3</strong></div>
-              <a href="#" class="author"><strong>Catouse</strong></a>
-              <div class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos, iusto at voluptatem quis aspernatur voluptas harum odit corporis consequatur dicta? Eos, unde, doloremque ab voluptatibus mollitia quam quas itaque quod repellendus sed optio cum blanditiis architecto excepturi quidem sint eaque.</div>
-              <div class="actions">
-                <a href="##">reply</a>
-                <a href="##">edit</a>
-                <a href="##">delete</a>
-              </div>
-            </div>
-          </div>
-          <div class="comment">
-            <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="content">
-              <div class="pull-right"><span class="text-muted">1 days ago</span> &nbsp;<strong>#2</strong></div>
-              <a href="#" class="author"><strong>Catouse</strong></a>
-              <div class="text">Excepturi voluptates ea esse voluptas ad voluptate voluptatibus laboriosam velit. Totam, fuga, laboriosam, optio, qui id voluptates nam fugit quibusdam labore alias atque laudantium repudiandae veniam delectus architecto libero ducimus consequatur hic sunt ipsa. Labore, eligendi sapiente dolores quibusdam ipsum.</div>
-              <div class="actions">
-                <a href="##">reply</a>
-                <a href="##">edit</a>
-                <a href="##">delete</a>
-              </div>
-            </div>
-          </div>
-          <div class="comment">
-            <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="content">
-              <div class="pull-right"><span class="text-muted">2 months ago</span> &nbsp;<strong>#1</strong></div>
-              <a href="#" class="author"><strong>Catouse</strong></a>
-              <div class="text">Assumenda, accusamus, inventore, ut, ea laboriosam quae sunt maxime labore quisquam quod nesciunt saepe quis. Debitis, fuga, ad, aut eaque vero vitae suscipit obcaecati nemo eligendi numquam id labore voluptas veniam sequi perspiciatis facilis voluptates dolorem minus quibusdam unde molestias.</div>
-              <div class="actions">
-                <a href="##">reply</a>
-                <a href="##">edit</a>
-                <a href="##">delete</a>
-              </div>
-            </div>
-          </div>
+        </s:else>
+
+        </s:iterator>
+                
         </section>
         <footer>
+        <br>
           <div class="reply-form" id="commentReplyForm">
             <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="form">
+            <div class="form" action="">
               <form role="form">
+               <div class="input-group  col-md-3">
+                	<span class="input-group-addon">评论人</span>
+                	<input type="text" class="form-control" placeholder="评论人">
+                </div>
+                <br>
                 <div class="form-group">
-                  <textarea class="form-control new-comment-text" rows="2" placeholder="write a comment..."></textarea>
+                  <textarea class="form-control new-comment-text" rows="2" placeholder="评论一下吧"></textarea>
                 </div>
-                <div class="form-group comment-user" style="display:none">
-                  <div class="row">
-                    <div class="col-md-3">
-                      <span class="pull-right">或者</span>
-                      <a href="#">登录</a> &nbsp;<a href="##">注册</a>
-                    </div>
-                    <div class="col-md-7">
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="nameInputEmail1" placeholder="Enter your name">
-                      </div>
-                      <div class="form-group">
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                      </div>
-                    </div>
-                    <div class="col-md-2"><button type="submit" class="btn btn-block btn-primary"><i class="icon-ok"></i></button></div>
-                  </div>
-                </div>
+                <div class="pull-right"><a href="#commentReplyForm" class="btn btn-info"><i class="icon-comment-alt"></i> 发表评论</a></div>
               </form>
             </div>
           </div>

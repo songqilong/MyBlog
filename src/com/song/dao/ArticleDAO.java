@@ -83,12 +83,12 @@ public class ArticleDAO {
 	}
 
 	/**
-	 * 获取一共有多少条数据
+	 * 获取指定作者一共有多少条篇文章
 	 * @return
 	 */
-	public int ArticleCount(){
+	public int ArticleCount(String author){
 		int row = 0;
-		String sql = "select * from t_article";
+		String sql = "select * from t_article where author='"+author+"'";
 		try{
 			// 打开数据库连接
 			DBUtils.ConnDB();
