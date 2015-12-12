@@ -23,7 +23,7 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="#">首页</a></li>
+        <li><a href="/Blog/index_access?master=<s:property value="#master"/>">首页</a></li>
         <li class="active">文章列表</li>
       </ul>
       <div class="list">
@@ -43,14 +43,12 @@
             <s:if test="#session.user.username!=null">
               <div class="pull-right"><a href="article_edit?articleID=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?articleID=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
-              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?articleID=<s:property value="#article.id"/>"><s:property value="#article.title"/></a></h4>
+              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?master=<s:property value="#master"/>&articleID=<s:property value="#article.id"/>"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
-            <s:property value="#article.content" escape="false"/>
-               <!--  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi, necessitatibus, animi magni illo vel ducimus quia dolorum modi temporibus iste fugit laudantium minima minus sit debitis. Autem voluptate dolorum saepe! -->
+            <s:property value="#article.content" escape="false"/>               
             </div>
             <div class="item-footer">
-              <a href="#" class="text-muted"><i class="icon-comments"></i> 243</a>&nbsp;
               <span class="text-muted"><s:property value="#article.ctime"/> </span>
             </div>
           </div>

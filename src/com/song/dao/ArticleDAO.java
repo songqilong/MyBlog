@@ -70,6 +70,7 @@ public class ArticleDAO {
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
 				article.setContent(rst.getString("content"));
+				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
 				list.add(article);
 			}
@@ -129,6 +130,7 @@ public class ArticleDAO {
 				article.setSourceurl(rst.getString("sourceurl"));;
 				article.setSourceurl(rst.getString("sourceurl"));
 				article.setContent(rst.getString("content"));
+				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
 			}
 			// 是否ResultSet资源
@@ -165,6 +167,7 @@ public class ArticleDAO {
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setKeyword(rst.getString("keyword"));
 				article.setContent(rst.getString("content"));
+				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
 			}
 			// 释放资源
@@ -175,5 +178,30 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return article;
+	}
+
+	/**
+	 * 更新文章点击次数
+	 * @param articleID
+	 * @return
+	 */
+	public boolean SumArticleClick(int articleID){
+		boolean isSuccess = false;
+		int row = 0;
+		String sql = "update t_article set clicktime=clicktime+1 where id="+articleID+";";
+		try{
+			// 打开数据连接
+			DBUtils.ConnDB();
+			// 执行更新SQL语句
+			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			if(row >0){
+				isSuccess = true;
+			}
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return isSuccess;
 	}
 }

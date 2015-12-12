@@ -59,4 +59,13 @@ public class ArticleBLL {
 	public Article GetLastArticleByAuthor(String author){
 		return articleDAO.GetArticle(author);
 	}
+
+	/**
+	 * 累加文章点击次数
+	 * @param articleID
+	 * @return
+	 */
+	public boolean SumArticleClick(int articleID){
+		return articleDAO.SumArticleClick(articleID);
+	}
 }

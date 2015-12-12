@@ -69,13 +69,13 @@ public class ArticleAction extends ActionSupport {
 			// 获取导航栏的导航项
 			List<Navigation> list = nvaBLL.GetNavigations();
 			// 如果导航项集合长度不为0
-			if (list.size() < 0) {
-				ActionContext.getContext().getSession().put("navigation", list);
+			if (list.size() <= 0) {				
 				result = "showlistfail";
+			}else{
+				ActionContext.getContext().getSession().put("navigation", list);
 			}
 		}
 		return result;
-//		return "showlist";
 	}
 	
 	/**
@@ -87,6 +87,8 @@ public class ArticleAction extends ActionSupport {
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 获取master
 		String master = ServletActionContext.getRequest().getParameter("master");
+		// 强master保存进request中
+		ActionContext.getContext().put("master", master);
 		// 获取全部文章的数量
 		int totalArticleQty = articleBLL.GetAllArticleCount(master);
 		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
@@ -137,13 +139,44 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String single()throws Exception{
+		String result = "showarticle";
+		Object obj = ActionContext.getContext().getSession().get("navigation");
+		if (obj == null) {
+			NavigationBLL nvaBLL = new NavigationBLL();
+			// 获取导航栏的导航项
+			List<Navigation> list = nvaBLL.GetNavigations();
+			// 如果导航项集合长度不为0
+			if (list.size() < 0) {
+				result = "showlistfail";
+			}else{
+				ActionContext.getContext().getSession().put("navigation", list);
+			}
+		}
+		return result;
+		
+	}
+	
+	/**
+	 * 显示单篇文章
+	 * @return
+	 * @throws Exception
+	 */
+	public String showArticle()throws Exception{
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 获取文章的ID
 		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
+		// 将文章ID存入request对象中
+		ActionContext.getContext().put("articleID", articleID);
+		CommentBLL commentBLL = new CommentBLL();
+		// 最新评论数量
+		int commentLastQty = commentBLL.CommentLast(articleID);
+		ActionContext.getContext().put("commentLastQty", commentLastQty);
 		//根据ID获取文章
 		this.article = articleBLL.GetArticleById(articleID);
 		// 如果文章不为空
 		if(this.article != null){
+			// 累加文章点击次数
+			articleBLL.SumArticleClick(articleID);
 			return "comment";
 		}
 		return "noarticle";

@@ -36,7 +36,7 @@
         </section>
         <footer>
           <p class="pull-right text-muted">
-            发布时间：<s:property value="article.ctime"/> &nbsp;点击数：234
+            发布时间：<s:property value="article.ctime"/> &nbsp;点击数：<s:property value="article.clicktime"/>
           </p>
           <p class="text-important">本文版权所有归<a href="###">@catouse</a></p>         
         </footer>

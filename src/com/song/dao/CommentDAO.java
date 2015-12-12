@@ -1,7 +1,9 @@
 package com.song.dao;
 
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import com.song.common.DBUtils;
@@ -64,5 +66,56 @@ public class CommentDAO {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	/**
+	 * 添加评论
+	 * @param comment
+	 * @return
+	 */
+	public boolean CommentAdd(Comment comment){
+		boolean isSuccess = false;
+		int row = 0;
+		String sql = "insert into t_comment(articleid,author,content,ip,ctime) values(" + comment.getArticleid() + ",'"
+				+ comment.getAuthor() + "','" + comment.getContent() + "','" + comment.getIp() + "','"
+				+ comment.getCtime() + "');";
+		try{
+			DBUtils.ConnDB();;
+			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			if(row >0){
+				isSuccess = true;
+			}
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return isSuccess;
+	}
+
+	/**
+	 * 获取最新评论数量
+	 * @param articleID
+	 * @return
+	 */
+	public int CommentLast(int articleID){
+		int row = 0;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(Calendar.getInstance().getTime())+" 00:00:00";
+		String sql = "select * from t_comment where articleid="+articleID+" and ctime>'"+date+"';";
+		try{
+			// 打开数据库
+			DBUtils.ConnDB();
+			// 执行SQL查询
+			ResultSet rst = DBUtils.Query(sql);
+			rst.last();
+			row = rst.getRow();
+			// 释放资源
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
 	}
 }

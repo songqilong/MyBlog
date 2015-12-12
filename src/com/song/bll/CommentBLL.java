@@ -29,4 +29,22 @@ public class CommentBLL {
 	public List<Comment> GetCommentCollection(int articleid){
 		return commentDAO.CommentCollection(articleid);
 	}
+	
+	/**
+	 * 添加评论
+	 * @param comment
+	 * @return
+	 */
+	public boolean CommentAdd(Comment comment){
+		return commentDAO.CommentAdd(comment);
+	}
+	
+	/**
+	 * 获取最新评论的数量
+	 * @param articleID
+	 * @return
+	 */
+	public int CommentLast(int articleID){
+		return commentDAO.CommentLast(articleID);
+	}
 }

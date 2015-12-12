@@ -17,6 +17,8 @@ public class Article {
 	private String keyword;
 	// 文章内容
 	private String content;
+	// 文章点击次数
+	private int clicktime;
 	// 文章创建时间
 	private String ctime;
 
@@ -91,5 +93,15 @@ public class Article {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
+
+	public int getClicktime() {
+		return clicktime;
+	}
+
+	public void setClicktime(int clicktime) {
+		this.clicktime = clicktime;
+	}
+	
+	
 
 }

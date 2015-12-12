@@ -28,23 +28,15 @@
             <dt></dt>
             <dd class="pull-right"><span class="label label-success">NEW</span> <span class="label label-warning">火爆</span> <span class="label label-info">原创</span> <span class="label label-danger"><i class="icon-eye-open"></i> 235</span></dd>
           </dl>
-          <section class="abstract">
-            <p><strong>摘要：</strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Natus, necessitatibus provident quasi suscipit laborum nemo tenetur ad accusantium explicabo pariatur?</p>
-          </section>
         </header>
         <section class="article-content">
           <s:property value="article.content" escape="false"/>
         </section>
         <footer>
           <p class="pull-right text-muted">
-            发布时间：<s:property value="article.ctime"/> &nbsp;点击数：234
+            发布时间：<s:property value="article.ctime"/> &nbsp;点击数：<s:property value="article.clicktime"/>
           </p>
           <p class="text-important">本文版权所有归<a href="###">@catouse</a></p>
-          <ul class="pager pager-justify">
-            <li class="previous"><a href="#"><i class="icon-arrow-left"></i> 论烧火煮饭</a></li>
-            <li><a href="#"><i class="icon-list-ul"></i> 目录</a></li>
-            <li class="next disabled"><a href="#">没有下一篇 <i class="icon-arrow-right"></i></a></li>
-          </ul>
         </footer>
       </article>
     </div>
@@ -54,7 +46,7 @@
         <header>
           <h3><i class="icon-comments icon-border-circle"></i> <s:property value="#CommentQty"/> 条评论</h3>
           <div class="alert alert-info text-center">
-            <a href="alert-link">3 条新的评论</a>
+            <s:property value="#commentLastQty"/> 条新的评论
           </div>
         </header>
         <section class="comments-list">
@@ -65,7 +57,7 @@
         		<div class="comment">
             		<a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
             		<div class="content">
-              		<div class="pull-right"><span class="text-muted">2 hours ago</span> &nbsp;<strong>#4</strong></div>
+              		<div class="pull-right"><span class="text-muted"><s:property value="#comment.ctime"/></span></div>
               		<!-- 文章作者 -->
               		<a href="#" class="author"><strong><s:property value="#comment.author"/></strong></a>
               		<div class="text">
@@ -85,7 +77,7 @@
         	<div class="comment">
             <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
             <div class="content">
-              <div class="pull-right"><span class="text-muted" title="2013-11-08 15:52:32">2 hours ago</span> &nbsp;<strong>#5</strong></div>
+              <div class="pull-right"><span class="text-muted"><s:property value="#comment.ctime"/></span></div>
               <span class="author">
                 <a href="#"><strong>Catouse</strong></a>
                 <span class="text-muted">回复 </span>
@@ -109,19 +101,20 @@
         </section>
         <footer>
         <br>
+          <!-- 发表评论 -->
           <div class="reply-form" id="commentReplyForm">
             <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
-            <div class="form" action="">
-              <form role="form">
+            <div class="form">
+              <form role="form" action="comment_commit?master=<s:property value="article.author"/>&articleID=<s:property value="#articleID"/>" method="post">
                <div class="input-group  col-md-3">
                 	<span class="input-group-addon">评论人</span>
-                	<input type="text" class="form-control" placeholder="评论人">
+                	<input type="text" class="form-control" name="comment.author" placeholder="评论人">
                 </div>
                 <br>
                 <div class="form-group">
-                  <textarea class="form-control new-comment-text" rows="2" placeholder="评论一下吧"></textarea>
+                  <textarea class="form-control new-comment-text" rows="6"  name="comment.content" placeholder="评论一下吧"></textarea>
                 </div>
-                <div class="pull-right"><a href="#commentReplyForm" class="btn btn-info"><i class="icon-comment-alt"></i> 发表评论</a></div>
+                <div class="pull-right"><input type="submit" class="btn btn-info" value="发表评论"> </div>
               </form>
             </div>
           </div>

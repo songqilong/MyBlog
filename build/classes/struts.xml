@@ -42,6 +42,7 @@
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
              <result name="showlist" type="chain">article_getList</result>
              <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
+             <result name="showarticle" type="chain">article_showArticle</result>
             <result name="list">/article/articlelist.jsp</result>
             <result name="write">/article/articleadd.jsp</result>
             <result name="comment" type="chain">article_comment</result>
@@ -55,7 +56,8 @@
         
          <!-- 评论 -->
          <action name="comment_*" class="com.song.struts.CommentAction" method="{1}">
-             
+             <result name="commit" type="redirectAction">article_single?master=${master}&amp;articleID=${articleID}</result>
+             <result name="commitfail">/error.jsp?info=提交评论失败</result>
          </action>
     </package>
 
