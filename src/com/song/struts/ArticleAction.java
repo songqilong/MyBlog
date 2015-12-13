@@ -12,6 +12,7 @@ import com.song.bll.ArticleBLL;
 import com.song.bll.CommentBLL;
 import com.song.bll.NavigationBLL;
 import com.song.common.Common;
+import com.song.common.PropertiesUtils;
 import com.song.entity.Article;
 import com.song.entity.Comment;
 import com.song.entity.Navigation;
@@ -92,8 +93,19 @@ public class ArticleAction extends ActionSupport {
 		// 获取全部文章的数量
 		int totalArticleQty = articleBLL.GetAllArticleCount(master);
 		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+		// 获取每页显示文章的条数
+		int perPageQty = Integer.parseInt(PropertiesUtils.ReadProperties("page"));
+		// 分页数
+		int pageQty = 0;
+		if(totalArticleQty%perPageQty != 0){
+			pageQty = totalArticleQty/perPageQty+1;
+		}else{
+			pageQty = totalArticleQty/perPageQty;
+		}		
+		ActionContext.getContext().put("pageQty", pageQty);
 		// 获取当前页码 
 		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
+		ActionContext.getContext().put("page", page);
 		// 获取当前页码全部文章的集合		
 		this.articlelist = articleBLL.GetArticlesForPage(master,page);
 		if(this.articlelist.size()>0){
@@ -110,6 +122,8 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String write() throws Exception {
+		String master  = ServletActionContext.getRequest().getParameter("master");
+		ServletActionContext.getRequest().setAttribute("master", master);
 		return "write";
 	}
 
@@ -123,7 +137,8 @@ public class ArticleAction extends ActionSupport {
 		// 设置文章创建的时间
 		this.article.setCtime(Common.GetCurrentTime());
 		// 获取存在Session对象中的作者即用户名
-		String author = String.valueOf(ActionContext.getContext().getSession().get("user"));
+		String author = ServletActionContext.getRequest().getParameter("master");
+		ActionContext.getContext().put("master", author);
 		this.article.setAuthor(author);
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表

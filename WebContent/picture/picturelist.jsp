@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
                 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -23,108 +23,76 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Library</a></li>
-        <li class="active">Data</li>
+        <li><a href="/Blog/index_access?master=<s:property value="#master"/>">首页</a></li>
+        <li class="active">图片</li>
       </ul>
       <div class="list">
         <header>
-          <div class="pull-right">
-            <div class="btn-group" data-toggle="buttons-radio">
-              <button type="button" class="btn btn-default active"><i class="icon-th-list"></i></button>
-              <button type="button" class="btn btn-default"><i class="icon-th"></i></button>
-              <button type="button" class="btn btn-default"><i class="icon-th-large"></i></button>
+          <s:if test="#session.user.username != null">
+            <div class="pull-right">
+            	<a class="btn btn-primary" href="">上传图片</a>
             </div>
-          </div>
-          <h3><i class="icon-list-ul icon-border-circle"></i> Cards &nbsp;<small>26 items</small></h3>
+          </s:if>
+          <h3><i class="icon-list-ul icon-border-circle"></i> 图片列表 &nbsp;<small>26 张图片</small></h3>
         </header>
         <section class="cards">
+        <br><br>
         <div class="row">
 								<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 		</div>
 		
 		        <div class="row">
 								<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 		</div>
 		
 		        <div class="row">
 								<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="./myimage/1.png" alt="...">
+									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
 									</a>
 								</div>
 		</div>
-        <!--  
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card">
-              <img src="./myimage/1.png" alt="">             
-            </a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card">
-              <img src="./myimage/1.png" alt="">
-            </a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-          <div class="col-md-4 col-sm-6 col-lg-3">
-            <a href="###" class="card"><img src="./myimage/1.png" alt=""></a>
-          </div>
-            -->
         </section>
         <footer>
           <ul class="pager">

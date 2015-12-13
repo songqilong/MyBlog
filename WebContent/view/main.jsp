@@ -18,6 +18,9 @@
 			<div class="col-md-9"><jsp:include page="bodyright.jsp"></jsp:include></div>
 		</div>
 		<div class="row"></div>
-	</div>
+   </div>
+   
+
+   
 </body>
 </html>

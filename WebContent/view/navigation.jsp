@@ -31,7 +31,7 @@
       		<li><a href="<s:property value="#navItem.url" escape="false"/>?master=${sessionScope.master}&page=1"><s:property value="#navItem.nav_name"/> </a></li>  
       	</s:elseif>   
       	<s:elseif test="%{#navItem.nav_name=='相册'}">
-      		<li><a href="<s:property value="#navItem.url"/>?page=1"><s:property value="#navItem.nav_name"/> </a></li>  
+      		<li><a href="<s:property value="#navItem.url"/>?master=${sessionScope.master}&page=1"><s:property value="#navItem.nav_name"/> </a></li>  
       	</s:elseif>      		
       </s:iterator>
       </ul>
@@ -40,12 +40,49 @@
       		<li><a href="#">欢迎 <s:property value="#session.user.username"/>登录</a></li>
       	</s:if>
       	<s:else>
-        	<li><a href="register">登录</a></li>
-        	<li><a href="#">注册</a></li>
+        	<li><a href="${basePath}/index.jsp">登录</a></li>
+        	<li><a data-toggle="modal" href="#register">注册</a></li>
         </s:else>
       </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
+    </div>
+  </div>
 </nav>
+
+   		<!-- 模态框开始 -->
+		<div class="modal fade" id="register" >
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form action="${basePath}/register" method="post" >
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
+						<h4 class="modal-title" >用户注册</h4>
+					</div>
+					<div class="modal-body">
+						<div class="control-group">
+							<label class="control-label">用户名</label>
+							<input type="text" name="user.username" class="form-control">
+						</div>
+						<div class="control-group">
+							<label class="control-label">密码</label>
+							<input type="password" name="user.password" class="form-control">
+						</div>
+						<!-- 
+						<div class="control-group">
+							<label class="control-label">确认密码</label>
+							<input type="password" name="spassword" class="form-control">
+						</div>
+						 -->
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<input type="submit" class="btn btn-primary" value="注册">
+					</div>
+					</form>
+			    </div>
+			</div>
+	   </div>
+				<!-- 模态框结束 -->
+
 </body>
 </html>

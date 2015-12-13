@@ -31,7 +31,7 @@
           <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><s:property value="#request.TotalArticleQty"/> 篇文章</small></h3>
           <s:if test="#session.user.username!=null">
           <div class="pull-right">
-            <a class="btn btn-primary" href="article_write">写文章</a>
+            <a class="btn btn-primary" href="article_write?master=<s:property value="#master"/>">写文章</a>
           </div>
          <br><br>
          </s:if>
@@ -56,16 +56,22 @@
         </section>
         <footer>
           <ul class="pager">
-            <li class="previous"><a href="#">« 上一页</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">⋯</a></li>
-            <li><a href="#">6</a></li>
-            <li class="active"><a href="#">7</a></li>
-            <li><a href="#">8</a></li>
-            <li><a href="#">9</a></li>
-            <li><a href="#">⋯</a></li>
-            <li><a href="#">12</a></li>
-            <li class="next"><a href="#">下一页 »</a></li>
+ 			<li class="previous">
+ 				<s:if test="#page==1">
+ 					<a href="article/article_showList?master=<s:property value="#master"/>&page=1">&larr; 上一页</a>
+ 				</s:if>
+    			<s:else>
+    				<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page-1}"/>">&larr; 上一页</a>
+    			</s:else>
+ 			</li>
+  			<li class="next">
+  				<s:if test="%{#page==#pageQty}">
+  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="#page"/>">下一页 &rarr;</a>
+  				</s:if>
+  				<s:else>
+  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page+1}"/>">下一页 &rarr;</a>
+  				</s:else>    			
+  			</li>
           </ul>
         </footer>
       </div>
@@ -73,6 +79,8 @@
   </article>
 </div>
 </div>
+
+
 <script type="text/javascript">
 $(document).ready(function(){
 	// 遍历class为item-content的元素

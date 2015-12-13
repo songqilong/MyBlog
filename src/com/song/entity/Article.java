@@ -8,7 +8,7 @@ public class Article {
 	// 文章作者
 	private String author;
 	// 文章类型
-	private String type;
+	private int type;
 	// 文章源网站名
 	private String sourceweb;
 	// 文章源网站网址
@@ -78,11 +78,11 @@ public class Article {
 		this.ctime = ctime;
 	}
 
-	public String getType() {
+	public int getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(int type) {
 		this.type = type;
 	}
 

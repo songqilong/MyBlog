@@ -26,7 +26,7 @@ KindEditor.ready(function(K) {
 <div class="row"><jsp:include page="../view/navigation.jsp"></jsp:include></div>
 <div class="row">
 <div class="example">
-      <form action="article_add" class="form-horizontal form-condensed" role="form" method='post'>
+      <form action="article_add?master=${master}" class="form-horizontal form-condensed" role="form" method='post'>
         <legend>创建文章</legend>
         <div class="form-group">
           <label class="col-md-2 control-label">标题</label>
@@ -41,12 +41,12 @@ KindEditor.ready(function(K) {
           <div class='col-md-4'>
             <select name='article.type' id='original' class='form-control'>
               <option value='1' selected='selected'>原创</option>
-              <option value='0'>转贴</option>
+              <option value='2'>转贴</option>
             </select>
           </div>
           <div id='copyBox'>
-            <div class='col-md-2'><input type='text' name='article.sourceweb' value='' class='form-control' placeholder='来源网站' /></div>
-            <div class='col-md-3'><input type='text' name='article.sourceul' value='' class='form-control' placeholder='来源URL' /></div>
+            <div class='col-md-2'><input type='text' name='article.sourceweb' class='form-control' placeholder='来源网站' /></div>
+            <div class='col-md-3'><input type='text' name='article.sourceurl' class='form-control' placeholder='来源URL' /></div>
           </div>
         </div>
         

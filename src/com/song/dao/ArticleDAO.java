@@ -17,8 +17,8 @@ public class ArticleDAO {
 	public boolean AddArticle(Article article) {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
-		String sql = "insert into t_article(title,author,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "','"+article.getAuthor()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
+		String sql = "insert into t_article(title,type,author,sourceweb,sourceurl,keyword,content,ctime)values('"
+				+ article.getTitle() + "',"+article.getType()+",'"+article.getAuthor()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
 				+ article.getKeyword() + "','" + article.getContent() + "','" + article.getCtime() + "')";
 		try{
 			// 打开数据库连接
@@ -47,10 +47,10 @@ public class ArticleDAO {
 		String sql = "";
 		if(page == 1){
 			// 构建查询文章集合的语句
-			sql = "select * from t_article where author='"+author+"' limit 0,"+articleCount+"";
+			sql = "select * from t_article where author='"+author+"' order by ctime desc limit 0,"+articleCount+";";
 		}else{
 			if(page>1){
-				sql = "select * from t_article where author='"+author+"' limit "+((page-1)*articleCount+1)+","+articleCount+"";
+				sql = "select * from t_article where author='"+author+"'  order by ctime desc limit "+((page-1)*articleCount)+","+articleCount+";";
 			}
 		}		
 		// 实例化一个文章对象的集合
@@ -66,7 +66,7 @@ public class ArticleDAO {
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
 				article.setAuthor(rst.getString("author"));
-				article.setType(rst.getString("type"));
+				article.setType(rst.getInt("type"));
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
 				article.setContent(rst.getString("content"));
@@ -125,7 +125,7 @@ public class ArticleDAO {
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
 				article.setAuthor(rst.getString("author"));
-				article.setType(rst.getString("type"));
+				article.setType(rst.getInt("type"));
 				article.setKeyword(rst.getString("keyword"));
 				article.setSourceurl(rst.getString("sourceurl"));;
 				article.setSourceurl(rst.getString("sourceurl"));
@@ -162,7 +162,7 @@ public class ArticleDAO {
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
 				article.setAuthor(rst.getString("author"));
-				article.setType(rst.getString("type"));
+				article.setType(rst.getInt("type"));
 				article.setSourceurl(rst.getString("sourceurl"));
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setKeyword(rst.getString("keyword"));

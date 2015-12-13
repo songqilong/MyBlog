@@ -25,6 +25,11 @@
             <result name="success" type="redirect">index_access?master=${user.username}</result>
             <result name="false">/login.jsp</result>
         </action>
+        <!-- 注册 -->
+        <action name="register" class="com.song.struts.RegisterAction" method="register">
+            <result name="register" type="redirect">index_access?master=${user.username}</result>
+            <result name="registerfail">/error.jsp?info=注册失败</result>
+        </action>
         <!-- 首页 -->
         <action name="index_*" class="com.song.struts.IndexAction" method="{1}">
             <result name="access" type="chain">index_loadNav</result>
@@ -44,11 +49,11 @@
              <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
              <result name="showarticle" type="chain">article_showArticle</result>
             <result name="list">/article/articlelist.jsp</result>
-            <result name="write">/article/articleadd.jsp</result>
+            <result name="write">/article/articleadd.jsp?master=${master}</result>
             <result name="comment" type="chain">article_comment</result>
             <result name="single">/article/articlesingle.jsp</result>
             <result name="add" type="redirectAction">
-                <param name="actionName">article_showList?page=1</param>
+                <param name="actionName">article_showList?master=${master}&amp;page=1</param>
             </result>
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>
@@ -59,6 +64,15 @@
              <result name="commit" type="redirectAction">article_single?master=${master}&amp;articleID=${articleID}</result>
              <result name="commitfail">/error.jsp?info=提交评论失败</result>
          </action>
+    </package>
+    
+
+    <package name="photo" namespace="/photo" extends="struts-default">
+        <action name="photo_*" class="com.song.struts.PhotoAction" method="{1}">
+            <result name="showlist" type="chain">photo_getList</result>
+            <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
+            <result name="getlist">/picture/picturelist.jsp</result>
+        </action>
     </package>
 
     <!-- Add packages here -->
