@@ -68,10 +68,13 @@
     
 
     <package name="photo" namespace="/photo" extends="struts-default">
+        <!-- 图片 -->
         <action name="photo_*" class="com.song.struts.PhotoAction" method="{1}">
             <result name="showlist" type="chain">photo_getList</result>
             <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
             <result name="getlist">/picture/picturelist.jsp</result>
+            <result name="add" type="chain">photo_showAdd</result>
+            <result name="showadd">/picture/pictureadd.jsp</result>
         </action>
     </package>
 

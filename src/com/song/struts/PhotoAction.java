@@ -51,4 +51,35 @@ public class PhotoAction extends ActionSupport{
 		return "getlist";
 	}
 
+	/**
+	 * 添加图片
+	 * @return
+	 * @throws Exception
+	 */
+	public String add()throws Exception{
+		String result = "add";
+		Object obj = ActionContext.getContext().getSession().get("navigation");
+		if (obj == null) {
+			NavigationBLL nvaBLL = new NavigationBLL();
+			// 获取导航栏的导航项
+			List<Navigation> list = nvaBLL.GetNavigations();
+			// 如果导航项集合长度不为0
+			if (list.size() <= 0) {				
+				result = "showlistfail";
+			}else{
+				ActionContext.getContext().getSession().put("navigation", list);
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * 加载添加图片界面数据
+	 * @return
+	 * @throws Exception
+	 */
+	public String showAdd()throws Exception{
+		
+		return "showadd";
+	}
 }
