@@ -152,13 +152,16 @@
             chunked: false,
             chunkSize: 512 * 1024,
             server: 'photo_upload',
+            
+            // [默认值：'file']  设置文件上传域的name。
+            fileVal:'uploadimage',
             // runtimeOrder: 'flash',
 
-            // accept: {
-            //     title: 'Images',
-            //     extensions: 'gif,jpg,jpeg,bmp,png',
-            //     mimeTypes: 'image/*'
-            // },
+             accept: {
+                 title: 'Images',
+                 extensions: 'gif,jpg,jpeg,bmp,png',
+                 mimeTypes: 'image/*'
+             },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,

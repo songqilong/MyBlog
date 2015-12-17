@@ -1,5 +1,6 @@
 package com.song.struts;
 
+import java.io.File;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -16,6 +17,40 @@ public class PhotoAction extends ActionSupport{
 	 */
 	private static final long serialVersionUID = -5466689722495476346L;
 	
+	// 上传的图片文件
+	private File[] uploadimage;
+	// 文件名称
+	private String[] uploadimageFileName;
+	// 文件类型
+	private String[] uploadimageContextType;
+	
+	
+	public File[] getUploadimage() {
+		return uploadimage;
+	}
+
+	public void setUploadimage(File[] uploadimage) {
+		this.uploadimage = uploadimage;
+	}
+	
+	
+
+	public String[] getUploadimageFileName() {
+		return uploadimageFileName;
+	}
+
+	public void setUploadimageFileName(String[] uploadimageFileName) {
+		this.uploadimageFileName = uploadimageFileName;
+	}
+
+	public String[] getUploadimageContextType() {
+		return uploadimageContextType;
+	}
+
+	public void setUploadimageContextType(String[] uploadimageContextType) {
+		this.uploadimageContextType = uploadimageContextType;
+	}
+
 	/**
 	 * 图片列表
 	 * @return
@@ -81,5 +116,14 @@ public class PhotoAction extends ActionSupport{
 	public String showAdd()throws Exception{
 		
 		return "showadd";
+	}
+	
+	
+	public String upload()throws Exception{
+		String imagePath = ServletActionContext.getRequest().getContextPath()+"/picture/image/";
+		for(int i = 0;i<uploadimage.length;i++){
+			uploadimage[i].renameTo(new File("D:/"+"aa.png"));
+		}
+		return "";
 	}
 }

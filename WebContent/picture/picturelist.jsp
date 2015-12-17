@@ -30,7 +30,7 @@
         <header>
           <s:if test="#session.user.username != null">
             <div class="pull-right">
-            	<a class="btn btn-primary" href="photo_add">上传图片</a>
+            	<a class="btn btn-primary" href="photo_add?master=<s:property value="#master"/>">上传图片</a>
             </div>
           </s:if>
           <h3><i class="icon-list-ul icon-border-circle"></i> 图片列表 &nbsp;<small>26 张图片</small></h3>
