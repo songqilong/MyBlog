@@ -5,6 +5,8 @@ public class Photo {
 	private int id;
 	// 图片名称
 	private String photoname;
+	// 图片元始名字
+	private String originalname;
 	// 相册ID
 	private int albumid;
 	// 图片作者
@@ -50,6 +52,14 @@ public class Photo {
 
 	public void setCtime(String ctime) {
 		this.ctime = ctime;
+	}
+
+	public String getOriginalname() {
+		return originalname;
+	}
+
+	public void setOriginalname(String originalname) {
+		this.originalname = originalname;
 	}
 
 }

@@ -1,14 +1,22 @@
 package com.song.struts;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+
+
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.NavigationBLL;
+import com.song.bll.PhotoBLL;
+import com.song.common.Common;
 import com.song.entity.Navigation;
+import com.song.entity.Photo;
 
 public class PhotoAction extends ActionSupport{
 
@@ -120,10 +128,41 @@ public class PhotoAction extends ActionSupport{
 	
 	
 	public String upload()throws Exception{
-		String imagePath = ServletActionContext.getRequest().getContextPath()+"/picture/image/";
+		String master = ServletActionContext.getRequest().getParameter("master");
+		PhotoBLL photoBLL = new PhotoBLL();
+		List<Photo> list = new ArrayList<Photo>();
+		// 获取图片存放路径
+		String imagePath =PhotoAction.class.getClassLoader().getResource("").getFile().replaceAll("/WEB-INF/classes/", "").replaceAll("%20", " ").substring(1)+"/picture/image/";
+		// 遍历上传的图片
 		for(int i = 0;i<uploadimage.length;i++){
-			uploadimage[i].renameTo(new File("D:/"+"aa.png"));
+			Photo photo = new Photo();
+			photo.setPhotoname(RenamePhoto(uploadimageFileName[i],master,i));
+			photo.setAlbumid(1);
+			photo.setOriginalname(uploadimageFileName[i]);
+			photo.setAuthor("1");
+			photo.setCtime(Common.GetCurrentTime());
+			list.add(photo);
+			uploadimage[i].renameTo(new File(imagePath+RenamePhoto(uploadimageFileName[i],master,i)));
 		}
-		return "";
+		if(photoBLL.AddPhotoList(list)){
+			return "upload";
+		}
+		return "uploadfail";
+	}
+	
+	/**
+	 * 重命名图片名字
+	 * @param originalname 图片元始名称
+	 * @param author 图片上传者
+	 * @param index 图片索引
+	 * @return
+	 */
+	private String RenamePhoto(String originalname,String author,int index){
+		// 图片后缀
+		String suffix = originalname.substring(originalname.lastIndexOf('.'), originalname.length());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddhhmmss");
+		String time = sdf.format(Calendar.getInstance().getTime());
+		String newName = author+time+index+suffix;
+		return newName;
 	}
 }
