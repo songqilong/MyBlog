@@ -1,18 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-            <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path;
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="<%=basePath%>/plugin/editor/themes/default/default.css">
-<link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.min.css">
-<script type="text/javascript" src="<%=basePath%>/plugin/editor/kindeditor-min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/plugin/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/plugin/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${basePath}/plugin/editor/themes/default/default.css">
+<link rel="stylesheet" href="${basePath}/plugin/bootstrap.min.css">
+<script type="text/javascript" src="${basePath}/plugin/editor/kindeditor-min.js"></script>
+<script type="text/javascript" src="${basePath}/plugin/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${basePath}/plugin/bootstrap.min.js"></script>
 <script>
 KindEditor.ready(function(K) {
     window.editor = K.create('#content');
@@ -24,6 +18,15 @@ KindEditor.ready(function(K) {
 <body>
 <div class="container">
 <div class="row"><jsp:include page="../view/navigation.jsp"></jsp:include></div>
+		<!-- 面包屑开始 -->
+		<div class="row">
+			<ul class="breadcrumb">
+				<li><a href="/Blog/index_access?master=${master}&type=100001">首页</a></li>
+				<li><a href="article_showList?master=${master}&page=1&type=100002">文章列表</a></li>
+				<li class="active">发布文章</li>
+			</ul>
+		</div>
+		<!-- 面包屑结束 -->
 <div class="row">
 <div class="example">
       <form action="article_add?master=${master}" class="form-horizontal form-condensed" role="form" method='post'>

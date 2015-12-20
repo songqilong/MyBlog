@@ -4,8 +4,7 @@
         var $wrap = $('#uploader'),
 
             // 图片容器
-            $queue = $( '<ul class="filelist"></ul>' )
-                .appendTo( $wrap.find( '.queueList' ) ),
+            $queue = $( '<ul class="filelist"></ul>' ).appendTo( $wrap.find( '.queueList' ) ),
 
             // 状态栏，包括进度和控制按钮
             $statusBar = $wrap.find( '.statusBar' ),
@@ -138,15 +137,13 @@
         }
         
 
-        function GetQueryString(name)
-        {
-             var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-             var r = window.location.search.substr(1).match(reg);
-             if(r!=null){
-            	 return  unescape(r[2]); 
-             } 
-             return null;
-        }
+        //获取url中的参数
+        master = (function getUrlParam() {
+            var reg = new RegExp("(^|&)master=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        })();
+
 
         // 实例化
         uploader = WebUploader.create({
@@ -162,7 +159,7 @@
             swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'photo_upload',
+            server: 'photo_upload?master='+master,
             
             // [默认值：'file']  设置文件上传域的name。
             fileVal:'uploadimage',

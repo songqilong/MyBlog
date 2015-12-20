@@ -1,16 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
-    <%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path;
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.css">
-<script type="text/javascript" src="<%=basePath%>/plugin/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="<%=basePath%>/plugin/bootstrap.min.js"></script>
+<link rel="stylesheet" href="${sessionScope.basePath}/plugin/bootstrap.css">
+<script type="text/javascript" src="${sessionScope.basePath}/plugin/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath}/plugin/bootstrap.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章列表</title>
 </head>
@@ -23,7 +18,7 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="/Blog/index_access?master=<s:property value="#master"/>">首页</a></li>
+        <li><a href="/Blog/index_access?master=<s:property value="#master"/>&type=100001">首页</a></li>
         <li class="active">文章列表</li>
       </ul>
       <div class="list">
@@ -58,18 +53,18 @@
           <ul class="pager">
  			<li class="previous">
  				<s:if test="#page==1">
- 					<a href="article/article_showList?master=<s:property value="#master"/>&page=1">&larr; 上一页</a>
+ 					<a href="article/article_showList?master=<s:property value="#master"/>&page=1&type=100002">« 上一页</a>
  				</s:if>
     			<s:else>
-    				<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page-1}"/>">&larr; 上一页</a>
+    				<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page-1}"/>&type=100002">« 上一页</a>
     			</s:else>
  			</li>
   			<li class="next">
   				<s:if test="%{#page==#pageQty}">
-  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="#page"/>">下一页 &rarr;</a>
+  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="#page"/>&type=100002">下一页 »</a>
   				</s:if>
   				<s:else>
-  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page+1}"/>">下一页 &rarr;</a>
+  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page+1}"/>&type=100002">下一页 »</a>
   				</s:else>    			
   			</li>
           </ul>

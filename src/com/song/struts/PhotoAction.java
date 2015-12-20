@@ -5,16 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-
-
 import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.NavigationBLL;
 import com.song.bll.PhotoBLL;
 import com.song.common.Common;
+import com.song.common.PropertiesUtils;
 import com.song.entity.Navigation;
 import com.song.entity.Photo;
 
@@ -39,9 +36,7 @@ public class PhotoAction extends ActionSupport{
 
 	public void setUploadimage(File[] uploadimage) {
 		this.uploadimage = uploadimage;
-	}
-	
-	
+	}	
 
 	public String[] getUploadimageFileName() {
 		return uploadimageFileName;
@@ -87,12 +82,32 @@ public class PhotoAction extends ActionSupport{
 	 * @throws Exception
 	 */
 	public String getList()throws Exception{
+		PhotoBLL photoBLL = new PhotoBLL();
 		// 获取参数master
 		String master = ServletActionContext.getRequest().getParameter("master");
 		// 设置request值master
 		ActionContext.getContext().put("master", master);
+	    // 获取一共多少张图片
+		int photoQty =  photoBLL.GetPhotoQtyByAuthor(master);
+		int photoSize = Integer.parseInt(PropertiesUtils.ReadProperties("photosize"));
+		ActionContext.getContext().put("photoQty", photoQty);
+		int pageQty = 0;
+		if(photoQty%photoSize >0){
+			pageQty = photoQty/photoSize+1;
+		}else{
+			pageQty = photoQty/photoSize;
+		}
+		ActionContext.getContext().put("pageQty", pageQty);
+		// 获取当前页码的参数
+		int currentPage = Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
+		ActionContext.getContext().put("page", currentPage);
+		List<Photo> list = photoBLL.GetPhotoList(master, currentPage);
+		//String jsonstr = JSON.toJSONString(list);
+		//ServletActionContext.getResponse().getWriter().print(jsonstr);
+		ActionContext.getContext().put("photoList", list);
 		return "getlist";
 	}
+	
 
 	/**
 	 * 添加图片
@@ -122,11 +137,17 @@ public class PhotoAction extends ActionSupport{
 	 * @throws Exception
 	 */
 	public String showAdd()throws Exception{
-		
+		// 获取mater参数
+		String master = ServletActionContext.getRequest().getParameter("master");
+		ServletActionContext.getRequest().setAttribute("master", master);
 		return "showadd";
 	}
 	
-	
+	/**
+	 * 图片上传处理
+	 * @return
+	 * @throws Exception
+	 */
 	public String upload()throws Exception{
 		String master = ServletActionContext.getRequest().getParameter("master");
 		PhotoBLL photoBLL = new PhotoBLL();

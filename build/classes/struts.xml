@@ -9,7 +9,7 @@
     <constant name="struts.devMode" value="true" />
 
     <package name="default" namespace="/" extends="struts-default">
-<!--
+       <!--
         <default-action-ref name="index" />
  
         <global-results>
@@ -20,10 +20,27 @@
             <exception-mapping exception="java.lang.Exception" result="error"/>
         </global-exception-mappings>
          -->
+         <!-- 通用Action -->
+         <action name="common_*" class="com.song.struts.CommonAction" method="{1}">
+             <!-- 加载URL -->
+             <result name="loadUrl" type="chain">common_loadNavigation</result>
+             <!-- 加载首页导航栏选项成功 -->
+             <result name="ins" type="chain">index_loadArticle</result>
+             <!-- 加载文章列表导航栏选项成功 -->
+             <result name="ans" type="chain">
+                 <param name="namespace">/article</param>
+                 <param name="actionName">article_getList</param>
+             </result>
+             <!-- 加载导航栏选项失败 -->
+            <result name="loadNavFail" type="redirect">/error.jsp?info=加载导航栏数据失败</result> 
+         </action>
+         
 		<!-- 登录 -->
         <action name="login" class="com.song.struts.LoginAction" method="login">
-            <result name="success" type="redirect">index_access?master=${user.username}</result>
-            <result name="false">/login.jsp</result>
+            <!-- 登录成功 -->
+            <result name="loginSuccess" type="redirect">index_access?master=${user.username}&amp;type=100001</result>
+            <!-- 登录失败 -->
+            <result name="loginfail">/login.jsp</result>
         </action>
         <!-- 注册 -->
         <action name="register" class="com.song.struts.RegisterAction" method="register">
@@ -32,11 +49,12 @@
         </action>
         <!-- 首页 -->
         <action name="index_*" class="com.song.struts.IndexAction" method="{1}">
-            <result name="access" type="chain">index_loadNav</result>
-            <result name="nav" type="chain">index_loadArticle</result>
-            <result name="navfail" type="redirect">/error.jsp?info=加载导航栏数据失败</result>           
-            <result name="article">/view/main.jsp</result>
-            <result name="articlefail">/error.jsp?info=加载文章失败</result>
+            <!-- 跳转到加载URL信息的action -->
+            <result name="access" type="chain">common_loadUrl</result>           
+            <!-- 首页文章加载成功，显示首页内容 -->          
+            <result name="articleSuccess">/view/main.jsp</result>
+            <!-- 首页文章加载失败，显示首页内容 --> 
+            <result name="articleFail">/error.jsp?info=加载文章失败</result>
         </action>
 
     </package>
@@ -45,15 +63,21 @@
     <package name="article" namespace="/article" extends="struts-default">
         <!-- 文章 -->
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
-             <result name="showlist" type="chain">article_getList</result>
-             <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
+             <!-- <result name="showlist" type="chain">article_getList</result> -->
+             <!-- 跳转到加载URL数据的action -->
+             <result name="showList" type="chain">
+                 <param name="namespace">/</param>
+                 <param name="actionName">common_loadUrl</param>
+             </result>
              <result name="showarticle" type="chain">article_showArticle</result>
-            <result name="list">/article/articlelist.jsp</result>
+            <!-- 获取文章列表成功 -->
+            <result name="getListSuccess">/article/articlelist.jsp</result>
             <result name="write">/article/articleadd.jsp?master=${master}</result>
             <result name="comment" type="chain">article_comment</result>
             <result name="single">/article/articlesingle.jsp</result>
-            <result name="add" type="redirectAction">
-                <param name="actionName">article_showList?master=${master}&amp;page=1</param>
+            <!-- 提交文章成功，跳转文件列表界面 -->
+            <result name="addSuccess" type="redirectAction">
+                <param name="actionName">article_showList?master=${master}&amp;page=1&amp;type=100002</param>
             </result>
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>

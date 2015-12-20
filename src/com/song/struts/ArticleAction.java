@@ -49,8 +49,6 @@ public class ArticleAction extends ActionSupport {
 		this.commentlist = commentlist;
 	}
 
-
-
 	/**
 	 * 
 	 */
@@ -63,20 +61,7 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String showList() throws Exception {
-		String result = "showlist";
-		Object obj = ActionContext.getContext().getSession().get("navigation");
-		if (obj == null) {
-			NavigationBLL nvaBLL = new NavigationBLL();
-			// 获取导航栏的导航项
-			List<Navigation> list = nvaBLL.GetNavigations();
-			// 如果导航项集合长度不为0
-			if (list.size() <= 0) {				
-				result = "showlistfail";
-			}else{
-				ActionContext.getContext().getSession().put("navigation", list);
-			}
-		}
-		return result;
+		return "showList";
 	}
 	
 	/**
@@ -109,7 +94,7 @@ public class ArticleAction extends ActionSupport {
 		// 获取当前页码全部文章的集合		
 		this.articlelist = articleBLL.GetArticlesForPage(master,page);
 		if(this.articlelist.size()>0){
-			return "list";
+			return "getListSuccess";
 		}
 		// 计算分页数量
 		return "list";
@@ -143,7 +128,7 @@ public class ArticleAction extends ActionSupport {
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表
 		if (articleBLL.AddArticle(article)) {
-			return "add";
+			return "addSuccess";
 		}
 		return "addfail";
 	}

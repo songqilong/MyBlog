@@ -36,9 +36,9 @@ public class LoginAction extends ActionSupport {
 		{
 			// 将用户信息保存进Session中
 			ServletActionContext.getRequest().getSession().setAttribute("user", user);
-			return "success";
+			return "loginSuccess";
 		}
-		return "false";
+		return "loginfail";
 	}
 
 }
