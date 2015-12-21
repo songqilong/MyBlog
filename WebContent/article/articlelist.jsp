@@ -38,7 +38,7 @@
             <s:if test="#session.user.username!=null">
               <div class="pull-right"><a href="article_edit?articleID=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?articleID=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
-              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?master=<s:property value="#master"/>&articleID=<s:property value="#article.id"/>"><s:property value="#article.title"/></a></h4>
+              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?master=<s:property value="#master"/>&articleID=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
             <s:property value="#article.content" escape="false"/>               

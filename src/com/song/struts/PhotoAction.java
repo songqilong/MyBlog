@@ -60,20 +60,7 @@ public class PhotoAction extends ActionSupport{
 	 * @throws Exception
 	 */
 	public String showList()throws Exception{
-		String result = "showlist";
-		Object obj = ActionContext.getContext().getSession().get("navigation");
-		if (obj == null) {
-			NavigationBLL nvaBLL = new NavigationBLL();
-			// 获取导航栏的导航项
-			List<Navigation> list = nvaBLL.GetNavigations();
-			// 如果导航项集合长度不为0
-			if (list.size() <= 0) {				
-				result = "showlistfail";
-			}else{
-				ActionContext.getContext().getSession().put("navigation", list);
-			}
-		}
-		return result;
+		return "showList";
 	}
 	
 	/**
@@ -105,7 +92,7 @@ public class PhotoAction extends ActionSupport{
 		//String jsonstr = JSON.toJSONString(list);
 		//ServletActionContext.getResponse().getWriter().print(jsonstr);
 		ActionContext.getContext().put("photoList", list);
-		return "getlist";
+		return "getList";
 	}
 	
 

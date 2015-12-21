@@ -139,20 +139,7 @@ public class ArticleAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String single()throws Exception{
-		String result = "showarticle";
-		Object obj = ActionContext.getContext().getSession().get("navigation");
-		if (obj == null) {
-			NavigationBLL nvaBLL = new NavigationBLL();
-			// 获取导航栏的导航项
-			List<Navigation> list = nvaBLL.GetNavigations();
-			// 如果导航项集合长度不为0
-			if (list.size() < 0) {
-				result = "showlistfail";
-			}else{
-				ActionContext.getContext().getSession().put("navigation", list);
-			}
-		}
-		return result;
+		return "single";
 		
 	}
 	
@@ -197,7 +184,7 @@ public class ArticleAction extends ActionSupport {
 		ActionContext.getContext().put("CommentQty", commentQty);
 		// 获取评论集合
 		this.commentlist = commentBLL.GetCommentCollection(articleID);
-		return "single";
+		return "singleShowSuccess";
 	}
 
 }

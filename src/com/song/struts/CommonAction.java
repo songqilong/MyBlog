@@ -36,9 +36,14 @@ public class CommonAction extends ActionSupport {
 		case "100002":
 			result = "ans";
 			break;
-		// 写文章界面加载导航栏	
+		// 图片列表界面导航 
+		case "100003":
+			result = "pns";
+			break;
+		// 单篇文章界面加载导航栏	
 		case "100004":
-			result = "wns";
+			result = "sns";
+			break;
 		}
 		Object obj = ActionContext.getContext().getSession().get("navigation");
 		if (obj == null) {

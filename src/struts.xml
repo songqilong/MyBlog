@@ -31,6 +31,16 @@
                  <param name="namespace">/article</param>
                  <param name="actionName">article_getList</param>
              </result>
+             <!-- 加载单篇文章界面导航栏项成功 -->
+             <result name="sns" type="chain">
+                 <param name="namespace">/article</param>
+                 <param name="actionName">article_showArticle</param>
+             </result>
+             <!-- 加载图片列表导航栏项成功 -->
+             <result name="pns" type="chain">
+                 <param name="namespace">/photo</param>
+                 <param name="actionName">photo_getList</param>
+             </result>
              <!-- 加载导航栏选项失败 -->
             <result name="loadNavFail" type="redirect">/error.jsp?info=加载导航栏数据失败</result> 
          </action>
@@ -69,12 +79,17 @@
                  <param name="namespace">/</param>
                  <param name="actionName">common_loadUrl</param>
              </result>
-             <result name="showarticle" type="chain">article_showArticle</result>
+             <!-- 显示单篇文章成功 -->
+             <result name="single" type="chain">
+                 <param name="namespace">/</param>
+                 <param name="actionName">common_loadUrl</param>
+             </result>
             <!-- 获取文章列表成功 -->
             <result name="getListSuccess">/article/articlelist.jsp</result>
             <result name="write">/article/articleadd.jsp?master=${master}</result>
+            <!-- 获取评论处理链 -->
             <result name="comment" type="chain">article_comment</result>
-            <result name="single">/article/articlesingle.jsp</result>
+            <result name="singleShowSuccess">/article/articlesingle.jsp</result>
             <!-- 提交文章成功，跳转文件列表界面 -->
             <result name="addSuccess" type="redirectAction">
                 <param name="actionName">article_showList?master=${master}&amp;page=1&amp;type=100002</param>
@@ -94,9 +109,13 @@
     <package name="photo" namespace="/photo" extends="struts-default">
         <!-- 图片 -->
         <action name="photo_*" class="com.song.struts.PhotoAction" method="{1}">
-            <result name="showlist" type="chain">photo_getList</result>
-            <result name="showlistfail">/error.jsp?info=加载导航栏数据失败</result>
-            <result name="getlist">/picture/picturelist.jsp</result>
+            <!-- 显示图片列表处理链 -->
+            <result name="showList">
+                <param name="namespace">/</param>
+                <param name="actionName">common_loadUrl</param>
+            </result>
+			<!-- 显示图片列表 -->
+            <result name="getList">/picture/picturelist.jsp</result>
             <result name="add" type="chain">photo_showAdd</result>
             <result name="showadd">/picture/pictureadd.jsp</result>
         </action>

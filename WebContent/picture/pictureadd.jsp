@@ -9,19 +9,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="<%=basePath%>/plugin/bootstrap.min.css">
-<link rel="stylesheet"
-	href="<%=basePath%>/plugin/image-upload/webuploader.css">
-<link rel="stylesheet"
-	href="<%=basePath%>/plugin/image-upload/style.css">
-<script type="text/javascript"
-	src="<%=basePath%>/plugin/jquery-1.11.3.min.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>/plugin/bootstrap.min.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>/plugin/image-upload/webuploader.js"></script>
-<script type="text/javascript"
-	src="<%=basePath%>/plugin/image-upload/upload.js"></script>
+<link rel="stylesheet" href="${sessionScope.basePath }/plugin/bootstrap.min.css">
+<link rel="stylesheet" href="${sessionScope.basePath }/plugin/image-upload/webuploader.css">
+<link rel="stylesheet" href="${sessionScope.basePath }/plugin/image-upload/style.css">
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/bootstrap.min.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/image-upload/webuploader.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/image-upload/upload.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>图片上传</title>
 </head>
@@ -33,7 +27,7 @@
 		<div class="row">
 			<ul class="breadcrumb">
 				<li><a href="/Blog/index_access?master=${master }&type=100001">首页</a></li>
-				<li><a href="photo_showList?master=${master }&page=1">图片列表</a></li>
+				<li><a href="photo_showList?master=${master }&page=1&type=100003">图片列表</a></li>
 				<li class="active">图片上传</li>
 			</ul>
 		</div>
