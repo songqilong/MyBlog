@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="./plugin/bootstrap.min.css">
 <script type="text/javascript" src="./plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="./plugin/bootstrap.min.js"></script>
@@ -14,10 +17,10 @@
 			<form class="form-signin" action="login">
 				<h2 class="form-signin-heading" align="center">登录</h2>
 				<!-- 用户名输入框 -->
-				<input type="text" name="user.username" class="form-control" placeholder="用户名" required autofocus>
+				<input type="text" name="master.username" class="form-control" placeholder="用户名" required autofocus>
 				<br> 
 				<!-- 密码输入框 -->
-				<input type="password" name="user.password" class="form-control" placeholder="密码" required>
+				<input type="password" name="master.password" class="form-control" placeholder="密码" required>
 				<br>
 				<!--   注释掉记住密码复选框
                 <div class="checkbox">

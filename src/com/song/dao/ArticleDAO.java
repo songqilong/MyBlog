@@ -17,8 +17,8 @@ public class ArticleDAO {
 	public boolean AddArticle(Article article) {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
-		String sql = "insert into t_article(title,type,author,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "',"+article.getType()+",'"+article.getAuthor()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
+		String sql = "insert into t_article(title,type,master_id,sourceweb,sourceurl,keyword,content,ctime)values('"
+				+ article.getTitle() + "',"+article.getType()+",'"+article.getMasterId()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
 				+ article.getKeyword() + "','" + article.getContent() + "','" + article.getCtime() + "')";
 		try{
 			// 打开数据库连接
@@ -43,14 +43,14 @@ public class ArticleDAO {
 	 * @param articleCount 每页的文章数量
 	 * @return
 	 */
-	public List<Article> ArticleCollection(String author,int page,int articleCount){
+	public List<Article> ArticleCollection(int masterId,int page,int articleCount){
 		String sql = "";
 		if(page == 1){
 			// 构建查询文章集合的语句
-			sql = "select * from t_article where author='"+author+"' order by ctime desc limit 0,"+articleCount+";";
+			sql = "select * from t_article where master_id='"+masterId+"' order by ctime desc limit 0,"+articleCount+";";
 		}else{
 			if(page>1){
-				sql = "select * from t_article where author='"+author+"'  order by ctime desc limit "+((page-1)*articleCount)+","+articleCount+";";
+				sql = "select * from t_article where master_id='"+masterId+"'  order by ctime desc limit "+((page-1)*articleCount)+","+articleCount+";";
 			}
 		}		
 		// 实例化一个文章对象的集合
@@ -65,7 +65,7 @@ public class ArticleDAO {
 				Article article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
-				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
@@ -87,9 +87,9 @@ public class ArticleDAO {
 	 * 获取指定作者一共有多少条篇文章
 	 * @return
 	 */
-	public int ArticleCount(String author){
+	public int ArticleCount(int masterId){
 		int row = 0;
-		String sql = "select * from t_article where author='"+author+"'";
+		String sql = "select * from t_article where master_id='"+masterId+"'";
 		try{
 			// 打开数据库连接
 			DBUtils.ConnDB();
@@ -124,7 +124,7 @@ public class ArticleDAO {
 				article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
-				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
 				article.setKeyword(rst.getString("keyword"));
 				article.setSourceurl(rst.getString("sourceurl"));;
@@ -161,7 +161,7 @@ public class ArticleDAO {
 				article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
-				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
 				article.setSourceurl(rst.getString("sourceurl"));
 				article.setSourceweb(rst.getString("sourceweb"));

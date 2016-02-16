@@ -72,11 +72,11 @@ public class ArticleAction extends ActionSupport {
 	public String getList()throws Exception{
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 获取master
-		String master = ServletActionContext.getRequest().getParameter("master");
+		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("master"));
 		// 强master保存进request中
-		ActionContext.getContext().put("master", master);
+		ActionContext.getContext().put("master", masterId);
 		// 获取全部文章的数量
-		int totalArticleQty = articleBLL.GetAllArticleCount(master);
+		int totalArticleQty = articleBLL.GetAllArticleCount(masterId);
 		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
 		// 获取每页显示文章的条数
 		int perPageQty = Integer.parseInt(PropertiesUtils.ReadProperties("page"));
@@ -92,7 +92,7 @@ public class ArticleAction extends ActionSupport {
 		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
 		ActionContext.getContext().put("page", page);
 		// 获取当前页码全部文章的集合		
-		this.articlelist = articleBLL.GetArticlesForPage(master,page);
+		this.articlelist = articleBLL.GetArticlesForPage(masterId,page);
 		if(this.articlelist.size()>0){
 			return "getListSuccess";
 		}
@@ -122,9 +122,9 @@ public class ArticleAction extends ActionSupport {
 		// 设置文章创建的时间
 		this.article.setCtime(Common.GetCurrentTime());
 		// 获取存在Session对象中的作者即用户名
-		String author = ServletActionContext.getRequest().getParameter("master");
-		ActionContext.getContext().put("master", author);
-		this.article.setAuthor(author);
+		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("master"));
+		ActionContext.getContext().put("master", masterId);
+		this.article.setMasterId(masterId);
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表
 		if (articleBLL.AddArticle(article)) {

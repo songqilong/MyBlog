@@ -1,16 +1,16 @@
 package com.song.struts;
 
-import com.song.bll.UserBLL;
-import com.song.entity.User;
+import com.song.bll.MasterBLL;
+import com.song.entity.Master;
 
 public class RegisterAction {
-	private User user;
+	private Master user;
 	
-	public User getUser() {
+	public Master getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Master user) {
 		this.user = user;
 	}
 
@@ -20,9 +20,9 @@ public class RegisterAction {
 	 * @throws Exception
 	 */
 	public String register()throws Exception{
-		UserBLL userBLL = new UserBLL();
+		MasterBLL masterBLL = new MasterBLL();
 		// 如果注册成功
-		if(userBLL.Register(user)){
+		if(masterBLL.Register(user)){
 			return "register";
 		}		
 		return "registerfail";

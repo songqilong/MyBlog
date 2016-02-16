@@ -5,8 +5,8 @@ public class Article {
 	private int id;
 	// 文章题目
 	private String title;
-	// 文章作者
-	private String author;
+	// 文章作者ID
+	private int masterId;
 	// 文章类型
 	private int type;
 	// 文章源网站名
@@ -86,12 +86,14 @@ public class Article {
 		this.type = type;
 	}
 
-	public String getAuthor() {
-		return author;
+
+
+	public int getMasterId() {
+		return masterId;
 	}
 
-	public void setAuthor(String author) {
-		this.author = author;
+	public void setMasterId(int masterId) {
+		this.masterId = masterId;
 	}
 
 	public int getClicktime() {

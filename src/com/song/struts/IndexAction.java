@@ -1,21 +1,19 @@
 package com.song.struts;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.ArticleBLL;
-import com.song.bll.NavigationBLL;
+import com.song.bll.NoticeBLL;
 import com.song.entity.Article;
-import com.song.entity.Navigation;
+import com.song.entity.Notice;
+
 
 
 public class IndexAction extends ActionSupport {
 
 	private Article article;
+	private Notice notice;
 	
 	public Article getArticle() {
 		return article;
@@ -24,6 +22,16 @@ public class IndexAction extends ActionSupport {
 	public void setArticle(Article article) {
 		this.article = article;
 	}
+	
+
+	public Notice getNotice() {
+		return notice;
+	}
+
+	public void setNotice(Notice notice) {
+		this.notice = notice;
+	}
+
 
 	/**
 	 * 
@@ -38,9 +46,10 @@ public class IndexAction extends ActionSupport {
 //		// 将基础路径存入session
 //		ServletActionContext.getRequest().getSession().setAttribute("basePath", basePath);
 		// 获取url中附带的用户参数
-		String master = ServletActionContext.getRequest().getParameter("master");
+		String str = ServletActionContext.getRequest().getParameter("master");
+		int masterId = Integer.parseInt(str);
 		// 将用户参数存入session中
-		ServletActionContext.getRequest().getSession().setAttribute("master", master);
+		ServletActionContext.getRequest().getSession().setAttribute("master", masterId);
 		return "access";
 	}
 	
@@ -67,16 +76,19 @@ public class IndexAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	public String loadArticle()throws Exception{
+	public String loadHomeInfo()throws Exception{
 		ArticleBLL articleBLL = new ArticleBLL();
+		NoticeBLL noticeBLL = new NoticeBLL();
 		// 获取url中的参数
-		String author = ServletActionContext.getRequest().getSession().getAttribute("master").toString();
+		int masterId = Integer.parseInt(ServletActionContext.getRequest().getSession().getAttribute("master").toString());
 		// 获取首页显示的最新文章
-		article = articleBLL.GetLastArticleByAuthor(author);
+		article = articleBLL.GetLastArticleByAuthor(masterId);
+		// 获取最新的公告
+		notice = noticeBLL.GetLastNotice(masterId);
 		// 如果首页显示的文章为空
-		if(article != null){
-			return "articleSuccess";
+		if(article != null&&notice != null){
+			return "loadInfoSuccess";
 		}
-		return "articleFail";
+		return "loadInfoFail";
 	}
 }

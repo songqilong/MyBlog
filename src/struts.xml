@@ -24,8 +24,8 @@
          <action name="common_*" class="com.song.struts.CommonAction" method="{1}">
              <!-- 加载URL -->
              <result name="loadUrl" type="chain">common_loadNavigation</result>
-             <!-- 加载首页导航栏选项成功 -->
-             <result name="ins" type="chain">index_loadArticle</result>
+             <!-- 加载首页导航栏选项成功 下一步：加载首页所要显示的数据-->
+             <result name="ins" type="chain">index_loadHomeInfo</result>
              <!-- 加载文章列表导航栏选项成功 -->
              <result name="ans" type="chain">
                  <param name="namespace">/article</param>
@@ -48,13 +48,13 @@
 		<!-- 登录 -->
         <action name="login" class="com.song.struts.LoginAction" method="login">
             <!-- 登录成功 -->
-            <result name="loginSuccess" type="redirect">index_access?master=${user.username}&amp;type=100001</result>
+            <result name="loginSuccess" type="redirect">index_access?master=${master.id}&amp;type=100001</result>
             <!-- 登录失败 -->
             <result name="loginfail">/login.jsp</result>
         </action>
         <!-- 注册 -->
         <action name="register" class="com.song.struts.RegisterAction" method="register">
-            <result name="register" type="redirect">index_access?master=${user.username}</result>
+            <result name="register" type="redirect">index_access?master=${master.id}</result>
             <result name="registerfail">/error.jsp?info=注册失败</result>
         </action>
         <!-- 首页 -->
@@ -62,9 +62,9 @@
             <!-- 跳转到加载URL信息的action -->
             <result name="access" type="chain">common_loadUrl</result>           
             <!-- 首页文章加载成功，显示首页内容 -->          
-            <result name="articleSuccess">/view/main.jsp</result>
+            <result name="loadInfoSuccess">/view/main.jsp</result>
             <!-- 首页文章加载失败，显示首页内容 --> 
-            <result name="articleFail">/error.jsp?info=加载文章失败</result>
+            <result name="loadInfoFail">/error.jsp?info=加载文章失败</result>
         </action>
 
     </package>

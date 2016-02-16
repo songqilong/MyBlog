@@ -2,9 +2,9 @@ package com.song.dao;
 
 import java.sql.ResultSet;
 import com.song.common.DBUtils;
-import com.song.entity.User;
+import com.song.entity.Master;
 
-public class UserDAO {
+public class MasterDAO {
 
 
 	/**
@@ -12,11 +12,11 @@ public class UserDAO {
 	 * @param user 用户对象
 	 * @return true添加成功，false添加失败
 	 */
-	public boolean AddUser(User user)
+	public boolean AddMaster(Master user)
 	{
 		boolean isSuccess = false;
 		// 插入新用户的SQL语句
-		String sql = "insert into t_user(username,password) values('"+user.getUsername()+"','"+user.getPassword()+"')";
+		String sql = "insert into t_master(username,password) values('"+user.getUsername()+"','"+user.getPassword()+"')";
 		try {
 			// 打开数据库
 			DBUtils.ConnDB();
@@ -29,7 +29,6 @@ public class UserDAO {
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			isSuccess = false;
 			e.printStackTrace();
 		}
 			DBUtils.CloseCon();
@@ -42,10 +41,10 @@ public class UserDAO {
 	 * @param user
 	 * @return
 	 */
-	public User GetUser(User user)
+	public Master GetMaster(Master user)
 	{
-		String sql = "select * from t_user where username='"+user.getUsername()+"' and password='"+user.getPassword()+"'";
-		User u = null;
+		String sql = "select * from t_master where username='"+user.getUsername()+"' and password='"+user.getPassword()+"'";
+		Master u = null;
 		try {
 			// 打开数据库
 			DBUtils.ConnDB();;
@@ -53,14 +52,14 @@ public class UserDAO {
 			ResultSet rst = DBUtils.Query(sql);
 			if(rst.next())
 			{
-				u = new User();
+				u = new Master();
+				u.setId(rst.getInt("id"));
 				u.setPassword(rst.getString("password"));
 				u.setUsername(rst.getString("username"));
 			}
 			rst.close();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			u = null;
 			e.printStackTrace();
 		}
 			DBUtils.CloseCon();

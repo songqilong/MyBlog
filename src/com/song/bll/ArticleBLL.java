@@ -28,18 +28,18 @@ public class ArticleBLL {
 	 * 获取分页文章
 	 * @return
 	 */
-	public List<Article> GetArticlesForPage(String author,int page){
+	public List<Article> GetArticlesForPage(int masterId,int page){
 		// 从配置文件中获取每页显示的文章数量
 		int articleCount = Integer.parseInt(PropertiesUtils.ReadProperties("page").toString());
-		return articleDAO.ArticleCollection(author,page,articleCount);
+		return articleDAO.ArticleCollection(masterId,page,articleCount);
 	}
 	
 	/**
 	 * 获取指定作者所有文章的数量
 	 * @return
 	 */
-	public int GetAllArticleCount(String author){
-		return articleDAO.ArticleCount(author);
+	public int GetAllArticleCount(int masterId){
+		return articleDAO.ArticleCount(masterId);
 	}
 
 	/**
@@ -56,8 +56,8 @@ public class ArticleBLL {
 	 * @param author
 	 * @return
 	 */
-	public Article GetLastArticleByAuthor(String author){
-		return articleDAO.GetArticle(author);
+	public Article GetLastArticleByAuthor(int masterId){
+		return articleDAO.GetArticle(masterId);
 	}
 
 	/**

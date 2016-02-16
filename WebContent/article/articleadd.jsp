@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="${basePath}/plugin/editor/themes/default/default.css">
 <link rel="stylesheet" href="${basePath}/plugin/bootstrap.min.css">
 <script type="text/javascript" src="${basePath}/plugin/editor/kindeditor-min.js"></script>
