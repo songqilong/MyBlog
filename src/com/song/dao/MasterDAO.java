@@ -66,4 +66,31 @@ public class MasterDAO {
 			return u;
 		
 	}
+	
+	/**
+	 * 根据作者ID获取作者信息
+	 * @param masterId
+	 * @return
+	 */
+	public Master getMaster(int masterId){
+		Master master = null;
+		String sql = "select * from t_master where id = "+masterId+"";
+		try {
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			if(rst.next())
+			{
+				master = new Master();
+				master.setId(rst.getInt("id"));
+				master.setPassword(rst.getString("password"));
+				master.setUsername(rst.getString("username"));
+			}
+			rst.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		DBUtils.CloseCon();
+		return master;
+	}
 }

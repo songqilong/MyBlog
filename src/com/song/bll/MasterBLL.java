@@ -33,4 +33,13 @@ public class MasterBLL {
 	{
 		return masterDAO.GetMaster(user);
 	}
+	
+	/**
+	 * 根据作者ID获取作者信息
+	 * @param masterId
+	 * @return
+	 */
+	public Master GetMasterInfo(int masterId){
+		return masterDAO.getMaster(masterId);
+	}
 }

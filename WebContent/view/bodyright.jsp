@@ -28,7 +28,7 @@
           <dl class="dl-inline">
             <dt>作者：</dt>
             <!-- 文章作者 -->
-            <dd><s:property value="article.author"/></dd>
+            <dd id="masterName"><!--<s:property value="article.author"/>--></dd>
             <dt></dt>
             <dd class="pull-right"><span class="label label-success">NEW</span> <span class="label label-warning">火爆</span> <span class="label label-info">原创</span> <span class="label label-danger"><i class="icon-eye-open"></i> 235</span></dd>
           </dl>
@@ -46,5 +46,20 @@
       </article>
     </div>
   </article>
+  <script type="text/javascript">
+  //获取url中的参数
+  function getUrlParam(name) {
+      var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+      var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+      if (r != null) return unescape(r[2]); return null; //返回参数值
+  }
+  
+  $(function(){
+	  var master = getUrlParam("master");
+	  $.get("/Blog/common_getMasterName?master="+master,function(data,status){
+		  $("#masterName").text(data);
+	  });
+  });
+  </script>
 </body>
 </html>

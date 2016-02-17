@@ -1,13 +1,16 @@
  package com.song.struts;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.song.bll.MasterBLL;
 import com.song.bll.NavigationBLL;
 import com.song.entity.Navigation;
 
@@ -73,5 +76,17 @@ public class CommonAction extends ActionSupport {
 		// 将基础路径存入session
 		ServletActionContext.getRequest().getSession().setAttribute("basePath", basePath);
 		return "loadUrl";
+	}
+	
+	public String getMasterName()throws Exception{
+		MasterBLL masterBLL = new MasterBLL();
+		// 获取response
+		HttpServletResponse response = ServletActionContext.getResponse();
+		// 获取request对象
+		HttpServletRequest request = ServletActionContext.getRequest();
+		int masterId = Integer.parseInt(request.getParameter("master"));
+		PrintWriter out = response.getWriter();
+		out.print(masterBLL.GetMasterInfo(masterId).getUsername());
+		return null;
 	}
 }

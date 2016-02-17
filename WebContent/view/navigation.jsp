@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -33,8 +32,8 @@
 					</s:iterator>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
-					<s:if test="#session.user.username!= null">
-						<li><a href="#">欢迎 <s:property value="#session.user.username" />登录</a></li>
+					<s:if test="#session.Master.username!= null">
+						<li><a href="#">欢迎 <s:property value="#session.Master.username" />登录</a></li>
 					</s:if>
 					<s:else>
 						<li><a href="${basePath}/index.jsp">登录</a></li>

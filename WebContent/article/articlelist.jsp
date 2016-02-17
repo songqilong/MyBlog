@@ -27,7 +27,7 @@
       <div class="list">
         <header>
           <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><s:property value="#request.TotalArticleQty"/> 篇文章</small></h3>
-          <s:if test="#session.user.username!=null">
+          <s:if test="#session.Master.username!=null">
           <div class="pull-right">
             <a class="btn btn-primary" href="article_write?master=<s:property value="#master"/>">写文章</a>
           </div>
@@ -38,7 +38,7 @@
         <s:iterator value="articlelist" id="article" status="st">
         	<div class="item">
             <div class="item-heading">
-            <s:if test="#session.user.username!=null">
+            <s:if test="#session.Master.username!=null">
               <div class="pull-right"><a href="article_edit?articleID=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?articleID=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
               <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?master=<s:property value="#master"/>&articleID=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>

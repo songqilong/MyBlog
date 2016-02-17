@@ -55,7 +55,16 @@ KindEditor.ready(function(K) {
             <div class='col-md-3'><input type='text' name='article.sourceurl' class='form-control' placeholder='来源URL' /></div>
           </div>
         </div>
-        
+         <div class="form-group">
+          <label class="col-md-2 control-label">分类</label>
+          <div class='col-md-4'>
+            <select name='article.type' id='original' class='form-control'>
+              <option value='1' selected='selected'>java</option>
+              <option value='2'>javascript</option>
+              <option value='3'>android</option>
+            </select>
+          </div>
+        </div>
         <div class="form-group">
           <label class="col-md-2 control-label">关键字</label>
           <div class="col-md-10">

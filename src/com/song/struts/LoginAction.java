@@ -46,7 +46,7 @@ public class LoginAction extends ActionSupport {
 		{
 			master.setId(m.getId());
 			// 将用户信息保存进Session中
-			ServletActionContext.getRequest().getSession().setAttribute("master", master);
+			ServletActionContext.getRequest().getSession().setAttribute("Master", master);
 			return "loginSuccess";
 		}
 		return "loginfail";
