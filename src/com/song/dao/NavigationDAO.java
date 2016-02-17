@@ -13,7 +13,7 @@ public class NavigationDAO {
 	 * 获取导航栏中的导航项
 	 * @return 导航项集合
 	 */
-	public List<Navigation> GetNavigationItem()
+	public List<Navigation> GetNavigationItems()
 	{
 		List<Navigation> list = new ArrayList<Navigation>();
 		String sql = "select * from t_navigation where visible = 1";

@@ -21,7 +21,7 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="/Blog/index_access?master=<s:property value="#master"/>&type=100001">首页</a></li>
+        <li><a href="/Blog/index_access?mid=<s:property value="#mid"/>&type=100001">首页</a></li>
         <li class="active">文章列表</li>
       </ul>
       <div class="list">
@@ -29,19 +29,19 @@
           <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><s:property value="#request.TotalArticleQty"/> 篇文章</small></h3>
           <s:if test="#session.Master.username!=null">
           <div class="pull-right">
-            <a class="btn btn-primary" href="article_write?master=<s:property value="#master"/>">写文章</a>
+            <a class="btn btn-primary" href="article_write?mid=<s:property value="#mid"/>">写文章</a>
           </div>
          <br><br>
          </s:if>
         </header>
         <section class="items items-hover">
-        <s:iterator value="articlelist" id="article" status="st">
+        <s:iterator value="articles" id="article" status="st">
         	<div class="item">
             <div class="item-heading">
             <s:if test="#session.Master.username!=null">
-              <div class="pull-right"><a href="article_edit?articleID=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?articleID=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
+              <div class="pull-right"><a href="article_edit?aid=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?aid=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
-              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?master=<s:property value="#master"/>&articleID=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
+              <h4><span class="label label-success">新</span>&nbsp; <a href="article_single?mid=<s:property value="#mid"/>&aid=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
             <s:property value="#article.content" escape="false"/>               
@@ -56,18 +56,18 @@
           <ul class="pager">
  			<li class="previous">
  				<s:if test="#page==1">
- 					<a href="article/article_showList?master=<s:property value="#master"/>&page=1&type=100002">« 上一页</a>
+ 					<a href="article/article_showList?mid=<s:property value="#mid"/>&page=1&type=100002">« 上一页</a>
  				</s:if>
     			<s:else>
-    				<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page-1}"/>&type=100002">« 上一页</a>
+    				<a href="article/article_showList?mid=<s:property value="#mid"/>&page=<s:property value="%{#page-1}"/>&type=100002">« 上一页</a>
     			</s:else>
  			</li>
   			<li class="next">
   				<s:if test="%{#page==#pageQty}">
-  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="#page"/>&type=100002">下一页 »</a>
+  					<a href="article/article_showList?mid=<s:property value="#mid"/>&page=<s:property value="#page"/>&type=100002">下一页 »</a>
   				</s:if>
   				<s:else>
-  					<a href="article/article_showList?master=<s:property value="#master"/>&page=<s:property value="%{#page+1}"/>&type=100002">下一页 »</a>
+  					<a href="article/article_showList?mid=<s:property value="#mid"/>&page=<s:property value="%{#page+1}"/>&type=100002">下一页 »</a>
   				</s:else>    			
   			</li>
           </ul>

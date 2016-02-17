@@ -24,15 +24,15 @@ KindEditor.ready(function(K) {
 		<!-- 面包屑开始 -->
 		<div class="row">
 			<ul class="breadcrumb">
-				<li><a href="/Blog/index_access?master=${master}&type=100001">首页</a></li>
-				<li><a href="article_showList?master=${master}&page=1&type=100002">文章列表</a></li>
+				<li><a href="/Blog/index_access?mid=${mid}&type=100001">首页</a></li>
+				<li><a href="article_showList?mid=${mid}&page=1&type=100002">文章列表</a></li>
 				<li class="active">发布文章</li>
 			</ul>
 		</div>
 		<!-- 面包屑结束 -->
 <div class="row">
 <div class="example">
-      <form action="article_add?master=${master}" class="form-horizontal form-condensed" role="form" method='post'>
+      <form action="article_add?master=${mid}" class="form-horizontal form-condensed" role="form" method='post'>
         <legend>创建文章</legend>
         <div class="form-group">
           <label class="col-md-2 control-label">标题</label>
@@ -58,7 +58,7 @@ KindEditor.ready(function(K) {
          <div class="form-group">
           <label class="col-md-2 control-label">分类</label>
           <div class='col-md-4'>
-            <select name='article.type' id='original' class='form-control'>
+            <select name='article.categoryId' id='original' class='form-control'>
               <option value='1' selected='selected'>java</option>
               <option value='2'>javascript</option>
               <option value='3'>android</option>

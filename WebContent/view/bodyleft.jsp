@@ -33,7 +33,11 @@
     <h3 class="panel-title">文章分类</h3>
   </div>
   <div class="panel-body">
-    Panel content
+    <ul>
+    	<s:iterator value="#categorys" id="category" status="st">
+    		<li><a href="/article/article_showList?mid=<s:property value="#category.masterId"/>&page=1&type=100006&cid=<s:property value="#category.id"/>"><s:property value="#category.category"/></a></li>
+    	</s:iterator>
+    </ul>
   </div>
 </div>
 
@@ -42,7 +46,13 @@
     <h3 class="panel-title">博主推荐</h3>
   </div>
   <div class="panel-body">
-    Panel content
+  <ul>
+    <s:iterator value="#recommends" id="recommend" status="st">
+    <li>
+    	<a href="/article/article_single?mid=<s:property value="#recommend.masterId"/>&type=100004&aid=<s:property value="#recommend.id"/>"><s:property value="#recommend.title"/></a>
+    </li>
+    </s:iterator>
+    </ul>
   </div>
 </div>
 

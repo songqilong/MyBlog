@@ -28,7 +28,7 @@
           <dl class="dl-inline">
             <dt>作者：</dt>
             <!-- 文章作者 -->
-            <dd id="masterName"><!--<s:property value="article.author"/>--></dd>
+            <dd><s:property value="article.author"/></dd>
             <dt></dt>
             <dd class="pull-right"><span class="label label-success">NEW</span> <span class="label label-warning">火爆</span> <span class="label label-info">原创</span> <span class="label label-danger"><i class="icon-eye-open"></i> 235</span></dd>
           </dl>
@@ -46,6 +46,7 @@
       </article>
     </div>
   </article>
+  
   <script type="text/javascript">
   //获取url中的参数
   function getUrlParam(name) {

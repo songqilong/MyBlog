@@ -17,9 +17,11 @@ public class ArticleDAO {
 	public boolean AddArticle(Article article) {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
-		String sql = "insert into t_article(title,type,master_id,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "',"+article.getType()+",'"+article.getMasterId()+"','" + article.getSourceweb() + "','" + article.getSourceurl() + "','"
-				+ article.getKeyword() + "','" + article.getContent() + "','" + article.getCtime() + "')";
+		String sql = "insert into t_article(title,author,type,master_id,category_id,sourceweb,sourceurl,keyword,content,ctime)values('"
+				+ article.getTitle() + "'," + article.getAuthor() + "'," + article.getType() + ",'"
+				+ article.getMasterId() + "'," + article.getCategoryId() + ",'" + article.getSourceweb() + "','"
+				+ article.getSourceurl() + "','" + article.getKeyword() + "','" + article.getContent() + "','"
+				+ article.getCtime() + "')";
 		try{
 			// 打开数据库连接
 			DBUtils.ConnDB();
@@ -65,13 +67,19 @@ public class ArticleDAO {
 				Article article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
 				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
+				article.setCategoryId(rst.getInt("category_id"));
 				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
+				article.setKeyword(rst.getString("keyword"));
 				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
 				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
 				list.add(article);
 			}
 			rst.close();
@@ -124,14 +132,19 @@ public class ArticleDAO {
 				article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
 				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
-				article.setKeyword(rst.getString("keyword"));
-				article.setSourceurl(rst.getString("sourceurl"));;
+				article.setCategoryId(rst.getInt("category_id"));
+				article.setSourceweb(rst.getString("sourceweb"));
 				article.setSourceurl(rst.getString("sourceurl"));
+				article.setKeyword(rst.getString("keyword"));
 				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
 				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
 			}
 			// 是否ResultSet资源
 			rst.close();
@@ -161,14 +174,19 @@ public class ArticleDAO {
 				article = new Article();
 				article.setId(rst.getInt("id"));
 				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
 				article.setMasterId(rst.getInt("master_id"));
 				article.setType(rst.getInt("type"));
-				article.setSourceurl(rst.getString("sourceurl"));
+				article.setCategoryId(rst.getInt("category_id"));
 				article.setSourceweb(rst.getString("sourceweb"));
+				article.setSourceurl(rst.getString("sourceurl"));
 				article.setKeyword(rst.getString("keyword"));
 				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
 				article.setClicktime(rst.getInt("clicktime"));
 				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
 			}
 			// 释放资源
 			rst.close();
@@ -203,5 +221,49 @@ public class ArticleDAO {
 			e.printStackTrace();
 		}
 		return isSuccess;
+	}
+	
+	/**
+	 * 获取推荐文章集合
+	 * @param masterId
+	 * @param articleQty
+	 * @return
+	 */
+	public List<Article> GetRecommendArticles(int masterId,int articleQty){
+		String sql = "select * from t_article where master_id='"+masterId+"' and isrecommend=1 order by ctime desc limit 0,"+articleQty+";";		
+		// 实例化一个文章对象的集合
+		List<Article> list = new ArrayList<Article>();
+		try{
+			// 打开数据库
+			DBUtils.ConnDB();
+			// 执行查询
+			ResultSet rst = DBUtils.Query(sql);
+			while(rst.next())
+			{
+				Article article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
+				article.setType(rst.getInt("type"));
+				article.setCategoryId(rst.getInt("category_id"));
+				article.setSourceweb(rst.getString("sourceweb"));
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setKeyword(rst.getString("keyword"));
+				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
+				article.setClicktime(rst.getInt("clicktime"));
+				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
+				list.add(article);
+			}
+			rst.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		// 关闭数据库连接
+		DBUtils.CloseCon();
+		return list;
 	}
 }

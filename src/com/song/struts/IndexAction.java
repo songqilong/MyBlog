@@ -46,31 +46,13 @@ public class IndexAction extends ActionSupport {
 //		// 将基础路径存入session
 //		ServletActionContext.getRequest().getSession().setAttribute("basePath", basePath);
 		// 获取url中附带的用户参数
-		String str = ServletActionContext.getRequest().getParameter("master");
-		int masterId = Integer.parseInt(str);
+		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("mid"));
 		// 将用户参数存入session中
 		ServletActionContext.getRequest().getSession().setAttribute("master", masterId);
 		return "access";
 	}
 	
-//	/**
-//	 * 加载首页显示的数据
-//	 * @return
-//	 * @throws Exception
-//	 */
-//	public String loadNav()throws Exception{
-//		ActionContext cxt = ActionContext.getContext();
-//		NavigationBLL nvaBLL = new NavigationBLL();
-//		// 获取导航栏的导航项
-//		List<Navigation> list = nvaBLL.GetNavigations();
-//		// 如果导航项集合长度不为0
-//		if (list.size() > 0) {
-//			cxt.getSession().put("navigation", list);
-//			return "nav";
-//		}
-//		return "navfail";
-//	}
-	
+
 	/**
 	 * 加载首页第一篇文章
 	 * @return

@@ -10,6 +10,7 @@ public class Navigation {
 	// 导航项是否显示 1为显示 0为不显示
 	private int visible;
 
+
 	public int getId() {
 		return id;
 	}
@@ -42,5 +43,7 @@ public class Navigation {
 	public void setVisible(int visible) {
 		this.visible = visible;
 	}
+
+	
 
 }

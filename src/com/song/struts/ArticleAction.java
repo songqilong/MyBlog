@@ -20,7 +20,7 @@ import com.song.entity.Navigation;
 public class ArticleAction extends ActionSupport {
 
 	private Article article;
-	private List<Article> articlelist;
+//	private List<Article> articlelist;
 	private List<Comment> commentlist;
 
 	public Article getArticle() {
@@ -30,14 +30,14 @@ public class ArticleAction extends ActionSupport {
 	public void setArticle(Article article) {
 		this.article = article;
 	}
-
-	public List<Article> getArticlelist() {
-		return articlelist;
-	}
-
-	public void setArticlelist(List<Article> articlelist) {
-		this.articlelist = articlelist;
-	}
+//
+//	public List<Article> getArticlelist() {
+//		return articlelist;
+//	}
+//
+//	public void setArticlelist(List<Article> articlelist) {
+//		this.articlelist = articlelist;
+//	}
 
 	
 	
@@ -65,53 +65,15 @@ public class ArticleAction extends ActionSupport {
 	}
 	
 	/**
-	 * 获取文章列表
+	 * 获取单篇文章
 	 * @return
 	 * @throws Exception
 	 */
-	public String getList()throws Exception{
-		ArticleBLL articleBLL = new ArticleBLL();
-		// 获取master
-		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("master"));
-		// 强master保存进request中
-		ActionContext.getContext().put("master", masterId);
-		// 获取全部文章的数量
-		int totalArticleQty = articleBLL.GetAllArticleCount(masterId);
-		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
-		// 获取每页显示文章的条数
-		int perPageQty = Integer.parseInt(PropertiesUtils.ReadProperties("page"));
-		// 分页数
-		int pageQty = 0;
-		if(totalArticleQty%perPageQty != 0){
-			pageQty = totalArticleQty/perPageQty+1;
-		}else{
-			pageQty = totalArticleQty/perPageQty;
-		}		
-		ActionContext.getContext().put("pageQty", pageQty);
-		// 获取当前页码 
-		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
-		ActionContext.getContext().put("page", page);
-		// 获取当前页码全部文章的集合		
-		this.articlelist = articleBLL.GetArticlesForPage(masterId,page);
-		if(this.articlelist.size()>0){
-			return "getListSuccess";
-		}
-		// 计算分页数量
-		return "list";
+	public String single()throws Exception{
+		return "single";
+		
 	}
-
-	/**
-	 * 前往写文章界面
-	 * 
-	 * @return
-	 * @throws Exception
-	 */
-	public String write() throws Exception {
-		String master  = ServletActionContext.getRequest().getParameter("master");
-		ServletActionContext.getRequest().setAttribute("master", master);
-		return "write";
-	}
-
+	
 	/**
 	 * 提交新文章
 	 * 
@@ -133,15 +95,57 @@ public class ArticleAction extends ActionSupport {
 		return "addfail";
 	}
 	
+//	/**
+//	 * 获取文章列表
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String getList()throws Exception{
+//		ArticleBLL articleBLL = new ArticleBLL();
+//		// 获取master
+//		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("master"));
+//		// 强master保存进request中
+//		ActionContext.getContext().put("master", masterId);
+//		// 获取全部文章的数量
+//		int totalArticleQty = articleBLL.GetAllArticleCount(masterId);
+//		ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+//		// 获取每页显示文章的条数
+//		int perPageQty = Integer.parseInt(PropertiesUtils.ReadProperties("page"));
+//		// 分页数
+//		int pageQty = 0;
+//		if(totalArticleQty%perPageQty != 0){
+//			pageQty = totalArticleQty/perPageQty+1;
+//		}else{
+//			pageQty = totalArticleQty/perPageQty;
+//		}		
+//		ActionContext.getContext().put("pageQty", pageQty);
+//		// 获取当前页码 
+//		int page =  Integer.parseInt(ServletActionContext.getRequest().getParameter("page"));
+//		ActionContext.getContext().put("page", page);
+//		// 获取当前页码全部文章的集合		
+//		this.articlelist = articleBLL.GetArticlesForPage(masterId,page);
+//		if(this.articlelist.size()>0){
+//			return "getListSuccess";
+//		}
+//		// 计算分页数量
+//		return "list";
+//	}
+
 	/**
-	 * 获取单篇文章
+	 * 前往写文章界面
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String single()throws Exception{
-		return "single";
-		
+	public String write() throws Exception {
+		String masterId  = ServletActionContext.getRequest().getParameter("mid");
+		ServletActionContext.getRequest().setAttribute("mid", masterId);
+		return "write";
 	}
+
+
+	
+
 	
 	/**
 	 * 显示单篇文章

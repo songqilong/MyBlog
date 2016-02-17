@@ -68,4 +68,14 @@ public class ArticleBLL {
 	public boolean SumArticleClick(int articleID){
 		return articleDAO.SumArticleClick(articleID);
 	}
+	
+	/**
+	 * 获取推荐的文章
+	 * @param masterId
+	 * @param articleQty
+	 * @return
+	 */
+	public List<Article> GetRecommendArticles(int masterId,int articleQty){
+		return articleDAO.GetRecommendArticles(masterId, articleQty);
+	}
 }

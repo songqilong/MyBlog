@@ -63,8 +63,44 @@ public class MasterDAO {
 			e.printStackTrace();
 		}
 			DBUtils.CloseCon();
-			return u;
-		
+			return u;		
+	}
+	
+	/**
+	 * 根据用户名密码获取单个用户
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public Master GetMaster(String username,String password)
+	{
+		String sql = "select * from t_master where username='"+username+"' and password='"+password+"'";
+		Master master = null;
+		try {
+			// 打开数据库
+			DBUtils.ConnDB();;
+			// 执行查询数据库语句
+			ResultSet rst = DBUtils.Query(sql);
+			if(rst.first())
+			{
+				master = new Master();
+				master.setId(rst.getInt("id"));
+				master.setPassword(rst.getString("password"));
+				master.setUsername(rst.getString("username"));
+				master.setNickName(rst.getString("nickname"));
+				master.setEmail(rst.getString("email"));
+				master.setSex(rst.getString("sex"));
+				master.setQq(rst.getString("qq"));
+				master.setRegisterTime(rst.getString("rtime"));
+				master.setLastLoginTime(rst.getString("lltime"));
+			}
+			rst.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			DBUtils.CloseCon();
+			return master;		
 	}
 	
 	/**

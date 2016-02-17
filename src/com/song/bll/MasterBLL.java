@@ -29,9 +29,9 @@ public class MasterBLL {
 	 * @param user 封装的登录用户信息
 	 * @return true验证通过可以登录，false验证失败不能登录
 	 */
-	public Master Login(Master user)
+	public Master Login(String username,String password)
 	{
-		return masterDAO.GetMaster(user);
+		return masterDAO.GetMaster(username,password);
 	}
 	
 	/**

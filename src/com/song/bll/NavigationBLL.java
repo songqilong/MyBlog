@@ -18,7 +18,7 @@ public class NavigationBLL {
 	 */
 	public List<Navigation> GetNavigations()
 	{
-		List<Navigation> list = navigationDAO.GetNavigationItem();
+		List<Navigation> list = navigationDAO.GetNavigationItems();
 		return list;
 	}
 }

@@ -2,7 +2,7 @@ package com.song.entity;
 
 import java.io.Serializable;
 
-public class Master implements Serializable{
+public class Master implements Serializable {
 	/**
 	 * 
 	 */
@@ -10,10 +10,12 @@ public class Master implements Serializable{
 	private int id;
 	private String username;
 	private String password;
+	private String nickName;
 	private String email;
 	private String sex;
 	private String qq;
 	private String registerTime;
+	private String lastLoginTime;
 
 	public int getId() {
 		return id;
@@ -37,6 +39,14 @@ public class Master implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
 
 	public String getEmail() {
@@ -70,5 +80,14 @@ public class Master implements Serializable{
 	public void setRegisterTime(String registerTime) {
 		this.registerTime = registerTime;
 	}
+
+	public String getLastLoginTime() {
+		return lastLoginTime;
+	}
+
+	public void setLastLoginTime(String lastLoginTime) {
+		this.lastLoginTime = lastLoginTime;
+	}
+	
 
 }

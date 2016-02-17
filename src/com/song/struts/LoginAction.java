@@ -1,6 +1,8 @@
 package com.song.struts;
 
 import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.MasterBLL;
 import com.song.entity.Master;
@@ -11,26 +13,28 @@ public class LoginAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = -1344151717344033281L;
-	private Master master;
-	
-	
+	private String username;
+	private String password;
 
 
-
-	public Master getMaster() {
-		return master;
+	public String getUsername() {
+		return username;
 	}
 
 
-
-
-
-	public void setMaster(Master master) {
-		this.master = master;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 
+	public String getPassword() {
+		return password;
+	}
 
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 
 	/**
@@ -40,13 +44,13 @@ public class LoginAction extends ActionSupport {
 	 */
 	public String login()throws Exception{	
 		MasterBLL masterBLL = new MasterBLL();
-		Master m = masterBLL.Login(master);
+		Master master = masterBLL.Login(username,password);
 		// 如果用户名和密码验证通过
-		if(m != null)
+		if(master != null)
 		{
-			master.setId(m.getId());
 			// 将用户信息保存进Session中
 			ServletActionContext.getRequest().getSession().setAttribute("Master", master);
+			ActionContext.getContext().put("mid", master.getId());
 			return "loginSuccess";
 		}
 		return "loginfail";

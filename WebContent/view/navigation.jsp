@@ -21,10 +21,10 @@
 					<!-- 获取导航项集合遍历显示 -->
 					<s:iterator value="#session.navigation" id="navItem" status="st">
 						<s:if test="%{#navItem.nav_name=='首页'}">
-							<li><a href="<s:property value="#navItem.url"/>?master=${sessionScope.master}&type=100001"><s:property value="#navItem.nav_name" /></a></li>
+							<li><a href="<s:property value="#navItem.url"/>?mid=${sessionScope.master}&type=100001"><s:property value="#navItem.nav_name" /></a></li>
 						</s:if>
 						<s:elseif test="%{#navItem.nav_name=='文章列表'}">
-							<li><a href="<s:property value="#navItem.url" escape="false"/>?master=${sessionScope.master}&page=1&type=100002"><s:property value="#navItem.nav_name" /> </a></li>
+							<li><a href="<s:property value="#navItem.url" escape="false"/>?mid=${sessionScope.master}&page=1&type=100002"><s:property value="#navItem.nav_name" /> </a></li>
 						</s:elseif>
 						<s:elseif test="%{#navItem.nav_name=='相册'}">
 							<li><a href="<s:property value="#navItem.url"/>?master=${sessionScope.master}&page=1&type=100003"><s:property value="#navItem.nav_name" /> </a></li>

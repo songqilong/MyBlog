@@ -17,10 +17,10 @@
 			<form class="form-signin" action="login">
 				<h2 class="form-signin-heading" align="center">登录</h2>
 				<!-- 用户名输入框 -->
-				<input type="text" name="master.username" class="form-control" placeholder="用户名" required autofocus>
+				<input type="text" name="username" class="form-control" placeholder="用户名" required autofocus>
 				<br> 
 				<!-- 密码输入框 -->
-				<input type="password" name="master.password" class="form-control" placeholder="密码" required>
+				<input type="password" name="password" class="form-control" placeholder="密码" required>
 				<br>
 				<!--   注释掉记住密码复选框
                 <div class="checkbox">
