@@ -83,6 +83,13 @@
                  <param name="namespace">/</param>
                  <param name="actionName">common_loadPageDate</param>
              </result>
+            <!-- 提交文章成功，跳转文件列表界面 -->
+            <result name="addSuccess" type="redirectAction">
+                <param name="actionName">article_showList?mid=${mid}&amp;page=1&amp;type=100002</param>
+            </result>
+            
+            
+            
              <!-- 显示单篇文章成功 -->
              <result name="single" type="chain">
                  <param name="namespace">/</param>
@@ -94,10 +101,6 @@
             <!-- 获取评论处理链 -->
             <result name="comment" type="chain">article_comment</result>
             <result name="singleShowSuccess">/article/articlesingle.jsp</result>
-            <!-- 提交文章成功，跳转文件列表界面 -->
-            <result name="addSuccess" type="redirectAction">
-                <param name="actionName">article_showList?master=${master}&amp;page=1&amp;type=100002</param>
-            </result>
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>
         </action>

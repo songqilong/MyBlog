@@ -18,8 +18,8 @@ public class ArticleDAO {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
 		String sql = "insert into t_article(title,author,type,master_id,category_id,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "'," + article.getAuthor() + "'," + article.getType() + ",'"
-				+ article.getMasterId() + "'," + article.getCategoryId() + ",'" + article.getSourceweb() + "','"
+				+ article.getTitle() + "','" + article.getAuthor() + "'," + article.getType() + ","
+				+ article.getMasterId() + "," + article.getCategoryId() + ",'" + article.getSourceweb() + "','"
 				+ article.getSourceurl() + "','" + article.getKeyword() + "','" + article.getContent() + "','"
 				+ article.getCtime() + "')";
 		try{

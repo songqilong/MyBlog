@@ -10,12 +10,10 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.ArticleBLL;
 import com.song.bll.CommentBLL;
-import com.song.bll.NavigationBLL;
 import com.song.common.Common;
-import com.song.common.PropertiesUtils;
 import com.song.entity.Article;
 import com.song.entity.Comment;
-import com.song.entity.Navigation;
+
 
 public class ArticleAction extends ActionSupport {
 
@@ -84,8 +82,8 @@ public class ArticleAction extends ActionSupport {
 		// 设置文章创建的时间
 		this.article.setCtime(Common.GetCurrentTime());
 		// 获取存在Session对象中的作者即用户名
-		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("master"));
-		ActionContext.getContext().put("master", masterId);
+		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("mid"));
+		ActionContext.getContext().put("mid", masterId);
 		this.article.setMasterId(masterId);
 		ArticleBLL articleBLL = new ArticleBLL();
 		// 如果添加成功跳转到文章列表

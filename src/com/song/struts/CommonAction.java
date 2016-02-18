@@ -17,7 +17,6 @@ import com.song.bll.NavigationBLL;
 import com.song.bll.NoticeBLL;
 import com.song.common.PropertiesUtils;
 import com.song.entity.Article;
-import com.song.entity.Category;
 import com.song.entity.Navigation;
 import com.song.entity.Notice;
 

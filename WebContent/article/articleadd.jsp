@@ -32,7 +32,7 @@ KindEditor.ready(function(K) {
 		<!-- 面包屑结束 -->
 <div class="row">
 <div class="example">
-      <form action="article_add?master=${mid}" class="form-horizontal form-condensed" role="form" method='post'>
+      <form action="article_add?mid=${mid}" class="form-horizontal form-condensed" role="form" method='post'>
         <legend>创建文章</legend>
         <div class="form-group">
           <label class="col-md-2 control-label">标题</label>
