@@ -43,12 +43,12 @@
         <header>
           <h3><i class="icon-comments icon-border-circle"></i> <s:property value="#CommentQty"/> 条评论</h3>
           <div class="alert alert-info text-center">
-            <s:property value="#commentLastQty"/> 条新的评论
+            <s:property value="#lastCommentQty"/> 条新的评论
           </div>
         </header>
         <section class="comments-list">
  		<!-- 遍历评论 -->       
-        <s:iterator value="commentlist" id="comment" status="st">
+        <s:iterator value="#comments" id="comment" status="st">
         	<!-- 如果回复对象为空 -->
         	<s:if test="#comment.replyto==null">
         		<div class="comment">
@@ -102,14 +102,14 @@
           <div class="reply-form" id="commentReplyForm">
             <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
             <div class="form">
-              <form role="form" action="comment_commit?master=<s:property value="article.author"/>&articleID=<s:property value="#articleID"/>" method="post">
+              <form id="form"role="form" action="" method="post">
                <div class="input-group  col-md-3">
                 	<span class="input-group-addon">评论人</span>
-                	<input type="text" class="form-control" name="comment.author" placeholder="评论人">
+                	<input type="text" id="author" class="form-control" name="comment.author" placeholder="评论人">
                 </div>
                 <br>
                 <div class="form-group">
-                  <textarea class="form-control new-comment-text" rows="6"  name="comment.content" placeholder="评论一下吧"></textarea>
+                  <textarea id="comment" class="form-control new-comment-text" rows="6"  name="comment.content" placeholder="评论一下吧"></textarea>
                 </div>
                 <div class="pull-right"><input type="submit" class="btn btn-info" value="发表评论"> </div>
               </form>
@@ -119,5 +119,48 @@
       </div>
     </div>
 </div>
+<!-- 该JQuery 用于提交评论 -->
+<script type="text/javascript">
+//获取url中的参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) {
+    	return unescape(r[2]);
+    	}
+    return null; //返回参数值
+    }
+
+var aid= getUrlParam("aid"); // 获取文章ID
+$(document).ready(function(){
+	$("#form").submit(function(e){
+ 		// 阻止提交按钮的默认 action
+		e.preventDefault();
+		alert("AAAAAAAA");	
+		var $author = $('#author');
+		var $comment = $('#comment');
+		if(author != null && comment != null){
+			$.post(
+			"/article/comment_commit",
+			{aid:aid,author:$author.text(),comment:$comment.text()},
+			function(data,status){
+				// 如果提交评论成功
+				if("addSuccess"==data){
+					Date date = new Date();
+					var ctime = date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+					$(".comments-list").append("<div class=\"comment\"><a href=\"###\" class=\"avatar\"><i class=\"icon-user icon-border icon-2x icon-muted\"></i></a><div class=\"content\"><div class=\"pull-right\"><span class=\"text-muted\">"+ctime+"</span></div><!-- 文章作者 --><a href=\"#\" class=\"author\">"+$author.text()+"</strong></a><div class=\"text\"><!-- 文章内容 -->"+$comment.text()+"</div><div class=\"actions\"><a href=\"##\">回复</a><a href=\"##\">编辑</a><a href=\"##\">删除</a></div></div></div>");
+					$author.text("");
+					$comment.text("");
+				}else{
+					$author.text("");
+					$comment.text("");
+				}
+			}
+			);
+		}
+	});
+});
+
+</script>
 </body>
 </html>

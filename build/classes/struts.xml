@@ -25,21 +25,10 @@
              <!-- 加载页面数据 -->
              <result name="indexready">/view/main.jsp</result>
              <result name="defaultArticlesReady">/article/articlelist.jsp</result>
+             <result name="singleArticleReady">/article/articlesingle.jsp</result>
              
              <!-- 加载URL -->
              <result name="loadUrl" type="chain">common_loadNavigation</result>
-             <!-- 加载首页导航栏选项成功 下一步：加载首页所要显示的数据-->
-             <result name="ins" type="chain">index_loadHomeInfo</result>
-             <!-- 加载文章列表导航栏选项成功 -->
-             <result name="ans" type="chain">
-                 <param name="namespace">/article</param>
-                 <param name="actionName">article_getList</param>
-             </result>
-             <!-- 加载单篇文章界面导航栏项成功 -->
-             <result name="sns" type="chain">
-                 <param name="namespace">/article</param>
-                 <param name="actionName">article_showArticle</param>
-             </result>
              <!-- 加载图片列表导航栏项成功 -->
              <result name="pns" type="chain">
                  <param name="namespace">/photo</param>
@@ -86,29 +75,23 @@
             <!-- 提交文章成功，跳转文件列表界面 -->
             <result name="addSuccess" type="redirectAction">
                 <param name="actionName">article_showList?mid=${mid}&amp;page=1&amp;type=100002</param>
-            </result>
-            
-            
-            
+            </result>                             
              <!-- 显示单篇文章成功 -->
              <result name="single" type="chain">
                  <param name="namespace">/</param>
-                 <param name="actionName">common_loadUrl</param>
-             </result>
-            <!-- 获取文章列表成功 -->
-            <!--<result name="getListSuccess">/article/articlelist.jsp</result> -->
+                 <param name="actionName">common_loadPageDate</param>
+             </result>            
+            <!-- 写文章 --> 
             <result name="write">/article/articleadd.jsp?master=${mid}</result>
             <!-- 获取评论处理链 -->
             <result name="comment" type="chain">article_comment</result>
-            <result name="singleShowSuccess">/article/articlesingle.jsp</result>
+            <!--<result name="singleShowSuccess">/article/articlesingle.jsp</result>-->
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>
         </action>
         
          <!-- 评论 -->
          <action name="comment_*" class="com.song.struts.CommentAction" method="{1}">
-             <result name="commit" type="redirectAction">article_single?master=${master}&amp;articleID=${articleID}</result>
-             <result name="commitfail">/error.jsp?info=提交评论失败</result>
          </action>
     </package>
     

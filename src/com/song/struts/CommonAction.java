@@ -1,6 +1,7 @@
  package com.song.struts;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,11 +13,13 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.ArticleBLL;
 import com.song.bll.CategoryBLL;
+import com.song.bll.CommentBLL;
 import com.song.bll.MasterBLL;
 import com.song.bll.NavigationBLL;
 import com.song.bll.NoticeBLL;
 import com.song.common.PropertiesUtils;
 import com.song.entity.Article;
+import com.song.entity.Comment;
 import com.song.entity.Navigation;
 import com.song.entity.Notice;
 
@@ -133,7 +136,7 @@ public class CommonAction extends ActionSupport {
 		switch(type){
 		// 加载首页数据
 		case "100001":
-			article = articleBLL.GetLastArticleByAuthor(masterId);
+			article = articleBLL.GetLastArticleByMaster(masterId);
 			ActionContext.getContext().put("recommends", articleBLL.GetRecommendArticles(masterId, 5));
 			NoticeBLL noticeBLL = new NoticeBLL();
 			notice = noticeBLL.GetLastNotice(masterId);
@@ -164,6 +167,26 @@ public class CommonAction extends ActionSupport {
 			ActionContext.getContext().put("page", page);
 			ActionContext.getContext().put("articles", articleBLL.GetArticlesForPage(masterId, page));
 			result = "defaultArticlesReady";
+			break;
+		// 显示单篇文件
+		case "100004":
+			// 获取文章ID
+			int aid = Integer.parseInt(request.getParameter("aid"));
+			// 更加文章ID获取文章对象
+			article = articleBLL.GetArticleById(aid);
+			// 文章点击次数累加
+			int clickTime = article.getClicktime()+1;
+			// 更新文章的点击次数
+			articleBLL.ModifyArticleClickTime(aid, clickTime);
+			CommentBLL commentBLL = new CommentBLL();
+			ActionContext.getContext().put("CommentQty", commentBLL.GetCommentQtyByAid(aid));
+			// 获取最新评论的数量
+			int lastCommentQty = commentBLL.GetLastCommentQty(aid);
+			ActionContext.getContext().put("lastCommentQty", lastCommentQty);
+			// 获取该文章的评论集合
+			List<Comment> list = commentBLL.GetComments(aid);
+			ActionContext.getContext().put("comments", list);
+			result = "singleArticleReady";
 			break;
 		}
 		return result;

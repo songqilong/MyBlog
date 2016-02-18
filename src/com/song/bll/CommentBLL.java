@@ -1,5 +1,7 @@
 package com.song.bll;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import com.song.dao.CommentDAO;
@@ -17,26 +19,9 @@ public class CommentBLL {
 	 * @param articleid
 	 * @return
 	 */
-	public int GetCommentQtyByArticle(int articleid){
-		return commentDAO.CommentCount(articleid);
-	}
-	
-	/**
-	 * 根据文章ID获取评论集合
-	 * @param articleid 文章ID
-	 * @return
-	 */
-	public List<Comment> GetCommentCollection(int articleid){
-		return commentDAO.CommentCollection(articleid);
-	}
-	
-	/**
-	 * 添加评论
-	 * @param comment
-	 * @return
-	 */
-	public boolean CommentAdd(Comment comment){
-		return commentDAO.CommentAdd(comment);
+	public int GetCommentQtyByAid(int aid){
+		String sql = "select * from t_comment where article_id="+aid+";";
+		return commentDAO.GetQueryQty(sql);
 	}
 	
 	/**
@@ -44,7 +29,34 @@ public class CommentBLL {
 	 * @param articleID
 	 * @return
 	 */
-	public int CommentLast(int articleID){
-		return commentDAO.CommentLast(articleID);
+	public int GetLastCommentQty(int aid){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String date = sdf.format(Calendar.getInstance().getTime())+" 00:00:00";
+		String sql = "select * from t_comment where article_id="+aid+" and ctime>'"+date+"';";
+		return commentDAO.GetQueryQty(sql);
 	}
+	
+	/**
+	 * 根据文章ID获取评论集合
+	 * @param articleid 文章ID
+	 * @return
+	 */
+	public List<Comment> GetComments(int aid){
+		String sql = "select * from t_comment where article_id="+aid+";";
+		return commentDAO.GetCollectionComment(sql);
+	}
+	
+	/**
+	 * 添加评论
+	 * @param comment
+	 * @return
+	 */
+	public int AddComment(Comment comment){
+		String sql = "insert into t_comment(article_id,author,content,ip,replyto,ctime) values ("
+				+ comment.getArticleId() + ",'" + comment.getAuthor() + "','" + comment.getContent() + "','"
+				+ comment.getIp() + "','" + comment.getReplyto() + "','" + comment.getCtime() + "');";
+		return commentDAO.UpdateComment(sql);
+	}
+	
+
 }

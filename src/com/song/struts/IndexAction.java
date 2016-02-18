@@ -64,7 +64,7 @@ public class IndexAction extends ActionSupport {
 		// 获取url中的参数
 		int masterId = Integer.parseInt(ServletActionContext.getRequest().getSession().getAttribute("master").toString());
 		// 获取首页显示的最新文章
-		article = articleBLL.GetLastArticleByAuthor(masterId);
+		article = articleBLL.GetLastArticleByMaster(masterId);
 		// 获取最新的公告
 		notice = noticeBLL.GetLastNotice(masterId);
 		// 如果首页显示的文章为空

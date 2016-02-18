@@ -4,7 +4,7 @@ public class Comment {
 	// 评论ID
 	private int id;
 	// 文章ID
-	private int articleid;
+	private int articleId;
 	// 评论人
 	private String author;
 	// 评论内容
@@ -24,12 +24,14 @@ public class Comment {
 		this.id = id;
 	}
 
-	public int getArticleid() {
-		return articleid;
+
+
+	public int getArticleId() {
+		return articleId;
 	}
 
-	public void setArticleid(int articleid) {
-		this.articleid = articleid;
+	public void setArticleId(int articleId) {
+		this.articleId = articleId;
 	}
 
 	public String getAuthor() {

@@ -145,48 +145,48 @@ public class ArticleAction extends ActionSupport {
 	
 
 	
-	/**
-	 * 显示单篇文章
-	 * @return
-	 * @throws Exception
-	 */
-	public String showArticle()throws Exception{
-		ArticleBLL articleBLL = new ArticleBLL();
-		// 获取文章的ID
-		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
-		// 将文章ID存入request对象中
-		ActionContext.getContext().put("articleID", articleID);
-		CommentBLL commentBLL = new CommentBLL();
-		// 最新评论数量
-		int commentLastQty = commentBLL.CommentLast(articleID);
-		ActionContext.getContext().put("commentLastQty", commentLastQty);
-		//根据ID获取文章
-		this.article = articleBLL.GetArticleById(articleID);
-		// 如果文章不为空
-		if(this.article != null){
-			// 累加文章点击次数
-			articleBLL.SumArticleClick(articleID);
-			return "comment";
-		}
-		return "noarticle";
-	}
+//	/**
+//	 * 显示单篇文章
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String showArticle()throws Exception{
+//		ArticleBLL articleBLL = new ArticleBLL();
+//		// 获取文章的ID
+//		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
+//		// 将文章ID存入request对象中
+//		ActionContext.getContext().put("articleID", articleID);
+//		CommentBLL commentBLL = new CommentBLL();
+//		// 最新评论数量
+//		int commentLastQty = commentBLL.CommentLast(articleID);
+//		ActionContext.getContext().put("commentLastQty", commentLastQty);
+//		//根据ID获取文章
+//		this.article = articleBLL.GetArticleById(articleID);
+//		// 如果文章不为空
+//		if(this.article != null){
+//			// 累加文章点击次数
+//			articleBLL.SumArticleClick(articleID);
+//			return "comment";
+//		}
+//		return "noarticle";
+//	}
 	
-	/**
-	 * 获取评论数据
-	 * @return
-	 * @throws Exception
-	 */
-	public String comment()throws Exception{
-		CommentBLL commentBLL = new CommentBLL();
-		// 获取文章ID
-		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
-		// 更加文章ID获取文章的评论数
-		int commentQty = commentBLL.GetCommentQtyByArticle(articleID);
-		// 将文章的评论数存放在request中
-		ActionContext.getContext().put("CommentQty", commentQty);
-		// 获取评论集合
-		this.commentlist = commentBLL.GetCommentCollection(articleID);
-		return "singleShowSuccess";
-	}
+//	/**
+//	 * 获取评论数据
+//	 * @return
+//	 * @throws Exception
+//	 */
+//	public String comment()throws Exception{
+//		CommentBLL commentBLL = new CommentBLL();
+//		// 获取文章ID
+//		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
+//		// 更加文章ID获取文章的评论数
+//		//int commentQty = commentBLL.GetCommentQtyByArticle(articleID);
+//		// 将文章的评论数存放在request中
+//		ActionContext.getContext().put("CommentQty", commentQty);
+//		// 获取评论集合
+//		this.commentlist = commentBLL.GetCommentCollection(articleID);
+//		return "singleShowSuccess";
+//	}
 
 }

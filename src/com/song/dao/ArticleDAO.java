@@ -17,11 +17,8 @@ public class ArticleDAO {
 	public boolean AddArticle(Article article) {
 		boolean isSuccess = false;
 		// 构建插入文章对象语句
-		String sql = "insert into t_article(title,author,type,master_id,category_id,sourceweb,sourceurl,keyword,content,ctime)values('"
-				+ article.getTitle() + "','" + article.getAuthor() + "'," + article.getType() + ","
-				+ article.getMasterId() + "," + article.getCategoryId() + ",'" + article.getSourceweb() + "','"
-				+ article.getSourceurl() + "','" + article.getKeyword() + "','" + article.getContent() + "','"
-				+ article.getCtime() + "')";
+		String sql = "insert into t_article(title,author,type,master_id,category_id,sourceweb,sourceurl,keyword,content,ctime)values('"+ article.getTitle() + "','" + article.getAuthor() + "'," + article.getType() + ","+ article.getMasterId() + "," + article.getCategoryId() + ",'" + article.getSourceweb() + "','"+ article.getSourceurl() + "','" + article.getKeyword() + "','" + article.getContent() + "','"+ article.getCtime() + "')";
+
 		try{
 			// 打开数据库连接
 			DBUtils.ConnDB();
@@ -265,5 +262,62 @@ public class ArticleDAO {
 		// 关闭数据库连接
 		DBUtils.CloseCon();
 		return list;
+	}
+	//*****************************************************************一下为代码将替换上面的代码
+	
+	/**
+	 * 获取单篇文章
+	 * @param sql
+	 * @return
+	 */
+	public Article GetSingleArticle(String sql){
+		Article article = null;
+		try{
+			// 连接数据库
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			if(rst.first()){
+				article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
+				article.setType(rst.getInt("type"));
+				article.setCategoryId(rst.getInt("category_id"));
+				article.setSourceweb(rst.getString("sourceweb"));
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setKeyword(rst.getString("keyword"));
+				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
+				article.setClicktime(rst.getInt("clicktime"));
+				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
+			}
+			// 是否ResultSet资源
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return article;
+	}
+	
+	/**
+	 * 更新文章对象
+	 * @param sql
+	 * @return
+	 */
+	public int UpdateArticle(String sql){
+		int row =0;
+		try{
+			DBUtils.ConnDB();
+			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
 	}
 }

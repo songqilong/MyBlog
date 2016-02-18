@@ -1,8 +1,10 @@
 package com.song.struts;
 
-import org.apache.struts2.ServletActionContext;
+import java.io.PrintWriter;
 
-import com.opensymphony.xwork2.ActionContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.CommentBLL;
 import com.song.common.Common;
@@ -45,26 +47,25 @@ public class CommentAction extends ActionSupport {
 	 * @throws Exception
 	 */
 	public String commit()throws Exception{
-		CommentBLL commentBLL = new CommentBLL();
-		// 获取master参数
-		String master = ServletActionContext.getRequest().getParameter("master");
-		// 将master参数存入session中
-		ActionContext.getContext().put("master", master);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter out = response.getWriter();
+		String author = request.getParameter("author");
+		String content = request.getParameter("comment");
 		// 获取文章ID
-		int articleID = Integer.parseInt(ServletActionContext.getRequest().getParameter("articleID"));
-		// 设置文章ID
-		comment.setArticleid(articleID);
-		// 将文章ID存入session对象中
-		ActionContext.getContext().put("articleID", articleID);
-		// 获取评论者IP
-		String ip = ServletActionContext.getRequest().getRemoteAddr();
-		// 设置IP
-		comment.setIp(ip);
-		// 设置评论提交时间
-		comment.setCtime(Common.GetCurrentTime());
-		if(commentBLL.CommentAdd(comment)){
-			return "commit";
+		int aid = Integer.parseInt(request.getParameter("aid"));
+		CommentBLL commentBLL = new CommentBLL();
+		Comment cet = new Comment();
+		cet.setArticleId(aid);
+		cet.setAuthor(author);
+		cet.setContent(content);
+		cet.setIp(request.getRemoteAddr());
+		cet.setCtime(Common.GetCurrentTime());
+		if(commentBLL.AddComment(comment)>0){
+			out.print("addSuccess");
+		}else{
+			out.print("addFail");
 		}		
-		 return "commitfail";
+		 return null;
 	}
 }

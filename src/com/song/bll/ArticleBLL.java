@@ -48,7 +48,8 @@ public class ArticleBLL {
 	 * @return
 	 */
 	public Article GetArticleById(int id){
-		return articleDAO.GetArticle(id);
+		String sql = "select * from t_article where id="+id+"";
+		return articleDAO.GetSingleArticle(sql);
 	}
 
 	/**
@@ -56,8 +57,9 @@ public class ArticleBLL {
 	 * @param author
 	 * @return
 	 */
-	public Article GetLastArticleByAuthor(int masterId){
-		return articleDAO.GetArticle(masterId);
+	public Article GetLastArticleByMaster(int masterId){
+		String sql = "select * from t_article where master_id="+masterId+" order by ctime desc limit 0,1";
+		return articleDAO.GetSingleArticle(sql);
 	}
 
 	/**
@@ -65,8 +67,9 @@ public class ArticleBLL {
 	 * @param articleID
 	 * @return
 	 */
-	public boolean SumArticleClick(int articleID){
-		return articleDAO.SumArticleClick(articleID);
+	public int ModifyArticleClickTime(int aid,int clickTime){
+		String sql = "update t_article set clicktime="+clickTime+" where id="+aid+"";
+		return articleDAO.UpdateArticle(sql);
 	}
 	
 	/**
