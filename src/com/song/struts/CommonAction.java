@@ -1,7 +1,6 @@
  package com.song.struts;
 
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -167,6 +166,10 @@ public class CommonAction extends ActionSupport {
 			ActionContext.getContext().put("page", page);
 			ActionContext.getContext().put("articles", articleBLL.GetArticlesForPage(masterId, page));
 			result = "defaultArticlesReady";
+			break;
+		// 显示图片界面
+		case "100003":
+			
 			break;
 		// 显示单篇文件
 		case "100004":

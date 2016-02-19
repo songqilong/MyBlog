@@ -92,6 +92,7 @@
         
          <!-- 评论 -->
          <action name="comment_*" class="com.song.struts.CommentAction" method="{1}">
+         	<result name="default">/error.jsp</result>
          </action>
     </package>
     
@@ -102,7 +103,7 @@
             <!-- 显示图片列表处理链 -->
             <result name="showList">
                 <param name="namespace">/</param>
-                <param name="actionName">common_loadUrl</param>
+                <param name="actionName">common_loadPageDate</param>
             </result>
 			<!-- 显示图片列表 -->
             <result name="getList">/picture/picturelist.jsp</result>

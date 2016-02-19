@@ -1,6 +1,12 @@
 package com.song.entity;
 
-public class Navigation {
+import java.io.Serializable;
+
+public class Navigation implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// 导航项ID
 	private int id;
 	// 导航项名称

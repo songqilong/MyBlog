@@ -27,7 +27,7 @@
 							<li><a href="<s:property value="#navItem.url" escape="false"/>?mid=${sessionScope.master}&page=1&type=100002"><s:property value="#navItem.nav_name" /> </a></li>
 						</s:elseif>
 						<s:elseif test="%{#navItem.nav_name=='相册'}">
-							<li><a href="<s:property value="#navItem.url"/>?master=${sessionScope.master}&page=1&type=100003"><s:property value="#navItem.nav_name" /> </a></li>
+							<li><a href="<s:property value="#navItem.url"/>?mid=${sessionScope.master}&page=1&type=100003"><s:property value="#navItem.nav_name" /> </a></li>
 						</s:elseif>
 					</s:iterator>
 				</ul>

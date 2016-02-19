@@ -1,6 +1,12 @@
 package com.song.entity;
 
-public class Article {
+import java.io.Serializable;
+
+public class Article implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// 文章ID
 	private int id;
 	// 文章题目

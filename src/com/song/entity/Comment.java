@@ -1,6 +1,12 @@
 package com.song.entity;
 
-public class Comment {
+import java.io.Serializable;
+
+public class Comment implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// ÆÀÂÛID
 	private int id;
 	// ÎÄÕÂID

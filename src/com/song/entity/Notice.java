@@ -1,6 +1,12 @@
 package com.song.entity;
 
-public class Notice {
+import java.io.Serializable;
+
+public class Notice implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private int masterId;
 	private String title;
