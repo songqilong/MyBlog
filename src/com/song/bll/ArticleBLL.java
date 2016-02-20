@@ -2,7 +2,7 @@ package com.song.bll;
 
 import java.util.List;
 
-import com.song.common.PropertiesUtils;
+
 import com.song.dao.ArticleDAO;
 import com.song.entity.Article;
 
@@ -25,22 +25,58 @@ public class ArticleBLL {
 	}
 	
 	/**
-	 * 获取分页文章
+	 * 获取不区分文章类别分页文章
 	 * @return
 	 */
-	public List<Article> GetArticlesForPage(int masterId,int page){
-		// 从配置文件中获取每页显示的文章数量
-		int articleCount = Integer.parseInt(PropertiesUtils.ReadProperties("page").toString());
-		return articleDAO.ArticleCollection(masterId,page,articleCount);
+	public List<Article> GetArticlesForPage(int masterId,int page,int pageSize,int categoryId){
+		String sql = "";
+		if(categoryId==0){
+			sql = "select * from t_article where master_id = "+masterId+" and isdelete = 0 order by ctime desc limit "+((page-1)*pageSize)+","+pageSize+";";
+		}else{
+			sql = "select * from t_article where master_id = "+masterId+" and category_id = "+categoryId+" and isdelete = 0 order by ctime desc limit "+((page-1)*pageSize)+","+pageSize+";";
+		} 
+		return articleDAO.GetArticles(sql);
 	}
 	
+//	/**
+//	 * 获取区分文章类别的分页文章
+//	 * @param masterId
+//	 * @param categoryId
+//	 * @param page
+//	 * @return
+//	 */
+//	public List<Article> GetArticlesForPage(int masterId,int categoryId,int page,int pageSize){
+//		// 从配置文件中获取每页显示的文章数量
+//		//int pageSize = Integer.parseInt(PropertiesUtils.ReadProperties("page").toString());
+//		String sql = "select * from t_article where master_id = "+masterId+" and category_id = "+categoryId+" and isdelete = 0 order by ctime desc limit "+((page-1)*pageSize)+","+pageSize+";";
+//		return articleDAO.GetArticles(sql);
+//	}
+	
 	/**
-	 * 获取指定作者所有文章的数量
+	 * 获取指定作者指定分类文章文章的数量
 	 * @return
 	 */
-	public int GetAllArticleCount(int masterId){
-		return articleDAO.ArticleCount(masterId);
+	public int GetAllArticleQtyByMid(int masterId,int categoryId){
+		String sql = "";
+		// 如果分类ID为0 则获取全部分类文章
+		if(categoryId == 0){
+			sql = "select * from t_article where master_id="+masterId+" and isdelete=0;";
+		}else{
+			 sql = "select * from t_article where master_id="+masterId+" and category_id="+categoryId+" and isdelete=0;";
+		}
+		return articleDAO.GetQueryQty(sql);
 	}
+	
+//	/**
+//	 * 获取指定分类文章的数量
+//	 * @param masterId
+//	 * @param categoryId
+//	 * @return
+//	 */
+//	public int GetCategoryArticleQty(int masterId,int categoryId){
+//		String sql = "select * from t_article where master_id="+masterId+" and category_id="+categoryId+" and isdelete=0;";
+//		return articleDAO.GetQueryQty(sql);
+//	}
 
 	/**
 	 * 根据文章ID获取文章
@@ -79,6 +115,8 @@ public class ArticleBLL {
 	 * @return
 	 */
 	public List<Article> GetRecommendArticles(int masterId,int articleQty){
-		return articleDAO.GetRecommendArticles(masterId, articleQty);
+		String sql = "select * from t_article where master_id='"+masterId+"' and isrecommend=1 order by ctime desc limit 0,"+articleQty+";";
+		
+		return articleDAO.GetArticles(sql);
 	}
 }

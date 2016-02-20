@@ -25,7 +25,9 @@
              <!-- 加载页面数据 -->
              <result name="indexready">/view/main.jsp</result>
              <result name="defaultArticlesReady">/article/articlelist.jsp</result>
+             <result name="categoryArticlesReady">/article/articlelist.jsp</result>
              <result name="singleArticleReady">/article/articlesingle.jsp</result>
+             <result name="defaultPicturesReady">/picture/picturelist.jsp</result>
              
              <!-- 加载URL -->
              <result name="loadUrl" type="chain">common_loadNavigation</result>
@@ -74,7 +76,7 @@
              </result>
             <!-- 提交文章成功，跳转文件列表界面 -->
             <result name="addSuccess" type="redirectAction">
-                <param name="actionName">article_showList?mid=${mid}&amp;page=1&amp;type=100002</param>
+                <param name="actionName">article_showList?mid=${mid}&amp;cid=0&amp;page=1&amp;type=100002</param>
             </result>                             
              <!-- 显示单篇文章成功 -->
              <result name="single" type="chain">
@@ -101,14 +103,21 @@
         <!-- 图片 -->
         <action name="photo_*" class="com.song.struts.PhotoAction" method="{1}">
             <!-- 显示图片列表处理链 -->
-            <result name="showList">
+            <result name="showList" type="chain">
                 <param name="namespace">/</param>
                 <param name="actionName">common_loadPageDate</param>
             </result>
 			<!-- 显示图片列表 -->
-            <result name="getList">/picture/picturelist.jsp</result>
-            <result name="add" type="chain">photo_showAdd</result>
-            <result name="showadd">/picture/pictureadd.jsp</result>
+            <!-- <result name="getList">/picture/picturelist.jsp</result> -->
+            <!--<result name="addPicture" type="chain">photo_showAdd</result>-->
+            <result name="addPicture">/picture/pictureadd.jsp</result>
+        </action>
+    </package>
+    
+    
+    <package name="category" namespace="/category" extends="struts-default">
+        <action name="category_*" class="com.song.struts.CategoryAction" method="{1}">
+            
         </action>
     </package>
 

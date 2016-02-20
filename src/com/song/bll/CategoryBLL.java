@@ -1,6 +1,6 @@
 package com.song.bll;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 import com.song.dao.CategoryDAO;
@@ -13,7 +13,13 @@ public class CategoryBLL {
 		categoryDAO = new CategoryDAO();
 	}
 	
+	/**
+	 * 通过创建者ID获取类别列表
+	 * @param masterId
+	 * @return
+	 */
 	public List<Category> GetCategorysByMid(int masterId){
-		return categoryDAO.GetCategoryListByMasterId(masterId);
+		String sql = "select * from t_category where master_id="+masterId+" and isdelete = 0;"; 
+		return categoryDAO.GetCategorys(sql);
 	}
 }

@@ -35,7 +35,7 @@
   <div class="panel-body">
     <ul>
     	<s:iterator value="#categorys" id="category" status="st">
-    		<li><a href="/article/article_showList?mid=<s:property value="#category.masterId"/>&page=1&type=100006&cid=<s:property value="#category.id"/>"><s:property value="#category.category"/></a></li>
+    		<li><a href="/Blog/article/article_showList?mid=<s:property value="#category.masterId"/>&cid=<s:property value="#category.id"/>&page=1&type=100002"><s:property value="#category.category"/></a></li>
     	</s:iterator>
     </ul>
   </div>
@@ -49,7 +49,7 @@
   <ul>
     <s:iterator value="#recommends" id="recommend" status="st">
     <li>
-    	<a href="/article/article_single?mid=<s:property value="#recommend.masterId"/>&type=100004&aid=<s:property value="#recommend.id"/>"><s:property value="#recommend.title"/></a>
+    	<a href="/Blog/article/article_single?mid=<s:property value="#recommend.masterId"/>&aid=<s:property value="#recommend.id"/>&type=100004"><s:property value="#recommend.title"/></a>
     </li>
     </s:iterator>
     </ul>

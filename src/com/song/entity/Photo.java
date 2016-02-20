@@ -9,6 +9,8 @@ public class Photo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	// 图片ID
 	private int id;
+	// 上传者ID
+	private int masterId;
 	// 图片名称
 	private String photoname;
 	// 图片元始名字
@@ -67,5 +69,14 @@ public class Photo implements Serializable{
 	public void setOriginalname(String originalname) {
 		this.originalname = originalname;
 	}
+
+	public int getMasterId() {
+		return masterId;
+	}
+
+	public void setMasterId(int masterId) {
+		this.masterId = masterId;
+	}
+	
 
 }

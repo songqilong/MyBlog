@@ -36,57 +36,57 @@ public class ArticleDAO {
 		return isSuccess;
 	}
 	
-	/**
-	 * 获取分页文章集合
-	 * @param page 页码
-	 * @param articleCount 每页的文章数量
-	 * @return
-	 */
-	public List<Article> ArticleCollection(int masterId,int page,int articleCount){
-		String sql = "";
-		if(page == 1){
-			// 构建查询文章集合的语句
-			sql = "select * from t_article where master_id='"+masterId+"' order by ctime desc limit 0,"+articleCount+";";
-		}else{
-			if(page>1){
-				sql = "select * from t_article where master_id='"+masterId+"'  order by ctime desc limit "+((page-1)*articleCount)+","+articleCount+";";
-			}
-		}		
-		// 实例化一个文章对象的集合
-		List<Article> list = new ArrayList<Article>();
-		try{
-			// 打开数据库
-			DBUtils.ConnDB();
-			// 执行查询
-			ResultSet rst = DBUtils.Query(sql);
-			while(rst.next())
-			{
-				Article article = new Article();
-				article.setId(rst.getInt("id"));
-				article.setTitle(rst.getString("title"));
-				article.setAuthor(rst.getString("author"));
-				article.setMasterId(rst.getInt("master_id"));
-				article.setType(rst.getInt("type"));
-				article.setCategoryId(rst.getInt("category_id"));
-				article.setSourceweb(rst.getString("sourceweb"));
-				article.setSourceurl(rst.getString("sourceurl"));
-				article.setKeyword(rst.getString("keyword"));
-				article.setContent(rst.getString("content"));
-				article.setIsrecommend(rst.getInt("isrecommend"));
-				article.setClicktime(rst.getInt("clicktime"));
-				article.setCtime(rst.getString("ctime"));
-				article.setIsdelete(rst.getInt("isdelete"));
-				article.setDeleteTime(rst.getString("dtime"));
-				list.add(article);
-			}
-			rst.close();
-			// 关闭数据库连接
-			DBUtils.CloseCon();
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return list;
-	}
+//	/**
+//	 * 获取分页文章集合
+//	 * @param page 页码
+//	 * @param articleCount 每页的文章数量
+//	 * @return
+//	 */
+//	public List<Article> ArticleCollection(int masterId,int page,int articleCount){
+//		String sql = "";
+//		if(page == 1){
+//			// 构建查询文章集合的语句
+//			sql = "select * from t_article where master_id='"+masterId+"' order by ctime desc limit 0,"+articleCount+";";
+//		}else{
+//			if(page>1){
+//				sql = "select * from t_article where master_id='"+masterId+"'  order by ctime desc limit "+((page-1)*articleCount)+","+articleCount+";";
+//			}
+//		}		
+//		// 实例化一个文章对象的集合
+//		List<Article> list = new ArrayList<Article>();
+//		try{
+//			// 打开数据库
+//			DBUtils.ConnDB();
+//			// 执行查询
+//			ResultSet rst = DBUtils.Query(sql);
+//			while(rst.next())
+//			{
+//				Article article = new Article();
+//				article.setId(rst.getInt("id"));
+//				article.setTitle(rst.getString("title"));
+//				article.setAuthor(rst.getString("author"));
+//				article.setMasterId(rst.getInt("master_id"));
+//				article.setType(rst.getInt("type"));
+//				article.setCategoryId(rst.getInt("category_id"));
+//				article.setSourceweb(rst.getString("sourceweb"));
+//				article.setSourceurl(rst.getString("sourceurl"));
+//				article.setKeyword(rst.getString("keyword"));
+//				article.setContent(rst.getString("content"));
+//				article.setIsrecommend(rst.getInt("isrecommend"));
+//				article.setClicktime(rst.getInt("clicktime"));
+//				article.setCtime(rst.getString("ctime"));
+//				article.setIsdelete(rst.getInt("isdelete"));
+//				article.setDeleteTime(rst.getString("dtime"));
+//				list.add(article);
+//			}
+//			rst.close();
+//			// 关闭数据库连接
+//			DBUtils.CloseCon();
+//		}catch(Exception e){
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 
 	/**
 	 * 获取指定作者一共有多少条篇文章
@@ -264,7 +264,25 @@ public class ArticleDAO {
 		return list;
 	}
 	//*****************************************************************一下为代码将替换上面的代码
-	
+	/**
+	 * 查询结果的条数
+	 * @param sql
+	 * @return
+	 */
+	public int GetQueryQty(String sql){
+		int row = 0;
+		try{
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			rst.last();
+			row = rst.getRow();
+			rst.close();
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
+	}
 	/**
 	 * 获取单篇文章
 	 * @param sql
@@ -305,6 +323,47 @@ public class ArticleDAO {
 	}
 	
 	/**
+	 * 获取文章集合
+	 * @param sql
+	 * @return
+	 */
+	public List<Article> GetArticles(String sql){
+		List<Article> list = new ArrayList<Article>();
+		try{
+			// 连接数据库
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			while(rst.next()){
+				Article article = new Article();
+				article.setId(rst.getInt("id"));
+				article.setTitle(rst.getString("title"));
+				article.setAuthor(rst.getString("author"));
+				article.setMasterId(rst.getInt("master_id"));
+				article.setType(rst.getInt("type"));
+				article.setCategoryId(rst.getInt("category_id"));
+				article.setSourceweb(rst.getString("sourceweb"));
+				article.setSourceurl(rst.getString("sourceurl"));
+				article.setKeyword(rst.getString("keyword"));
+				article.setContent(rst.getString("content"));
+				article.setIsrecommend(rst.getInt("isrecommend"));
+				article.setClicktime(rst.getInt("clicktime"));
+				article.setCtime(rst.getString("ctime"));
+				article.setIsdelete(rst.getInt("isdelete"));
+				article.setDeleteTime(rst.getString("dtime"));
+				list.add(article);
+			}
+			// 是否ResultSet资源
+			rst.close();
+			// 关闭数据库连接
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
+	
+	/**
 	 * 更新文章对象
 	 * @param sql
 	 * @return
@@ -320,4 +379,6 @@ public class ArticleDAO {
 		}
 		return row;
 	}
+	
+	
 }

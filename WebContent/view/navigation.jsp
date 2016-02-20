@@ -24,7 +24,7 @@
 							<li><a href="<s:property value="#navItem.url"/>?mid=${sessionScope.master}&type=100001"><s:property value="#navItem.nav_name" /></a></li>
 						</s:if>
 						<s:elseif test="%{#navItem.nav_name=='文章列表'}">
-							<li><a href="<s:property value="#navItem.url" escape="false"/>?mid=${sessionScope.master}&page=1&type=100002"><s:property value="#navItem.nav_name" /> </a></li>
+							<li><a href="<s:property value="#navItem.url" escape="false"/>?mid=${sessionScope.master}&cid=0&page=1&type=100002"><s:property value="#navItem.nav_name" /> </a></li>
 						</s:elseif>
 						<s:elseif test="%{#navItem.nav_name=='相册'}">
 							<li><a href="<s:property value="#navItem.url"/>?mid=${sessionScope.master}&page=1&type=100003"><s:property value="#navItem.nav_name" /> </a></li>

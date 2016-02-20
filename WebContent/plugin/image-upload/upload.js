@@ -138,8 +138,8 @@
         
 
         //获取url中的参数
-        master = (function getUrlParam() {
-            var reg = new RegExp("(^|&)master=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        mid = (function getUrlParam() {
+            var reg = new RegExp("(^|&)mid=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         })();
@@ -159,7 +159,7 @@
             swf: './Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'photo_upload?master='+master,
+            server: 'photo_upload?mid='+mid,
             
             // [默认值：'file']  设置文件上传域的name。
             fileVal:'uploadimage',

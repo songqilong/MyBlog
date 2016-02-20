@@ -10,9 +10,10 @@
 <script type="text/javascript" src="${basePath}/plugin/editor/kindeditor-min.js"></script>
 <script type="text/javascript" src="${basePath}/plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${basePath}/plugin/bootstrap.min.js"></script>
+<script type="text/javascript" src="${basePath}/plugin/blogcommon.js"></script>
 <script>
 KindEditor.ready(function(K) {
-    window.editor = K.create('#content');
+    window.editor = K.create('#content',{afterBlur: function(){this.sync()}});
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -25,7 +26,7 @@ KindEditor.ready(function(K) {
 		<div class="row">
 			<ul class="breadcrumb">
 				<li><a href="/Blog/index_access?mid=${mid}&type=100001">首页</a></li>
-				<li><a href="article_showList?mid=${mid}&page=1&type=100002">文章列表</a></li>
+				<li><a href="article_showList?mid=${mid}&cid=${cid}&page=1&type=100002">文章列表</a></li>
 				<li class="active">发布文章</li>
 			</ul>
 		</div>
@@ -36,32 +37,29 @@ KindEditor.ready(function(K) {
         <legend>创建文章</legend>
         <div class="form-group">
           <label class="col-md-2 control-label">标题</label>
-          <div class="col-md-10 has-error">
-             <input type='text' name='article.title' id='title' value='' class='form-control' placeholder=''/>
-             <div class="help-block alert alert-warning">标题不能为空</div>
+          <div class="col-md-10">
+             <input id="input_title" type='text' name='article.title' id='title' value='' class='form-control' placeholder=''/>
           </div>
         </div>
         
         <div class="form-group">
           <label class="col-md-2 control-label">来源</label>
-          <div class='col-md-4'>
-            <select name='article.type' id='original' class='form-control'>
+          <div class='col-md-3'>
+            <select id="select_type" name='article.type' id='original' class='form-control'>
               <option value='1' selected='selected'>原创</option>
               <option value='2'>转贴</option>
             </select>
-          </div>
+          </div> 
           <div id='copyBox'>
-            <div class='col-md-2'><input type='text' name='article.sourceweb' class='form-control' placeholder='来源网站' /></div>
-            <div class='col-md-3'><input type='text' name='article.sourceurl' class='form-control' placeholder='来源URL' /></div>
-          </div>
+          	<div class='col-md-2'><input id="input_author" type='text' name='article.author' class='form-control' placeholder='作者'/></div>
+			<div class='col-md-2'><input id="input_sourceweb" type='text' name='article.sourceweb' class='form-control' placeholder='来源网站'/></div>
+			<div class='col-md-3'><input id="input_sourceurl" type='text' name='article.sourceurl' class='form-control' placeholder='来源URL' /></div>
+		</div>       
         </div>
          <div class="form-group">
           <label class="col-md-2 control-label">分类</label>
-          <div class='col-md-4'>
-            <select name='article.categoryId' id='original' class='form-control'>
-              <option value='1' selected='selected'>java</option>
-              <option value='2'>javascript</option>
-              <option value='3'>android</option>
+          <div class='col-md-3'>
+            <select id='select_category' name='article.categoryId' id='original' class='form-control'>
             </select>
           </div>
         </div>
@@ -75,7 +73,7 @@ KindEditor.ready(function(K) {
         <div class="form-group">
           <label class="col-md-2 control-label">内容</label>
           <div class="col-md-10">
-            <textarea id="content" name="article.content" class='form-control'>
+            <textarea id="content" name="article.content"  class='form-control'>
 				
 			</textarea>
           </div>
@@ -83,7 +81,7 @@ KindEditor.ready(function(K) {
 
         <div class="form-group">
           <div class="col-md-offset-2 col-md-10">
-             <input type='submit' id='submit' class='btn btn-primary' value='发表' data-loading='稍候...' /> <input type='hidden' name='type' id='type' value='article'  />
+             <input type='submit' id='submit' class='btn btn-primary' value='发表'/> 
           </div>
         </div>
       </form>
