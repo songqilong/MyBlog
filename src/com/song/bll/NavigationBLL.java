@@ -16,9 +16,10 @@ public class NavigationBLL {
 	 * 获取导航项
 	 * @return
 	 */
-	public List<Navigation> GetNavigations()
+	public List<Navigation> GetNavigations(int masterId)
 	{
-		List<Navigation> list = navigationDAO.GetNavigationItems();
+		String sql = "select * from t_navigation where master_id in("+masterId+",0) and visible = 1 order by id asc";
+		List<Navigation> list = navigationDAO.GetNavigations(sql);
 		return list;
 	}
 }

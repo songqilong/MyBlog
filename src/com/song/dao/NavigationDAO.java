@@ -11,12 +11,11 @@ public class NavigationDAO {
 
 	/**
 	 * 获取导航栏中的导航项
-	 * @return 导航项集合
+	 * @param sql
+	 * @return
 	 */
-	public List<Navigation> GetNavigationItems()
-	{
+	public List<Navigation> GetNavigations(String sql){
 		List<Navigation> list = new ArrayList<Navigation>();
-		String sql = "select * from t_navigation where visible = 1";
 		try{
 			// 连接数据库
 			DBUtils.ConnDB();
@@ -27,6 +26,7 @@ public class NavigationDAO {
 			{
 				Navigation nav = new Navigation();
 				nav.setId(rst.getInt("id"));
+				nav.setMasterId(rst.getInt("master_id"));
 				nav.setNav_name(rst.getString("nav_name"));
 				nav.setUrl(rst.getString("url"));
 				nav.setVisible(rst.getInt("visible"));

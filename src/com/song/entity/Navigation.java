@@ -9,6 +9,8 @@ public class Navigation implements Serializable{
 	private static final long serialVersionUID = 1L;
 	// 导航项ID
 	private int id;
+	// 用户ID
+	private int masterId;
 	// 导航项名称
 	private String nav_name;
 	// url地址
@@ -23,6 +25,14 @@ public class Navigation implements Serializable{
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public int getMasterId() {
+		return masterId;
+	}
+
+	public void setMasterId(int masterId) {
+		this.masterId = masterId;
 	}
 
 	public String getNav_name() {

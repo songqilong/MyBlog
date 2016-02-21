@@ -17,7 +17,7 @@ KindEditor.ready(function(K) {
 });
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>写文章</title>
+<title>编辑文章</title>
 </head>
 <body>
 <div class="container">
@@ -27,18 +27,18 @@ KindEditor.ready(function(K) {
 			<ul class="breadcrumb">
 				<li><a href="/Blog/index_access?mid=${mid}&type=100001">首页</a></li>
 				<li><a href="article_showList?mid=${mid}&cid=${cid}&page=1&type=100002">文章列表</a></li>
-				<li class="active">发布文章</li>
+				<li class="active">编辑文章</li>
 			</ul>
 		</div>
 		<!-- 面包屑结束 -->
 <div class="row">
 <div class="example">
-      <form action="article_add?mid=${mid}&cid=${cid}" class="form-horizontal form-condensed" role="form" method='post'>
-        <legend>创建文章</legend>
+      <form action="article_update?mid=${mid}&aid=${aid}&cid=${cid}" class="form-horizontal form-condensed" role="form" method='post'>
+        <legend>编辑文章</legend>
         <div class="form-group">
           <label class="col-md-2 control-label">标题</label>
           <div class="col-md-10">
-             <input id="input_title" type='text' name='article.title' id='title' value='' class='form-control' placeholder=''/>
+             <input id="input_title" type='text' name='article.title' id='title' class='form-control' placeholder=''/>
           </div>
         </div>
         
@@ -66,7 +66,7 @@ KindEditor.ready(function(K) {
         <div class="form-group">
           <label class="col-md-2 control-label">关键字</label>
           <div class="col-md-10">
-            <input type='text' name='article.keyword' id='keywords' value='' class='form-control' />
+            <input id='input_keyword' type='text' name='article.keyword'  value='' class='form-control' />
           </div>
         </div>
 
@@ -88,5 +88,40 @@ KindEditor.ready(function(K) {
     </div>
 </div>
 </div>
+<script type="text/javascript">
+//获取url中的参数
+function getUrlParam(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+    var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+    if (r != null) return unescape(r[2]); return null; //返回参数值
+}
+$(function(){
+	  var mid = getUrlParam("mid"); // 获取文章分类
+	  var $categroy = $('#select_category');
+	  $.getJSON("/Blog/category/category_getCategoryInfo",{mid:mid},function(data){
+		  $.each(data,function(index,item){
+			  $categroy.append("<option value='"+item.id+"'>"+item.category+"</option>");
+		  });
+	  });
+	  
+	  var aid = getUrlParam("aid");  // 文章ID
+	  $.getJSON("/Blog/article/article_getArticleForEdit",{aid:aid},function(data){
+	  	$('#input_title').val(data.title);
+	  	var type = data.type;
+	  	$('#select_type').val(data.type);
+	  	if(type == 2){
+	  		$('#copyBox').show();
+	  		$('#input_author').val(data.author);
+	  		$('#input_sourceweb').val(data.sourceweb);
+	  		$('#input_sourceurl').val(data.sourceurl);
+	  	}
+	  	$('#select_category').val(data.categoryId);
+	  	$('#input_keyword').val(data.keyword);
+	  	//$('#content').val(data.content);
+	  	KindEditor.html('#content',data.content);
+	  });
+});
+
+</script>
 </body>
 </html>

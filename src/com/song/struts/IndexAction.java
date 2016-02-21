@@ -48,7 +48,7 @@ public class IndexAction extends ActionSupport {
 		// 获取url中附带的用户参数
 		int masterId = Integer.parseInt(ServletActionContext.getRequest().getParameter("mid"));
 		// 将用户参数存入session中
-		ServletActionContext.getRequest().getSession().setAttribute("master", masterId);
+		ServletActionContext.getRequest().getSession().setAttribute("mid", masterId);
 		return "access";
 	}
 	

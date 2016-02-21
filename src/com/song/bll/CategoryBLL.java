@@ -19,7 +19,7 @@ public class CategoryBLL {
 	 * @return
 	 */
 	public List<Category> GetCategorysByMid(int masterId){
-		String sql = "select * from t_category where master_id="+masterId+" and isdelete = 0;"; 
+		String sql = "select * from t_category where master_id in("+masterId+",0) and isdelete = 0;"; 
 		return categoryDAO.GetCategorys(sql);
 	}
 }

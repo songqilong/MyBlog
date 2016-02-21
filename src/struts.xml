@@ -28,16 +28,6 @@
              <result name="categoryArticlesReady">/article/articlelist.jsp</result>
              <result name="singleArticleReady">/article/articlesingle.jsp</result>
              <result name="defaultPicturesReady">/picture/picturelist.jsp</result>
-             
-             <!-- 加载URL -->
-             <result name="loadUrl" type="chain">common_loadNavigation</result>
-             <!-- 加载图片列表导航栏项成功 -->
-             <result name="pns" type="chain">
-                 <param name="namespace">/photo</param>
-                 <param name="actionName">photo_getList</param>
-             </result>
-             <!-- 加载导航栏选项失败 -->
-            <result name="loadNavFail" type="redirect">/error.jsp?info=加载导航栏数据失败</result> 
          </action>
          
 		<!-- 登录 -->
@@ -49,15 +39,13 @@
         </action>
         <!-- 注册 -->
         <action name="register" class="com.song.struts.RegisterAction" method="register">
-            <result name="register" type="redirect">index_access?master=${master.id}</result>
+            <result name="register" type="redirect">index_access?mid=${mid}&amp;type=100001</result>
             <result name="registerfail">/error.jsp?info=注册失败</result>
         </action>
         <!-- 首页 -->
         <action name="index_*" class="com.song.struts.IndexAction" method="{1}">
             <!-- 从index_access 跳转到加载首页数据的action -->
             <result name="access" type="chain">common_loadPageDate</result>           
-            <!-- 首页文章加载成功，显示首页内容          
-            <result name="loadInfoSuccess">/view/main.jsp</result>--> 
             <!-- 首页文章加载失败，显示首页内容 --> 
             <result name="loadInfoFail">/error.jsp?info=加载文章失败</result>
         </action>
@@ -68,7 +56,6 @@
     <package name="article" namespace="/article" extends="struts-default">
         <!-- 文章 -->
          <action name="article_*" class="com.song.struts.ArticleAction" method="{1}">
-             <!-- <result name="showlist" type="chain">article_getList</result> -->
              <!-- 跳转到文章列表的action -->
              <result name="showList" type="chain">
                  <param name="namespace">/</param>
@@ -76,22 +63,26 @@
              </result>
             <!-- 提交文章成功，跳转文件列表界面 -->
             <result name="addSuccess" type="redirectAction">
-                <param name="actionName">article_showList?mid=${mid}&amp;cid=0&amp;page=1&amp;type=100002</param>
-            </result>                             
+                <param name="actionName">article_showList?mid=${mid}&amp;cid=${cid}&amp;page=1&amp;type=100002</param>
+            </result>  
+            <!-- 编辑文章成功，跳转文件列表界面 -->
+            <result name="updateSuccess" type="redirectAction">
+                <param name="actionName">article_showList?mid=${mid}&amp;cid=${cid}&amp;page=1&amp;type=100002</param>
+            </result>                           
              <!-- 显示单篇文章成功 -->
              <result name="single" type="chain">
                  <param name="namespace">/</param>
                  <param name="actionName">common_loadPageDate</param>
              </result>            
             <!-- 写文章 --> 
-            <result name="write">/article/articleadd.jsp?master=${mid}</result>
+            <result name="write">/article/articleadd.jsp</result>
+            <!-- 编辑文章 -->
+            <result name="edit">/article/articleedit.jsp</result>
             <!-- 获取评论处理链 -->
             <result name="comment" type="chain">article_comment</result>
-            <!--<result name="singleShowSuccess">/article/articlesingle.jsp</result>-->
             <result name="addfail">/error.jsp?info=文章发布失败</result>
             <result name="noarticle">/error.jsp?info=文章不存在</result>
-        </action>
-        
+        </action>        
          <!-- 评论 -->
          <action name="comment_*" class="com.song.struts.CommentAction" method="{1}">
          	<result name="default">/error.jsp</result>
@@ -107,9 +98,6 @@
                 <param name="namespace">/</param>
                 <param name="actionName">common_loadPageDate</param>
             </result>
-			<!-- 显示图片列表 -->
-            <!-- <result name="getList">/picture/picturelist.jsp</result> -->
-            <!--<result name="addPicture" type="chain">photo_showAdd</result>-->
             <result name="addPicture">/picture/pictureadd.jsp</result>
         </action>
     </package>

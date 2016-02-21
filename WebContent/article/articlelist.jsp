@@ -36,10 +36,10 @@
         </header>
         <section class="items items-hover">
         <s:iterator value="articles" id="article" status="st">
-        	<div class="item" id="a<s:property value="#article.id"/>">
+        	<div class="item" id="<s:property value="#article.id"/>">
             <div class="item-heading">
             <s:if test="#session.Master.username!=null">
-              <div class="pull-right"><a href="article_edit?aid=<s:property value="#article.id"/>"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a href="article_delete?aid=<s:property value="#article.id"/>"><i class="icon-remove"></i> 删除</a></div>
+              <div class="pull-right"><a href="article_edit?mid=<s:property value="#mid"/>&aid=<s:property value="#article.id"/>&cid=<s:property value="#cid"/>&operate=2"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a class="delete" href="#delete"/><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
               <h4> <a href="article_single?mid=<s:property value="#mid"/>&aid=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
             </div>
@@ -77,7 +77,26 @@
   </article>
 </div>
 </div>
-
+<!-- **********************************模态框start***************************************** -->
+	<div class="modal fade" id="model-delete">
+		<div class="modal-dialog">
+			<div class="modal-content">			
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">提示</h4>
+					</div>					
+					<div class="modal-body">
+						<h4>Are you sure</h4>
+						<p>删除这篇绝美文章</p>	
+					</div>					
+					<div class="modal-footer">
+						<a class="btn btn-default" data-dismiss="modal">取消</a>
+						<a id="delete" class="btn btn-primary">删除</a>
+					</div>					
+			</div>
+		</div>
+	</div>
+<!-- **********************************模态框end***************************************** -->
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -87,6 +106,21 @@ $(document).ready(function(){
 		var articleContent = $(this).text().substr(0,150)+"......";
 		// 将每个元素的样式设为默认样式
 		$(this).text(articleContent).css({"style":"none"});
+	});
+	
+	var aid = 0;
+	$('.delete').click(function(){
+		aid = $(this).parent().parent().parent().attr("id");
+		$('#model-delete').modal('show');
+	});
+	
+	$('#delete').click(function(){
+		$.post("/Blog/article/article_delete",{aid:aid},function(data){
+			if("deleteSuccess" == data){
+				$('#model-delete').modal('hide');
+				$("#"+aid).remove();
+			}
+		});
 	});
 });
 </script>

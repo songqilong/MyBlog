@@ -16,30 +16,38 @@ public class MasterBLL {
 	
 	/**
 	 * 注册用户
-	 * @param user 注册用户对象实体
-	 * @return true注册成功，false注册失败
+	 * 
+	 * @param master
+	 * @return
 	 */
-	public boolean Register(Master user)
-	{
-		return masterDAO.AddMaster(user);		
+	public int Register(Master master) {
+		String sql = "insert into t_master(username,password,nickname,email,sex,qq,rtime,lltime) values('"
+				+ master.getUsername() + "','" + master.getPassword() + "','" + master.getNickName() + "','"
+				+ master.getEmail() + "','" + master.getSex() + "','" + master.getQq() + "','"
+				+ master.getRegisterTime() + "','" + master.getLastLoginTime() + "');";
+		return masterDAO.UpdateMaster(sql);
 	}
 	
 	/**
 	 * 用户登录
-	 * @param user 封装的登录用户信息
-	 * @return true验证通过可以登录，false验证失败不能登录
+	 * @param username
+	 * @param password
+	 * @return
 	 */
 	public Master Login(String username,String password)
 	{
-		return masterDAO.GetMaster(username,password);
+		String sql = "select * from t_master where username='"+username+"' and password='"+password+"'";
+		return masterDAO.GetMaster(sql);
 	}
 	
 	/**
-	 * 根据作者ID获取作者信息
-	 * @param masterId
+	 * 根据用户名密码获取用户ID
+	 * @param username
+	 * @param password
 	 * @return
 	 */
-	public Master GetMasterInfo(int masterId){
-		return masterDAO.getMaster(masterId);
+	public int GetMasterId(String username,String password){
+		return Login(username,password).getId();
 	}
+	
 }

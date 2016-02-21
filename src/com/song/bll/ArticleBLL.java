@@ -25,6 +25,18 @@ public class ArticleBLL {
 	}
 	
 	/**
+	 * 根据文章id逻辑删除文章
+	 * @param aid
+	 * @return
+	 */
+	public int DeleteArticle(int aid){
+		int row = 0;
+		String sql = "update t_article set isdelete = 1 where id="+aid+";";
+		row = articleDAO.UpdateArticle(sql);
+		return row;
+	}
+	
+	/**
 	 * 获取不区分文章类别分页文章
 	 * @return
 	 */
@@ -38,19 +50,6 @@ public class ArticleBLL {
 		return articleDAO.GetArticles(sql);
 	}
 	
-//	/**
-//	 * 获取区分文章类别的分页文章
-//	 * @param masterId
-//	 * @param categoryId
-//	 * @param page
-//	 * @return
-//	 */
-//	public List<Article> GetArticlesForPage(int masterId,int categoryId,int page,int pageSize){
-//		// 从配置文件中获取每页显示的文章数量
-//		//int pageSize = Integer.parseInt(PropertiesUtils.ReadProperties("page").toString());
-//		String sql = "select * from t_article where master_id = "+masterId+" and category_id = "+categoryId+" and isdelete = 0 order by ctime desc limit "+((page-1)*pageSize)+","+pageSize+";";
-//		return articleDAO.GetArticles(sql);
-//	}
 	
 	/**
 	 * 获取指定作者指定分类文章文章的数量
@@ -67,16 +66,21 @@ public class ArticleBLL {
 		return articleDAO.GetQueryQty(sql);
 	}
 	
-//	/**
-//	 * 获取指定分类文章的数量
-//	 * @param masterId
-//	 * @param categoryId
-//	 * @return
-//	 */
-//	public int GetCategoryArticleQty(int masterId,int categoryId){
-//		String sql = "select * from t_article where master_id="+masterId+" and category_id="+categoryId+" and isdelete=0;";
-//		return articleDAO.GetQueryQty(sql);
-//	}
+	/**
+	 * 编辑更新文章内容
+	 * @param article
+	 * @return
+	 */
+	public int EditArticle(Article article){
+		int row = 0;
+		String sql = "update t_article set title='" + article.getTitle() + "',author='"+article.getAuthor()+"',type=" + article.getType()
+				+ ",category_id=" + article.getCategoryId() + ",sourceweb='" + article.getSourceweb() + "',sourceurl='"
+				+ article.getSourceurl() + "',keyword='" + article.getKeyword() + "',content='" + article.getContent()
+				+ "' where id=" + article.getId() + ";";
+		row = articleDAO.UpdateArticle(sql);
+		return row;
+	}
+	
 
 	/**
 	 * 根据文章ID获取文章

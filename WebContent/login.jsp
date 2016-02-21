@@ -22,13 +22,6 @@
 				<!-- 密码输入框 -->
 				<input type="password" name="password" class="form-control" placeholder="密码" required>
 				<br>
-				<!--   注释掉记住密码复选框
-                <div class="checkbox">
-                  <label>
-                  <input type="checkbox" value="remember-me"> 记住密码
-                  </label>
-                </div>
-                -->
                 <!-- 登录按钮 -->
 				<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
 			</form>

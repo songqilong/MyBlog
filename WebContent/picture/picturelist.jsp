@@ -42,51 +42,12 @@
         <br><br>
         <div class="row">
         	<s:iterator value="#photoes" id="photo" status="st">
-        	   <div class="col-xs-6 col-md-3">
-					 <a href="#" class="thumbnail"> <img src="${basePath }/picture/image/<s:property value="#photo.photoname"/>" alt="..."></a>
+        	   <div class="col-xs-6 col-md-3" >
+					 <a href="#" class="thumbnail"> <img src="${basePath }/picture/image/<s:property value="#photo.photoname"/>" style="height: 200px;" alt="..."></a>
 				</div>
         	</s:iterator>
 								
 		</div>
-		<!--  
-		        <div class="row">
-								<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-		</div>
-		
-		        <div class="row">
-								<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-										<div class="col-xs-6 col-md-3">
-									<a href="#" class="thumbnail"> <img src="${basePath }/picture/image/1.png" alt="...">
-									</a>
-								</div>
-		</div>
-		-->
         </section>
         <footer>
           <ul class="pager">

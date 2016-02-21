@@ -4,7 +4,9 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.song.bll.BlogBLL;
 import com.song.bll.MasterBLL;
+import com.song.entity.Blog;
 import com.song.entity.Master;
 
 public class LoginAction extends ActionSupport {
@@ -48,9 +50,10 @@ public class LoginAction extends ActionSupport {
 		// 如果用户名和密码验证通过
 		if(master != null)
 		{
-			// 将用户信息保存进Session中
+			// 将用户信息保存进struts2的Session对象中
 			ServletActionContext.getRequest().getSession().setAttribute("Master", master);
-			ActionContext.getContext().put("mid", master.getId());
+			int masterId = master.getId();
+			ActionContext.getContext().put("mid",masterId);
 			return "loginSuccess";
 		}
 		return "loginfail";
