@@ -28,14 +28,13 @@
 						<li><a href="#">欢迎 <s:property value="#session.Master.username" />登录</a></li>
 					</s:if>
 					<s:else>
-						<li><a href="${basePath}/index.jsp">登录</a></li>
-						<li><a data-toggle="modal" href="#modal-register">注册</a></li>
+						<li><a href="/Blog/index.jsp">登录</a></li>
+						<li><a id ="modal" href="#modal-register">注册</a></li>
 					</s:else>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	<jsp:include page="modal.jsp"></jsp:include>
-
+	<div id="nav"></div>
 </body>
 </html>

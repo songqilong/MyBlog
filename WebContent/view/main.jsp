@@ -8,7 +8,8 @@
 <link rel="stylesheet" href="${sessionScope.basePath }/plugin/bootstrap.min.css">
 <script type="text/javascript" src="${sessionScope.basePath }/plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${sessionScope.basePath }/plugin/bootstrap.min.js"></script>
-<script type="text/javascript" src="${sessionScope.basePath }/plugin/calendar.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/pagejs/calendar.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/pagejs/main-page.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>首页</title>
 </head>
