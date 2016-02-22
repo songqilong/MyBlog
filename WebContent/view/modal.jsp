@@ -18,17 +18,18 @@
 					</div>
 					<div class="modal-body">
 						<div class="control-group">
-							<label class="control-label">用户名</label> <input type="text" name="master.username" class="form-control">
+							<label class="control-label">用户名</label><div><input id="input_uname" type="text" name="master.username" class="form-control"></div> 
+							<div id="username-prompt">用户名为数字或字母组成，至少6位</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">密码</label> <input type="password" name="master.password" class="form-control">
+							<label class="control-label">密码</label> <input id="pwd" type="password" name="master.password" class="form-control">
 						</div> 
 						<div class="control-group">
 							<label class="control-label">确认密码</label>
-							<input type="password" name="spassword" class="form-control">
+							<input id="spwd" type="password" name="spassword" class="form-control">
 						</div>
 						<div class="control-group">
-							<label class="control-label">昵称</label> <input type="text" name="master.nickName" class="form-control">
+							<label class="control-label">昵称</label> <input id="nickname" type="text" name="master.nickName" class="form-control">
 						</div>
 					</div>
 					<div class="modal-footer">
