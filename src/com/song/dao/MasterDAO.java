@@ -7,6 +7,26 @@ import com.song.entity.Master;
 public class MasterDAO {
 	
 	/**
+	 * 查询结果的条数
+	 * @param sql
+	 * @return
+	 */
+	public int GetQueryQty(String sql){
+		int row = 0;
+		try{
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			rst.last();
+			row = rst.getRow();
+			rst.close();
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
+	/**
 	 * 更新用户
 	 * @param sql
 	 * @return

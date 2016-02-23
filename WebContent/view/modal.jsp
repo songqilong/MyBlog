@@ -11,25 +11,26 @@
 	<div class="modal fade" id="modal-register">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<form action="/Blog/register" method="post">
+				<form action="/Blog/register_register" method="post">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">用户注册</h4>
+						<h4 class="modal-title">用户注册（*必填）</h4>
 					</div>
 					<div class="modal-body">
 						<div class="control-group">
-							<label class="control-label">用户名</label><div><input id="input_uname" type="text" name="master.username" class="form-control"></div> 
-							<div id="username-prompt">用户名为数字或字母组成，至少6位</div>
+							<label class="control-label">*用户名</label><div><input id="input_uname" type="text" name="master.username" class="form-control"></div> 
+							<div id="username-prompt">用户名为非0开头的数字或字母组成，至少6位</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">密码</label> <input id="pwd" type="password" name="master.password" class="form-control">
+							<label class="control-label">*密码</label><div> <input id="input_pwd" type="password" name="master.password" class="form-control"></div>
+							<div id="password-prompt">密码为数字或字母组成，至少6位</div>
 						</div> 
 						<div class="control-group">
-							<label class="control-label">确认密码</label>
-							<input id="spwd" type="password" name="spassword" class="form-control">
+							<label class="control-label">*确认密码</label>
+							<input id="input_spwd" type="password"  class="form-control">
 						</div>
 						<div class="control-group">
-							<label class="control-label">昵称</label> <input id="nickname" type="text" name="master.nickName" class="form-control">
+							<label class="control-label">*昵称</label> <input id="nickname" type="text" name="master.nickName" class="form-control">
 						</div>
 					</div>
 					<div class="modal-footer">

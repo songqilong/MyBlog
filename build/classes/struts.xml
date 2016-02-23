@@ -38,7 +38,7 @@
             <result name="loginfail">/login.jsp</result>
         </action>
         <!-- 注册 -->
-        <action name="register" class="com.song.struts.RegisterAction" method="register">
+        <action name="register_*" class="com.song.struts.RegisterAction" method="{1}">
             <result name="register" type="redirect">index_access?mid=${mid}&amp;type=100001</result>
             <result name="registerfail">/error.jsp?info=注册失败</result>
         </action>
@@ -102,7 +102,7 @@
         </action>
     </package>
     
-    
+    <!-- 文字分类的相关操作 -->
     <package name="category" namespace="/category" extends="struts-default">
         <action name="category_*" class="com.song.struts.CategoryAction" method="{1}">
             

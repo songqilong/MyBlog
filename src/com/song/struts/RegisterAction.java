@@ -1,5 +1,12 @@
 package com.song.struts;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.song.bll.BlogBLL;
 import com.song.bll.MasterBLL;
@@ -43,5 +50,25 @@ public class RegisterAction {
 			return "register";
 		}
 		return "registerfail";
+	}
+	
+	/**
+	 * 验证用户名是否可注册
+	 * @return
+	 * @throws Exception
+	 */
+	public String checkUsername() throws Exception{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		HttpServletResponse response = ServletActionContext.getResponse();
+		PrintWriter out = response.getWriter();
+		// 获取要验证的用户名
+		String username  = request.getParameter("username");
+		MasterBLL masterBLL = new MasterBLL();
+		if(!masterBLL.IsUsernameRegister(username)){
+			out.print("canRegister");
+		}else{
+			out.print("cannotRegister");
+		}
+		return null;
 	}
 }
