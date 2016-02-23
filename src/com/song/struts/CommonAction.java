@@ -95,7 +95,8 @@ public class CommonAction extends ActionSupport {
 			// 获取全部文章的数量
 			int totalArticleQty = articleBLL.GetAllArticleQtyByMid(masterId,categoryId);
 			// 设置作者发布的所有文章的总数
-			ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+			//ActionContext.getContext().put("TotalArticleQty", totalArticleQty);
+			request.setAttribute("TotalArticleQty", totalArticleQty);
 			if(totalArticleQty%pageSize != 0){
 				pageQty = totalArticleQty/pageSize+1;
 			}else{
@@ -158,20 +159,20 @@ public class CommonAction extends ActionSupport {
 	 * 获取导航
 	 * @return
 	 */
-	private boolean getNavigation(int masterId){
-		boolean flag = false;
-		Object nav = ActionContext.getContext().getSession().get("navigations");
-		if (nav == null) {
+	private void getNavigation(int masterId){
+		//boolean flag = false;
+		//Object nav = ActionContext.getContext().getSession().get("navigations");
+		//if (nav == null) {
 			NavigationBLL nvaBLL = new NavigationBLL();
 			// 获取导航栏的导航项
-			List<Navigation> list = nvaBLL.GetNavigations(masterId);
+			List<Navigation> list = nvaBLL.GetNavigations(masterId);			
 			// 如果导航项集合长度不为0
-			if (list.size() > 0) {				
-				ActionContext.getContext().getSession().put("navigations", list);
-				flag = true;
-			}			
-		}
-		return flag;
+			//if (list.size() > 0) {				
+			ActionContext.getContext().getSession().put("navigations", list);	
+				//flag = true;
+			//}			
+		//}
+		//return flag;
 	}
 
 	/**

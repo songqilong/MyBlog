@@ -21,7 +21,7 @@ public class CategoryAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * 获取分类信息
+	 * 获取分类信息(用于添加文章，编辑文章界面)
 	 * @return
 	 */
 	public String getCategoryInfo() throws Exception{

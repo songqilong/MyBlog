@@ -7,6 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<script type="text/javascript" src="${sessionScope.basePath }/plugin/pagejs/navigation-page.js"></script>
 <title>导航栏</title>
 </head>
 <body>
@@ -25,7 +26,7 @@
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<s:if test="#session.Master.username!= null">
-						<li><a href="#">欢迎 <s:property value="#session.Master.username" />登录</a></li>
+						<li><a href="/Blog/admin/admin_home?mid=${mid}">欢迎 <s:property value="#session.Master.nickName" />登录</a></li>
 					</s:if>
 					<s:else>
 						<li><a href="/Blog/index.jsp">登录</a></li>

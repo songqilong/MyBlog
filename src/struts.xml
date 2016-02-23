@@ -108,6 +108,12 @@
             
         </action>
     </package>
+    
+    <package name="admin" namespace="/admin" extends="struts-default">
+        <action name="admin_*" class="com.song.struts.AdminAction"  method="{1}">
+            <result name="home">/admin/admin.jsp</result>
+        </action>
+    </package>
 
     <!-- Add packages here -->
 

@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="${sessionScope.basePath}/plugin/bootstrap.css">
 <script type="text/javascript" src="${sessionScope.basePath}/plugin/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="${sessionScope.basePath}/plugin/bootstrap.min.js"></script>
+<script type="text/javascript" src="${sessionScope.basePath}/plugin/pagejs/articlelist-page.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>文章列表</title>
 </head>
@@ -21,15 +22,15 @@
       <br>
       <ul class="breadcrumb breadcrumb-block">
         <li><i class="icon-location-arrow icon-muted"></i></li>
-        <li><a href="/Blog/index_access?mid=<s:property value="#mid"/>&type=100001">首页</a></li>
+        <li><a href="/Blog/index_access?mid=${mid}&type=100001">首页</a></li>
         <li class="active">文章列表</li>
       </ul>
       <div class="list">
         <header>
-          <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><s:property value="#request.TotalArticleQty"/> 篇文章</small></h3>
+          <h3><i class="icon-list-ul icon-border-circle"></i> 文章列表 &nbsp;<small><span id="TotalArticleQty">${TotalArticleQty}</span> 篇文章</small></h3>
           <s:if test="#session.Master.username!=null">
           <div class="pull-right">
-            <a class="btn btn-primary" href="article_write?mid=<s:property value="#mid"/>&cid=<s:property value="#cid"/>">写文章</a>
+            <a class="btn btn-primary" href="article_write?mid=${mid}&cid=<s:property value="#cid"/>">写文章</a>
           </div>
          <br><br>
          </s:if>
@@ -39,9 +40,9 @@
         	<div class="item" id="<s:property value="#article.id"/>">
             <div class="item-heading">
             <s:if test="#session.Master.username!=null">
-              <div class="pull-right"><a href="article_edit?mid=<s:property value="#mid"/>&aid=<s:property value="#article.id"/>&cid=<s:property value="#cid"/>&operate=2"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a class="delete" href="#delete"/><i class="icon-remove"></i> 删除</a></div>
+              <div class="pull-right"><a href="article_edit?mid=${mid}&aid=<s:property value="#article.id"/>&cid=<s:property value="#cid"/>&operate=2"><i class="icon-pencil"></i> 编辑</a> &nbsp;<a class="delete" href="#delete"/><i class="icon-remove"></i> 删除</a></div>
             </s:if>  
-              <h4> <a href="article_single?mid=<s:property value="#mid"/>&aid=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
+              <h4> <a href="article_single?mid=${mid}&aid=<s:property value="#article.id"/>&type=100004"><s:property value="#article.title"/></a></h4>
             </div>
             <div class="item-content">
             <s:property value="#article.content" escape="false"/>               
@@ -56,18 +57,18 @@
           <ul class="pager">
  			<li class="previous">
  				<s:if test="#page==1">
- 					<a href="article/article_showList?mid=<s:property value="#mid"/>&cid=<s:property value="#cid"/>&page=1&type=100002">« 上一页</a>
+ 					<a href="article/article_showList?mid=${mid}&cid=<s:property value="#cid"/>&page=1&type=100002">« 上一页</a>
  				</s:if>
     			<s:else>
-    				<a href="article/article_showList?mid=<s:property value="#mid"/>&cid=<s:property value="#cid"/>&page=<s:property value="%{#page-1}"/>&type=100002">« 上一页</a>
+    				<a href="article/article_showList?mid=${mid}&cid=<s:property value="#cid"/>&page=<s:property value="%{#page-1}"/>&type=100002">« 上一页</a>
     			</s:else>
  			</li>
   			<li class="next">
   				<s:if test="%{#page==#pageQty}">
-  					<a href="article/article_showList?mid=<s:property value="#mid"/>&cid=<s:property value="#cid"/>&page=<s:property value="#page"/>&type=100002">下一页 »</a>
+  					<a href="article/article_showList?mid=${mid}&cid=<s:property value="#cid"/>&page=<s:property value="#page"/>&type=100002">下一页 »</a>
   				</s:if>
   				<s:else>
-  					<a href="article/article_showList?mid=<s:property value="#mid"/>&cid=<s:property value="#cid"/>&page=<s:property value="%{#page+1}"/>&type=100002">下一页 »</a>
+  					<a href="article/article_showList?mid=${mid}&cid=<s:property value="#cid"/>&page=<s:property value="%{#page+1}"/>&type=100002">下一页 »</a>
   				</s:else>    			
   			</li>
           </ul>
@@ -77,53 +78,7 @@
   </article>
 </div>
 </div>
-<!-- **********************************模态框start***************************************** -->
-	<div class="modal fade" id="model-delete">
-		<div class="modal-dialog">
-			<div class="modal-content">			
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">提示</h4>
-					</div>					
-					<div class="modal-body">
-						<h4>Are you sure</h4>
-						<p>删除这篇绝美文章</p>	
-					</div>					
-					<div class="modal-footer">
-						<a class="btn btn-default" data-dismiss="modal">取消</a>
-						<a id="delete" class="btn btn-primary">删除</a>
-					</div>					
-			</div>
-		</div>
-	</div>
-<!-- **********************************模态框end***************************************** -->
-
-<script type="text/javascript">
-$(document).ready(function(){
-	// 遍历class为item-content的元素
-	$(".item-content").each(function(){
-		// 获取每个元素中的文本，然后截取150个字符
-		var articleContent = $(this).text().substr(0,150)+"......";
-		// 将每个元素的样式设为默认样式
-		$(this).text(articleContent).css({"style":"none"});
-	});
-	
-	var aid = 0;
-	$('.delete').click(function(){
-		aid = $(this).parent().parent().parent().attr("id");
-		$('#model-delete').modal('show');
-	});
-	
-	$('#delete').click(function(){
-		$.post("/Blog/article/article_delete",{aid:aid},function(data){
-			if("deleteSuccess" == data){
-				$('#model-delete').modal('hide');
-				$("#"+aid).remove();
-			}
-		});
-	});
-});
-</script>
+<div id="load-modal"></div>
 
 </body>
 </html>

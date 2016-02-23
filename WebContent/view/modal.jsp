@@ -27,10 +27,31 @@
 						</div> 
 						<div class="control-group">
 							<label class="control-label">*确认密码</label>
-							<input id="input_spwd" type="password"  class="form-control">
+							<div><input id="input_spwd" type="password"  class="form-control"></div>
+							<div id="spassword-prompt"></div>
 						</div>
 						<div class="control-group">
-							<label class="control-label">*昵称</label> <input id="nickname" type="text" name="master.nickName" class="form-control">
+							<label class="control-label">*昵称</label> <div><input id="input_nickname" type="text" name="master.nickName" class="form-control"></div>
+							<div id="nickname-prompt"></div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">性别</label>
+							<div class="form-control">
+								<label class="radio-inline">
+  									<input type="radio" name="master.sex" id="inlineRadio1" value="male"  checked="checked"> 男
+								</label>
+								<label class="radio-inline">
+  									<input type="radio" name="master.sex" id="inlineRadio2" value="famale">女
+								</label>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">Email</label> <div><input id="input_email" type="text" name="master.email" class="form-control"></div>
+							<div id="email-prompt"></div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">QQ</label><div><input id="input_qq" type="text" name="master.qq" class="form-control"></div>
+							<div id="qq-prompt"></div>
 						</div>
 					</div>
 					<div class="modal-footer">
@@ -42,5 +63,26 @@
 		</div>
 	</div>
 	<!-- 注册模态框结束 -->
+	
+	<!-- **********************************模态框start***************************************** -->
+	<div class="modal fade" id="model-delete">
+		<div class="modal-dialog">
+			<div class="modal-content">			
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">提示</h4>
+					</div>					
+					<div class="modal-body">
+						<h4>Are you sure</h4>
+						<p>删除这篇绝美文章</p>	
+					</div>					
+					<div class="modal-footer">
+						<a class="btn btn-default" data-dismiss="modal">取消</a>
+						<a id="delete" class="btn btn-primary">删除</a>
+					</div>					
+			</div>
+		</div>
+	</div>
+<!-- **********************************模态框end***************************************** -->
 </body>
 </html>

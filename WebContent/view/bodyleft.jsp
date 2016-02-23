@@ -35,7 +35,7 @@
   <div class="panel-body">
     <ul>
     	<s:iterator value="#categorys" id="category" status="st">
-    		<li><a href="/Blog/article/article_showList?mid=<s:property value="#category.masterId"/>&cid=<s:property value="#category.id"/>&page=1&type=100002"><s:property value="#category.category"/></a></li>
+    		<li><a href="/Blog/article/article_showList?mid=${mid}&cid=<s:property value="#category.id"/>&page=1&type=100002"><s:property value="#category.category"/></a></li>
     	</s:iterator>
     </ul>
   </div>
