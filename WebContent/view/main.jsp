@@ -15,11 +15,13 @@
 <body>
 	<div class="container">
 		<div class="row">
-		<jsp:include page="navigation.jsp"></jsp:include></div>
+		<jsp:include page="navigation.jsp"></jsp:include>
+		</div>
 		<div class="row">
 			<div class="col-md-4"><jsp:include page="bodyleft.jsp"></jsp:include></div>
 			<div class="col-md-8"><jsp:include page="bodyright.jsp"></jsp:include></div>
 		</div>
+
    </div> 
 </body>
 </html>

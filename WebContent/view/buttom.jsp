@@ -10,6 +10,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Place sticky footer content here.</p>
+      </div>
+    </footer>
 </body>
 </html>

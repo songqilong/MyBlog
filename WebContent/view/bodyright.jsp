@@ -12,7 +12,7 @@
 <script type="text/javascript" src="${sessionScope.basePath }/plugin/blogcommon.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 </head>
-<body>
+<body style="height: 1000px;">
  <article>
     <div contenteditable="true" spellcheck="false" class="example">
       <br>
