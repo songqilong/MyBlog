@@ -30,6 +30,48 @@
     </div>
   </div>
 </div>
-<!-- 添加文章分类模态框 end -->
+<!-- 删除文章分类模态框 end -->
+
+<!-- 添加文章分类模态框start -->
+<div class="modal fade" id="modal-deletecategory">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">删除提示</h4>
+      </div>
+      <div class="modal-body">
+      	<h3>确定删除吗！</h3>
+		<h3>删除该分类的同时，将会删除该分类下的所有文章！</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button id="category-delete" type="button" class="btn btn-primary">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 删除文章分类模态框 end -->
+
+<!-- 编辑章分类模态框start -->
+<div class="modal fade" id="modal-editcategory">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">编辑文章分类</h4>
+      </div>
+      <div class="modal-body">
+      	<h3>确定删除吗！</h3>
+		<h3>删除该分类的同时，将会删除该分类下的所有文章！</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+        <button id="category-delete" type="button" class="btn btn-primary">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 编辑文章分类模态框 end -->
 </body>
 </html>

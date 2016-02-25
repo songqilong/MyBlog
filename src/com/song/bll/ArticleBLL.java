@@ -121,6 +121,16 @@ public class ArticleBLL {
 	public List<Article> GetRecommendArticles(int masterId,int articleQty){
 		String sql = "select * from t_article where master_id='"+masterId+"' and isrecommend=1 order by ctime desc limit 0,"+articleQty+";";
 		
-		return articleDAO.GetArticles(sql);
+		return articleDAO.GetArticles(sql);				
+	}
+	
+	/**
+	 * 删除指定分类的所有文章
+	 * @param CategoryId
+	 * @return
+	 */
+	public int DeleteArticleByCategoryId(int CategoryId){
+		String sql = "update t_article set isdelete=1 where category_id="+CategoryId+";";
+		return articleDAO.UpdateArticle(sql);
 	}
 }

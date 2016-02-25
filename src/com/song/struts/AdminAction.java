@@ -25,25 +25,5 @@ public class AdminAction extends ActionSupport {
 		return "home";
 	}
 	
-	/**
-	 * 文章分类管理获取分类数据
-	 * @return
-	 * @throws Exception
-	 */
-	public String getCategorysForManager()throws Exception{
-		System.out.println("*****************************************");
-		HttpServletRequest request = ServletActionContext.getRequest();
-		HttpServletResponse reponse = ServletActionContext.getResponse();
-		reponse.setHeader("Cache-Control","no-cache");
-		reponse.setContentType("text/json;charset=UTF-8");
-		PrintWriter out = reponse.getWriter();
-		int masterId = Integer.parseInt(request.getParameter("mid"));
-		int page = Integer.parseInt(request.getParameter("page"));
-		int pageSize =  Integer.parseInt(PropertiesUtils.ReadProperties("categorySize"));
-		CategoryBLL categoryBLL = new CategoryBLL();
-		List<Category> list = categoryBLL.GetCategorysForManager(masterId, page, pageSize);
-		String info = JSON.toJSONString(list);
-		out.print(info);
-		return null;
-	}
+
 }

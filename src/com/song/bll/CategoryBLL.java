@@ -44,4 +44,16 @@ public class CategoryBLL {
 		String sql ="select * from t_category where master_id ="+masterId+" and isdelete = 0 order by id asc limit "+((page-1)*pageSize)+","+pageSize+";";
 		return categoryDAO.GetCategorys(sql);
 	}
+	
+	/**
+	 * 根据文章分类ID删除文章分类
+	 * @param categoryId
+	 * @return
+	 */
+	public int DeleteCategory(int categoryId,String dtime){
+		String sql = "update t_category set isdelete=1,dtime='"+dtime+"' where id="+categoryId+";";
+		ArticleBLL articleBLL = new ArticleBLL();
+		articleBLL.DeleteArticleByCategoryId(categoryId);
+		return categoryDAO.UpdateCategory(sql);
+	}
 }

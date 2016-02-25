@@ -34,13 +34,13 @@
 	<div>
 	<div class="col-md-4">
 	第
-	<select>
-		<option value="1">1</option>
+	<select id="totalPage">
+		<!--<option value="1">1</option>
 		<option value="2">2</option>
-		<option value="3">3</option>
+		<option value="3">3</option>  -->
 	</select>
 	页
-	&nbsp;&nbsp;&nbsp;一共3页
+	&nbsp;&nbsp;&nbsp;一共<span></span>页
 	</div>
 	<button class="btn btn-primary pull-right col-md-2">新增</button></div>
 </body>

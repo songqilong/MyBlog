@@ -67,4 +67,21 @@ public class CategoryDAO {
 		DBUtils.CloseCon();
 		return list;
 	}
+	
+	/**
+	 * 更新文章对象
+	 * @param sql
+	 * @return
+	 */
+	public int UpdateCategory(String sql){
+		int row =0;
+		try{
+			DBUtils.ConnDB();
+			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
+	}
 }
