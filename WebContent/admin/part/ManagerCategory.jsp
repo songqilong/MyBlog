@@ -8,9 +8,10 @@
 <body>
  <legend>文章分类管理</legend>
 	<div>
-		<table class="table table-bordered">
+		<table id="categoryTable" class="table table-bordered">
 			<thead>
 				<tr>
+					<th>ID</th>
 					<th>类别名</th>
 					<th>创建日期</th>
 					<th>删除</th>
@@ -18,27 +19,29 @@
 				</tr>
 			</thead>
 			<tbody>
+			<!--  
 				<tr>
 					<td>Mark</td>
 					<td>Otto</td>
 					<td><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="删除"></span></td>
 					<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="编辑"></span></td>
 				</tr>
-				<tr>
-					<td>Jacob</td>
-					<td>Thornton</td>
-					<td><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="删除"></span></td>
-					<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="编辑"></span></td>
-				</tr>
-				<tr>
-					<td>Larry</td>
-					<td>the Bird</td>
-					<td><span class="glyphicon glyphicon-trash" data-toggle="tooltip" data-placement="top" title="删除"></span></td>
-					<td><span class="glyphicon glyphicon-pencil" data-toggle="tooltip" data-placement="top" title="编辑"></span></td>
-				</tr>
+				-->
 			</tbody>
 		</table>
 	</div>
-	<div><button class="btn btn-primary pull-right">新增</button></div>
+	
+	<div>
+	<div class="col-md-4">
+	第
+	<select>
+		<option value="1">1</option>
+		<option value="2">2</option>
+		<option value="3">3</option>
+	</select>
+	页
+	&nbsp;&nbsp;&nbsp;一共3页
+	</div>
+	<button class="btn btn-primary pull-right col-md-2">新增</button></div>
 </body>
 </html>

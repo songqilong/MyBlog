@@ -32,4 +32,16 @@ public class CategoryBLL {
 		String sql = "select * from t_category where master_id in("+masterId+") and isdelete = 0;"; 
 		return categoryDAO.GetCategorys(sql);
 	}
+	
+	/**
+	 * 获取文章分类对象（用于分类管理）
+	 * @param masterId
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
+	public List<Category> GetCategorysForManager(int masterId,int page,int pageSize){
+		String sql ="select * from t_category where master_id ="+masterId+" and isdelete = 0 order by id asc limit "+((page-1)*pageSize)+","+pageSize+";";
+		return categoryDAO.GetCategorys(sql);
+	}
 }

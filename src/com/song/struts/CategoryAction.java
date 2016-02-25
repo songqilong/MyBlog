@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import com.alibaba.fastjson.JSON;
 import com.opensymphony.xwork2.ActionSupport;
 import com.song.bll.CategoryBLL;
+import com.song.common.PropertiesUtils;
 import com.song.entity.Category;
 
 public class CategoryAction extends ActionSupport {
@@ -38,5 +39,7 @@ public class CategoryAction extends ActionSupport {
 		System.out.println(info);
 		return null;
 	}
+	
+
 
 }
