@@ -102,9 +102,16 @@
         </action>
     </package>
     
-    <!-- 文字分类的相关操作 -->
+    <!-- 文章分类的相关操作 -->
     <package name="category" namespace="/category" extends="struts-default">
         <action name="category_*" class="com.song.struts.CategoryAction" method="{1}">
+            
+        </action>
+    </package>
+    
+    <!-- 公告相关工作 -->
+    <package name="notice" namespace="/notice" extends="struts-default">
+        <action name="notice_*" class="com.song.struts.NoticeAction" method="{1}">
             
         </action>
     </package>

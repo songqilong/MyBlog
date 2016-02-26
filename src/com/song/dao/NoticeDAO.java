@@ -1,6 +1,8 @@
 package com.song.dao;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.song.common.DBUtils;
 import com.song.entity.Notice;
@@ -32,9 +34,8 @@ public class NoticeDAO {
 	 * 获取最新一条公告
 	 * @return
 	 */
-	public Notice GetNotice(int masterId){
+	public Notice GetNotice(String sql){
 		Notice notice = null;
-		String sql = "select * from t_notice where master_id="+masterId+" order by ctime desc limit 0,1";
 		try {
 			DBUtils.ConnDB();
 			ResultSet rst = DBUtils.Query(sql);
@@ -54,5 +55,71 @@ public class NoticeDAO {
 			e.printStackTrace();
 		}
 		return notice;
+	}
+	
+	/**
+	 * 获取公告集合
+	 * @param sql
+	 * @return
+	 */
+	public List<Notice> GetNotices(String sql){
+		List<Notice> list = new ArrayList<Notice>();
+		try {
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			while(rst.next()){
+				Notice notice = new Notice();
+				notice.setId(rst.getInt("id"));
+				notice.setMasterId(rst.getInt("master_id"));
+				notice.setTitle(rst.getString("title"));
+				notice.setContent(rst.getString("content"));
+				notice.setCtime(rst.getString("ctime"));
+				notice.setIsdelete(rst.getInt("isdelete"));
+				notice.setDtime(rst.getString("dtime"));
+				list.add(notice);
+			}
+			rst.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
+	 * 更新文章对象
+	 * @param sql
+	 * @return
+	 */
+	public int UpdateNotice(String sql){
+		int row =0;
+		try{
+			DBUtils.ConnDB();
+			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
+	/**
+	 * 查询结果的条数
+	 * @param sql
+	 * @return
+	 */
+	public int GetQueryQty(String sql){
+		int row = 0;
+		try{
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			rst.last();
+			row = rst.getRow();
+			rst.close();
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
 	}
 }

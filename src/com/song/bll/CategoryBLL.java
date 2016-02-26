@@ -56,4 +56,35 @@ public class CategoryBLL {
 		articleBLL.DeleteArticleByCategoryId(categoryId);
 		return categoryDAO.UpdateCategory(sql);
 	}
+	
+	/**
+	 * 获取指定Master的文章分类的数量
+	 * @param masterId
+	 * @return
+	 */
+	public int GetTotalCategoryQty(int masterId){
+		String sql = "select * from t_category where master_id="+masterId+" and isdelete=0;";
+		return categoryDAO.GetQueryQty(sql);
+	}
+	
+	/**
+	 * 编辑文章分类
+	 * @param categoryId
+	 * @param newcategory
+	 * @return
+	 */
+	public int EditCategory(int categoryId,String newcategory){
+		String sql = "update t_category set category='"+newcategory+"' where id="+categoryId+";";
+		return categoryDAO.UpdateCategory(sql);
+	}
+	
+	/**
+	 * 添加文章分类
+	 * @param category
+	 * @return
+	 */
+	public int AddCategory(Category category){
+		String sql ="insert into t_category(master_id,category,ctime) values ("+category.getMasterId()+",'"+category.getCategory()+"','"+category.getCtime()+"');";
+		return categoryDAO.UpdateCategory(sql);
+	}
 }

@@ -8,36 +8,6 @@ import com.song.common.DBUtils;
 import com.song.entity.Category;
 
 public class CategoryDAO {
-
-//	/**
-//	 * 通过创建者ID获取类别列表
-//	 * @param masterId
-//	 * @return
-//	 */
-//	public List<Category> GetCategoryListByMasterI(int masterId){
-//		List<Category> list = new ArrayList<Category>();
-//		String sql = "select * from t_category where master_id="+masterId+"";
-//		try {
-//			DBUtils.ConnDB();
-//			ResultSet rst = DBUtils.Query(sql);
-//			while(rst.next()){
-//				Category category = new Category();
-//				category.setId(rst.getInt("id"));
-//				category.setMasterId(rst.getInt("master_id"));
-//				category.setCategory(rst.getString("category"));
-//				category.setCtime(rst.getString("ctime"));
-//				category.setIsdelete(rst.getInt("isdelete"));
-//				category.setDtime(rst.getString("dtime"));
-//				list.add(category);
-//			}
-//			rst.close();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		DBUtils.CloseCon();
-//		return list;
-//	}
 	 
 	/**
 	 * 获取分类信息集合
@@ -78,6 +48,26 @@ public class CategoryDAO {
 		try{
 			DBUtils.ConnDB();
 			row = DBUtils.ExecuteUpdateOrDelete(sql);
+			DBUtils.CloseCon();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return row;
+	}
+	
+	/**
+	 * 查询结果的条数
+	 * @param sql
+	 * @return
+	 */
+	public int GetQueryQty(String sql){
+		int row = 0;
+		try{
+			DBUtils.ConnDB();
+			ResultSet rst = DBUtils.Query(sql);
+			rst.last();
+			row = rst.getRow();
+			rst.close();
 			DBUtils.CloseCon();
 		}catch(Exception e){
 			e.printStackTrace();
